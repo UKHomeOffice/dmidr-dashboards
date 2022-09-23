@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+}
+
+#_pages_content{
+    margin:1% 2%;
+}
+
+.govuk-grid-row{
+  margin: 0px;
+}
+
+.th_padd {
+  padding-left: 5px
+}
+
+tbody tr:nth-child(odd){
+  background-color: #fff;
+}
+
+.report_background_box {
+  background-color: #f1f1f1;
+  padding: 20px 0px;
+}
+
+.information_box {
+  padding: 10px;
+  border: 2px solid #e6e6e6;
+}

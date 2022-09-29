@@ -18,6 +18,19 @@ tbody tr:nth-child(odd){
   background-color: #fff;
 }
 
+.auto-table-cells td:nth-child(1) {
+  font-weight: 700;
+  padding: 10px 10px 10px 5px;
+}
+
+.pad-head th:nth-child(1) {
+  padding: 10px 10px 10px 5px;
+}
+
+.hide-lead-column-head th:nth-child(1) {
+  visibility: hidden;
+}
+
 .report_background_box {
   background-color: #f1f1f1;
   padding: 20px 0px;

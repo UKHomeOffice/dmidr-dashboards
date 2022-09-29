@@ -65,7 +65,7 @@ tbody tr:nth-child(odd){
   border-left: 1px solid #000 !important;
   border-right: 1px solid #000 !important;
   border-top: 1px solid #000 !important;
-  border-bottom: 1px solid #fff !important;
-  margin-bottom: -1px;
+  border-bottom: 3px solid #fff !important;
+  margin-bottom: -3px;
   font-weight: bold;
 }

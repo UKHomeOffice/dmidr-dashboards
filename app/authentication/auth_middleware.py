@@ -43,8 +43,8 @@ class AuthMiddleware:
         if check_match_in_list(self.whitelisted_urls, request.path):
             return self.app(environ, start_response)
 
-        # If we have a token continue
-        # Otherwise want to redirect to new page
+        # If we have a token continue,
+        # otherwise want to redirect to login page
         if self.is_logged_in(request):
             return self.app(environ, start_response)
 

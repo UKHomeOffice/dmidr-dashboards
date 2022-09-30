@@ -6,8 +6,6 @@ from .report_1 import *
 
 dash.register_page(__name__, path="/report-1")
 
-
-
 layout = html.Div(
     className="report_background_box",
     children = [

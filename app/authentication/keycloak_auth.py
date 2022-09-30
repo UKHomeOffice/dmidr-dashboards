@@ -34,6 +34,10 @@ class KeycloakAuth:
         except KeycloakAuthenticationError:
             return "Username and password are incorrect."
 
+    def logout(self):
+        self.keycloak_openid.logout(session["token"]["refresh_token"])
+        session.clear()
+
     def decode_token(self):
         keycloak_public_key = (
             f"-----BEGIN PUBLIC KEY-----\n"

@@ -1,6 +1,8 @@
 import re
 from flask import redirect
 from werkzeug.wrappers import Request, Response
+import os
+import json
 
 
 class Objectify(object):
@@ -18,25 +20,21 @@ def check_match_in_list(patterns, to_check):
 
 
 class AuthMiddleware:
-    def __init__(self, server):
+    def __init__(self, server, config_path=None):
+        if config_path is None:
+            config_path = os.path.join(os.path.dirname(__file__), "middleware.json")
+
+        with open(config_path, "r") as f:
+            config = json.load(f)
+
         # ToDo: Change this to something else
         server.config["SECRET_KEY"] = "SECRET"
 
         self.app = server.wsgi_app
         self.session_interface = server.session_interface
-        self.config = server.config
-        self.config_object = Objectify(config=self.config, **self.config)
-        self.redirect_url = "/"
-        self.login_uri = "/login"
-        self.whitelisted_urls = [
-            "/login",
-            "/assets/*",
-            "/_reload-hash",
-            "/_dash-dependencies",
-            "/_dash-update-component",
-            "/_dash-layout",
-            "/_dash-component-suites/*",
-        ]
+        self.server_config = Objectify(config=server.config, **server.config)
+        self.login_uri = config["login-url"]
+        self.whitelisted_urls = config["whitelisted-urls"]
 
     def __call__(self, environ, start_response):
         request = Request(environ)
@@ -55,5 +53,5 @@ class AuthMiddleware:
 
     def is_logged_in(self, request):
         return "token" in self.session_interface.open_session(
-            self.config_object, request
+            self.server_config, request
         )

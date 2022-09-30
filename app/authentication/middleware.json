@@ -1,0 +1,12 @@
+{
+  "whitelisted-urls": [
+      "/login",
+      "/assets/*",
+      "/_reload-hash",
+      "/_dash-dependencies",
+      "/_dash-update-component",
+      "/_dash-layout",
+      "/_dash-component-suites/*"
+  ],
+  "login-url": "/login"
+}

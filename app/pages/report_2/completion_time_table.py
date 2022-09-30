@@ -35,9 +35,9 @@ completion_time_table = html.Div(
         auto_govuk_table(
             unit_df, 
             title="Open Cases",
-            titleSize="m",
-            boldLead=True,
-            hiddenLeadHead=True
+            title_size="m",
+            bold_lead=True,
+            hidden_lead_head=True
         )
     ]
 )

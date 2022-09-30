@@ -1,11 +1,14 @@
 import dash
 from dash import html, dcc
+from datetime import date
 
 from .report_1 import *
 from .report_2 import *
+from components import report_header
 
 dash.register_page(__name__, path="/report-3")
 
+today = date.today()
 
 layout = html.Div(
     className="report_background_box govuk-body",
@@ -35,65 +38,7 @@ layout = html.Div(
                                 )
                             ]
                         ),
-                        html.Div(
-                            className="govuk-grid-row",
-                            style={"marginTop":"20px"},
-                            children=[
-                                html.Div(
-                                    className="govuk-grid-column-one-third",
-                                    children=[
-                                        html.Img(
-                                            style={
-                                                "verticalAlign":"middle",
-                                                "height":"45px",
-                                                "paddingLeft":"10px",
-                                                "marginRight":"15px",
-                                                "borderLeft":"3px solid #8f23b3"
-                                            },
-                                            src="/assets/images/uk-home-office-logo.png", 
-                                        ),
-                                        html.P(
-                                            className="govuk-body-l",
-                                            style={
-                                                "verticalAlign":"middle",
-                                                "display":"inline",
-                                            },
-                                            children="Home Office"
-                                        ), 
-                                    ]
-                                ),
-                                html.Div(
-                                    className="govuk-grid-column-one-third",
-                                    children=[
-                                        html.H3(
-                                            className="govuk-heading-l",
-                                            style={
-                                                "textAlign":"center"
-                                            },
-                                            children="Performance Overview"
-                                        ), 
-                                    ]
-                                ),
-                                html.Div(
-                                    className="govuk-grid-column-one-third",
-                                    children=[
-                                        html.Span(
-                                            className="govuk-caption-s",
-                                            style={
-                                                "display":"block",
-                                                "textAlign":"right"
-                                            },
-                                            children="Todays date"
-                                        ),
-                                        html.H3(
-                                            className="govuk-heading-s",
-                                            style={"textAlign":"right"},
-                                            children="Monday 9 September 2022"
-                                        ), 
-                                    ]
-                                )
-                            ]
-                        ),
+                        report_header("The reports", today),
                         html.Div(
                             className="govuk-grid-row",
                             children=[
@@ -186,65 +131,7 @@ layout = html.Div(
                                 )
                             ]
                         ),
-                        html.Div(
-                            className="govuk-grid-row",
-                            style={"marginTop":"20px"},
-                            children=[
-                                html.Div(
-                                    className="govuk-grid-column-one-third",
-                                    children=[
-                                        html.Img(
-                                            style={
-                                                "verticalAlign":"middle",
-                                                "height":"45px",
-                                                "paddingLeft":"10px",
-                                                "marginRight":"15px",
-                                                "borderLeft":"3px solid #8f23b3"
-                                            },
-                                            src="/assets/images/uk-home-office-logo.png", 
-                                        ),
-                                        html.P(
-                                            className="govuk-body-l",
-                                            style={
-                                                "verticalAlign":"middle",
-                                                "display":"inline",
-                                            },
-                                            children="Home Office"
-                                        ), 
-                                    ]
-                                ),
-                                html.Div(
-                                    className="govuk-grid-column-one-third",
-                                    children=[
-                                        html.H3(
-                                            className="govuk-heading-l",
-                                            style={
-                                                "textAlign":"center"
-                                            },
-                                            children="Performance Overview"
-                                        ), 
-                                    ]
-                                ),
-                                html.Div(
-                                    className="govuk-grid-column-one-third",
-                                    children=[
-                                        html.Span(
-                                            className="govuk-caption-s",
-                                            style={
-                                                "display":"block",
-                                                "textAlign":"right"
-                                            },
-                                            children="Todays date"
-                                        ),
-                                        html.H3(
-                                            className="govuk-heading-s",
-                                            style={"textAlign":"right"},
-                                            children="Monday 9 September 2022"
-                                        ), 
-                                    ]
-                                )
-                            ]
-                        ),
+                        report_header("The reports", today),
                         html.Div(
                             className="govuk-grid-row",
                             children=[

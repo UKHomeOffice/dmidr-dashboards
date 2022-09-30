@@ -1,37 +1,37 @@
 from dash import html
 
-def auto_govuk_table(dFrame, title:str=None, titleSize:str="s", boldLead:bool=False, hiddenLeadHead:bool=False):
+def auto_govuk_table(dFrame, title:str=None, title_size:str="s", bold_lead:bool=False, hidden_lead_head:bool=False):
     """
     Function to build a style a table in accordance with GovUK style guide.
     
     dFrame: DataFrame - Prepared data frame to be turned into a table.
     title: String - Title for the table, default None.
-    titleSize: String - Set the size of the title.
-    boldLead: Bool - Set the leading column to bold text, default False.
-    hiddenLeadHead: Bool - Hide the leading column heading, default False. 
+    title_size: String - Set the size of the title.
+    bold_lead: Bool - Set the leading column to bold text, default False.
+    hidden_lead_head: Bool - Hide the leading column heading, default False. 
     """
     return html.Table(
         className="govuk-table",
         children=[
-            auto_table_title(title, titleSize),
-            auto_table_header(dFrame.columns, hiddenLeadHead),
-            auto_table_body(dFrame, boldLead=boldLead)    
+            auto_table_title(title, title_size),
+            auto_table_header(dFrame.columns, hidden_lead_head),
+            auto_table_body(dFrame, bold_lead=bold_lead)    
         ]
     )
 
-def auto_table_title(title:str, titleSize) -> str:
+def auto_table_title(title:str, title_size) -> str:
     if title:
         return html.Caption(
-            className=f"govuk-table__caption govuk-table__caption--{titleSize}",
+            className=f"govuk-table__caption govuk-table__caption--{title_size}",
             children=f"{title}"
         )
     else:
         return None
 
 
-def auto_table_header(columns, hiddenLeadHead):
+def auto_table_header(columns, hidden_lead_head):
     is_hidden=""
-    if hiddenLeadHead:
+    if hidden_lead_head:
         is_hidden = "hide-lead-column-head"
 
     return html.Thead(
@@ -51,9 +51,9 @@ def auto_table_header(columns, hiddenLeadHead):
         ]
     )
 
-def auto_table_body(df, boldLead=False):
+def auto_table_body(df, bold_lead=False):
     bold = ""
-    if boldLead:
+    if bold_lead:
         bold = "auto-table-cells"
 
     return html.Tbody(

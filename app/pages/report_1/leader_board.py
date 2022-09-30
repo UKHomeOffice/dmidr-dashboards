@@ -27,7 +27,7 @@ leader_board = html.Div(
                 auto_govuk_table(
                     teams_df[0:3],
                     title="Top 3",
-                    boldLead=True
+                    bold_lead=True
                 )
             ]
         ), 
@@ -37,7 +37,7 @@ leader_board = html.Div(
                 auto_govuk_table(
                     teams_df[3:6],
                     title="Bottom 3",
-                    boldLead=True
+                    bold_lead=True
                 )
             ]
         ), 
@@ -53,7 +53,7 @@ personal_leaders = html.Div(
                 auto_govuk_table(
                     users_df[0:3], 
                     title="Top 3",
-                    boldLead=True
+                    bold_lead=True
                 )
             ]
         ), 
@@ -63,7 +63,7 @@ personal_leaders = html.Div(
                 auto_govuk_table(
                     users_df[3:6], 
                     title="Bottom 3",
-                    boldLead=True
+                    bold_lead=True
                 )
             ]
         ), 

@@ -20,7 +20,7 @@ unit_df = pd.DataFrame(
 details_table = auto_govuk_table(
     unit_df, 
     title="Performance details",
-    titleSize="m",
-    boldLead=True,
-    hiddenLeadHead=True
+    title_size="m",
+    bold_lead=True,
+    hidden_lead_head=True
 )

@@ -2,11 +2,9 @@ import dash
 from dash import Dash, html, Output, Input
 from flask import Flask, session
 from keycloak_middleware import KeycloakMiddleware
+from keycloak import KeycloakOpenID
 
 from components import *
-
-from keycloak import KeycloakOpenID
-from flask_keycloak import FlaskKeycloak
 
 server = Flask(__name__)
 keycloak_openid = KeycloakOpenID(
@@ -16,7 +14,6 @@ keycloak_openid = KeycloakOpenID(
     client_secret_key="xJWJXqD8ZMPZf04n6WEAaUWkgCqe2zKn",
 )
 
-# FlaskKeycloak.from_kc_oidc_json(server, config_path="keycloak.json", )
 server.wsgi_app = KeycloakMiddleware(server, keycloak_openid)
 
 app = Dash(__name__, use_pages=True, server=server)

@@ -1,7 +1,6 @@
 import re
 from flask import redirect
 from werkzeug.wrappers import Request, Response
-from keycloak import KeycloakOpenID, KeycloakAuthenticationError
 
 
 class Objectify(object):
@@ -18,8 +17,8 @@ def check_match_in_list(patterns, to_check):
     return False
 
 
-class KeycloakMiddleware:
-    def __init__(self, server, keycloak_openid: KeycloakOpenID):
+class AuthMiddleware:
+    def __init__(self, server):
         # ToDo: Change this to something else
         server.config["SECRET_KEY"] = "SECRET"
 
@@ -27,7 +26,6 @@ class KeycloakMiddleware:
         self.session_interface = server.session_interface
         self.config = server.config
         self.config_object = Objectify(config=self.config, **self.config)
-        self.keycloak_openid = keycloak_openid
         self.redirect_url = "/"
         self.login_uri = "/login"
         self.whitelisted_urls = [

@@ -4,16 +4,7 @@ from dash import html, dcc, callback
 from dash.dependencies import Output, Input, State
 from dash.exceptions import PreventUpdate
 
-from keycloak import KeycloakOpenID, KeycloakAuthenticationError
-from flask import session, redirect
-import requests
-
-keycloak_openid = KeycloakOpenID(
-    server_url="http://localhost:8080/",
-    client_id="test_client",
-    realm_name="KeyCloak",
-    client_secret_key="xJWJXqD8ZMPZf04n6WEAaUWkgCqe2zKn",
-)
+from authentication.keycloak_auth import KeycloakAuth
 
 dash.register_page(__name__, path="/login")
 
@@ -76,9 +67,11 @@ def update_output(n_clicks, username, password):
     if n_clicks is None:
         raise PreventUpdate
     else:
-        try:
-            token = keycloak_openid.token(username, password)
-            session["token"] = token
-            return "/", None
-        except KeycloakAuthenticationError:
-            return "/login", "Username and password are incorrect."
+        keycloak_auth = KeycloakAuth()
+
+        auth_error = keycloak_auth.login(username, password)
+
+        if auth_error:
+            return "/login", auth_error
+
+        return "/", None

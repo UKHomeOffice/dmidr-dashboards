@@ -1,25 +1,18 @@
 import dash
-from dash import Dash, html, Output, Input
+from dash import Dash, html, callback, Output, Input
 from flask import Flask, session
-from keycloak_middleware import KeycloakMiddleware
-from keycloak import KeycloakOpenID
+from authentication.auth_middleware import AuthMiddleware
 
 from components import *
 
 server = Flask(__name__)
-keycloak_openid = KeycloakOpenID(
-    server_url="http://localhost:8080/",
-    client_id="test_client",
-    realm_name="KeyCloak",
-    client_secret_key="xJWJXqD8ZMPZf04n6WEAaUWkgCqe2zKn",
-)
-
-server.wsgi_app = KeycloakMiddleware(server, keycloak_openid)
+server.wsgi_app = AuthMiddleware(server)
 
 app = Dash(__name__, use_pages=True, server=server)
 
 app.layout = html.Div(
     children=[
+        html.Span(id="login-status-text", children=[]),
         govuk_header,
         html.Div(
             className="govuk-grid-row",
@@ -40,6 +33,16 @@ app.layout = html.Div(
     ]
 )
 
+
+@callback(
+    Output("login-status-text", "children"),
+    [Input("main", "children")]
+)
+def login_status(value):
+    if "userinfo" in session:
+        return f"logged in as: {session['userinfo']['preferred_username']}"
+
+    return "Not logged in"
 
 if __name__ == "__main__":
     app.run_server(debug=True)

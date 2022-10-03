@@ -5,6 +5,7 @@ from dash.dependencies import Output, Input, State
 from dash.exceptions import PreventUpdate
 
 from authentication.keycloak_auth import KeycloakAuth
+from urllib.parse import urlsplit, parse_qs
 
 dash.register_page(__name__, path="/login")
 
@@ -61,9 +62,9 @@ layout = html.Div(
 @callback(
     [Output("url", "pathname"), Output("login_error", "children")],
     [Input("verify", "n_clicks")],
-    [State("username", "value"), State("password", "value")],
+    [State("username", "value"), State("password", "value"), State("url", "search")],
 )
-def update_output(n_clicks, username, password):
+def update_output(n_clicks, username, password, querystring):
     if n_clicks is None:
         raise PreventUpdate
     else:
@@ -74,4 +75,10 @@ def update_output(n_clicks, username, password):
         if auth_error:
             return "/login", auth_error
 
-        return "/", None
+        redirect = "/"
+
+        if querystring:
+            params = parse_qs(querystring.replace("?", ""))
+            redirect = params["redirect"][0]
+
+        return redirect, None

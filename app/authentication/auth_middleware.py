@@ -40,7 +40,7 @@ class AuthMiddleware:
         request = Request(environ)
 
         # If on a page which doesn't require authentication e.g. Login page
-        if check_match_in_list(self.whitelisted_urls, request.path):
+        if check_match_in_list(self.whitelisted_urls, request.path) or request.path == self.login_url:
             return self.app(environ, start_response)
 
         # If we have a token continue,

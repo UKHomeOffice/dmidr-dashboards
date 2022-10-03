@@ -1,6 +1,5 @@
 {
   "whitelisted-urls": [
-      "/login",
       "/assets/*",
       "/_reload-hash",
       "/_dash-dependencies",

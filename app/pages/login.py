@@ -5,7 +5,7 @@ from dash.dependencies import Output, Input, State
 from dash.exceptions import PreventUpdate
 
 from authentication.keycloak_auth import KeycloakAuth
-from urllib.parse import urlsplit, parse_qs
+from urllib.parse import parse_qs
 
 dash.register_page(__name__, path="/login")
 

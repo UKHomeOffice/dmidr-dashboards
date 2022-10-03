@@ -1,12 +1,15 @@
 import dash
 from dash import Dash, html, callback, Output, Input
 from flask import Flask, session
-from authentication.auth_middleware import AuthMiddleware
+import os
 
 from components import *
 
 server = Flask(__name__)
-server.wsgi_app = AuthMiddleware(server)
+
+if os.environ.get("STAGE") == "PRODUCTION":
+    from authentication.auth_middleware import AuthMiddleware
+    server.wsgi_app = AuthMiddleware(server)
 
 app = Dash(__name__, use_pages=True, server=server)
 
@@ -33,7 +36,8 @@ app.layout = html.Div(
     ]
 )
 
-
+# Need this callback to access the session.
+# Probably can be done another way, but this is simple for now.
 @callback(
     Output("login-status-text", "children"),
     [Input("main", "children")]

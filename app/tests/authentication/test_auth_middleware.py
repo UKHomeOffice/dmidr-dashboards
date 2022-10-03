@@ -14,6 +14,6 @@ def test_request_does_not_redirect_when_token_in_session(client):
 
 
 def test_request_to_whitelist_url_does_not_redirect_without_authentication(client):
-    """Test requests to whitelisted url's do not need to be authenticated"""
+    """Test requests to whitelisted urls do not need to be authenticated"""
     response = client.get("/whitelisted", follow_redirects=True)
     assert b"whitelisted page" in response.data

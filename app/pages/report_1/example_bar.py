@@ -13,7 +13,7 @@ example_bar = html.Div(
     children=[
         dcc.Graph(
             figure={
-                "data": [
+                "data":[
                     {
                         "x": df["day"],
                         "y": df["count_1"],
@@ -29,7 +29,7 @@ example_bar = html.Div(
                         "marker": {"color": "#4c2c92"},
                     },
                 ],
-                "layout": {
+                "layout":{
                     "title": "Cases due vs day",
                     "xaxis": {"title": "Day", "showgrid": "False"},
                     "yaxis": {"title": "Cases due",},

@@ -4,25 +4,18 @@ from dash import html
 govuk_header = html.Header(
     className="govuk-header ",
     role="banner",
-    **{
-        "data-module": "govuk-header"
-    }, 
+    **{"data-module": "govuk-header"},
     children=[
         html.Div(
             className="govuk-header__container ",
-            style={
-                "marginRight": "2%",
-                "marginLeft": "2%",
-            },
+            style={"marginRight": "2%", "marginLeft": "2%",},
             children=[
                 html.Div(
                     className="govuk-header__logo",
-                    style={
-                        "width":"66.6%"
-                    },
+                    style={"width": "66.6%"},
                     children=[
                         html.A(
-                            className="govuk-header__link govuk-header__link--homepage", 
+                            className="govuk-header__link govuk-header__link--homepage",
                             href="/",
                             children=[
                                 html.Span(
@@ -30,24 +23,24 @@ govuk_header = html.Header(
                                     children=[
                                         html.Img(
                                             className="govuk-header__logotype-crown",
-                                            style={"marginRight":"10px"},
-                                            src="/assets/images/govuk-logotype-crown.png", 
+                                            style={"marginRight": "10px"},
+                                            src="/assets/images/govuk-logotype-crown.png",
                                         ),
                                         html.Span(
                                             className="govuk-header__logotype-text",
                                             children="GOV.UK",
                                         ),
-                                    ]
+                                    ],
                                 ),
                                 html.Span(
-                                    className="govuk-header__product-name", 
-                                    children="DECS Reporting"
-                                )
+                                    className="govuk-header__product-name",
+                                    children="DECS Reporting",
+                                ),
                             ],
                         ),
-                    ]
+                    ],
                 ),
-            ]
+            ],
         ),
     ]
 )

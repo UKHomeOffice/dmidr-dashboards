@@ -33,14 +33,14 @@ class AuthMiddleware:
         self.app = server.wsgi_app
         self.session_interface = server.session_interface
         self.server_config = Objectify(config=server.config, **server.config)
-        self.login_uri = config["login-url"]
+        self.login_url = config["login-url"]
         self.whitelisted_urls = config["whitelisted-urls"]
 
     def __call__(self, environ, start_response):
         request = Request(environ)
 
         # If on a page which doesn't require authentication e.g. Login page
-        if check_match_in_list(self.whitelisted_urls, request.path):
+        if check_match_in_list(self.whitelisted_urls, request.path) or request.path == self.login_url:
             return self.app(environ, start_response)
 
         # If we have a token continue,
@@ -48,7 +48,10 @@ class AuthMiddleware:
         if self.is_logged_in(request):
             return self.app(environ, start_response)
 
-        res = redirect(self.login_uri)
+        if not request.path == self.login_url:
+            redirect_url = f"{self.login_url}?redirect={request.path}"
+
+        res = redirect(redirect_url)
         return res(environ, start_response)
 
     def is_logged_in(self, request):

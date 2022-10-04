@@ -10,49 +10,75 @@ from urllib.parse import parse_qs
 dash.register_page(__name__, path="/login")
 
 layout = html.Div(
-    [
+    className="govuk-grid-row",
+    children=[
         dcc.Location(id="url", pathname="/login"),
         html.Div(
-            dcc.Input(
-                id="username",
-                type="text",
-                placeholder="Enter Username",
-                style={
-                    "margin-left": "35%",
-                    "width": "450px",
-                    "height": "45px",
-                    "padding": "10px",
-                    "margin-top": "60px",
-                    "font-size": "16px",
-                    "border-width": "3px",
-                    "border-color": "#a0a3a2",
-                },
-            ),
-        ),
-        html.Div(
-            dcc.Input(
-                id="password",
-                type="text",
-                placeholder="Enter Password",
-                style={
-                    "margin-left": "35%",
-                    "width": "450px",
-                    "height": "45px",
-                    "padding": "10px",
-                    "margin-top": "10px",
-                    "font-size": "16px",
-                    "border-width": "3px",
-                    "border-color": "#a0a3a2",
-                },
-            ),
-        ),
-        html.Div(
-            html.Button(
-                "Verify",
-                id="verify",
-                style={"border-width": "3px", "font-size": "14px"},
-            ),
-            style={"margin-left": "45%", "padding-top": "30px"},
+            className="govuk-grid-column-one-third",
+            children=[
+                html.H1(
+                    className="govuk-heading-l", 
+                    children="Sign in with..."
+                ),
+                html.Div(
+                    className="govuk-button-group",
+                    children=[
+                        html.Button(
+                            className="govuk-button",
+                            children="POISE",
+                        ),
+                        html.Button(
+                            className="govuk-button",
+                            children="DECS Admin",
+                        ),
+                    ]
+                ),
+                html.Div(
+                    className="govuk-form-group",
+                    children=[
+                        html.Label(
+                            className="govuk-label govuk-label--m", 
+                            children="Username or email"
+                        ),
+                        dcc.Input(
+                            id="username",
+                            className='govuk-input govuk-input--width-20',
+                            type="text", 
+                            placeholder="Enter Username",
+                        ),
+                    ]
+                ),
+                html.Div(
+                    className="govuk-form-group",
+                    children=[
+                        html.Label(
+                            className="govuk-label govuk-label--m", 
+                            children="Password"
+                        ),
+                        dcc.Input(
+                            id="password",
+                            className='govuk-input govuk-input--width-20',
+                            type="text", 
+                            placeholder="Enter Password",
+                        ),
+                    ]
+                ),
+                html.Div(
+                    className="govuk-button-group",
+                    children=[
+                        html.Button(
+                            className="govuk-button",
+                            children="Continue",
+                            id="verify",
+                        ),
+                        html.A(
+                            className="govuk-link",
+                            children="Cancel",
+                            href="/"
+                        )
+                    ]
+                ),
+            ]
         ),
         html.Div(id="login_error", children=[]),
     ]
@@ -60,9 +86,18 @@ layout = html.Div(
 
 
 @callback(
-    [Output("url", "pathname"), Output("login_error", "children")],
-    [Input("verify", "n_clicks")],
-    [State("username", "value"), State("password", "value"), State("url", "search")],
+    [
+        Output(component_id="url", component_property="pathname"), 
+        Output(component_id="login_error", component_property="children")
+    ],
+    [
+        Input(component_id="verify", component_property="n_clicks")
+    ],
+    [
+        State(component_id="username", component_property="value"), 
+        State(component_id="password", component_property="value"), 
+        State(component_id="url", component_property="search")
+    ],
 )
 def update_output(n_clicks, username, password, querystring):
     if n_clicks is None:

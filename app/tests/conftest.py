@@ -1,16 +1,19 @@
 import pytest
+import os
 
 from app.authentication.auth_middleware import AuthMiddleware
-from authentication.test_flask_app import create_app
+from app.tests.authentication.auth_middleware.test_flask_app import create_app
 
 
 @pytest.fixture()
 def app():
-    app = create_app()
-    app.config.update(
-        {"TESTING": True,}
+    middleware_config_dir = os.path.join(
+        os.path.dirname(__file__), "authentication/auth_middleware/test_middleware.json"
     )
-    app.wsgi_app = AuthMiddleware(app, "test_middleware.json")
+
+    app = create_app()
+    app.config.update({"TESTING": True})
+    app.wsgi_app = AuthMiddleware(app, middleware_config_dir)
 
     yield app
 

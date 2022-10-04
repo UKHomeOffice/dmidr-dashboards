@@ -51,3 +51,18 @@ def test_keycloak_auth_login_returns_error_msg_with_invalid_credentials(
         keycloak_auth = KeycloakAuth(test_config_dir)
         msg = keycloak_auth.login("", "")
         assert "Username and password are incorrect." in msg
+
+
+def test_keycloak_auth_logout_removes_auth_data_from_session(app, monkeypatch):
+    """Test logout removes auth data from users session"""
+    monkeypatch.setattr(KeycloakOpenID, "logout", lambda self, token: None)
+
+    with app.test_request_context():
+        session["token"] = {"access_token": "TOKEN", "refresh_token": "REFRESH_TOKEN"}
+        session["userinfo"] = "USERINFO"
+
+        keycloak_auth = KeycloakAuth(test_config_dir)
+        keycloak_auth.logout()
+
+        assert "token" not in session
+        assert "userinfo" not in session

@@ -1,0 +1,6 @@
+{
+  "whitelisted-urls": [
+      "/whitelisted"
+  ],
+  "login-url": "/login"
+}

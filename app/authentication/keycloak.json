@@ -1,9 +1,9 @@
 {
   "auth-server-url": "http://localhost:8080/",
-  "realm": "KeyCloak",
+  "realm": "realm-2",
+  "resource": "test-client",
   "credentials": {
-    "client_id": "test_client",
-    "secret": "xJWJXqD8ZMPZf04n6WEAaUWkgCqe2zKn"
+    "secret": "x0MECAIv2LVmOMqYNG0saCo3VUibjQV6"
   },
   "ssl-required": "none"
 }

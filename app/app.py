@@ -38,15 +38,6 @@ app.layout = html.Div(
     ]
 )
 
-# Need this callback to access the session.
-# Probably can be done another way, but this is simple for now.
-@callback(Output("login-status-text", "children"), [Input("main", "children")])
-def login_status(value):
-    if "userinfo" in session:
-        return f"logged in as: {session['userinfo']['preferred_username']}"
-
-    return "Not logged in"
-
 
 if __name__ == "__main__":
     app.run_server(debug=True)

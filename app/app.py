@@ -8,9 +8,10 @@ from components import *
 server = Flask(__name__)
 
 if os.environ.get("STAGE") == "PRODUCTION":
-    from authentication.auth_middleware import AuthMiddleware
+    from flask_keycloak.core import FlaskKeycloak
 
-    server.wsgi_app = AuthMiddleware(server)
+    config_path = os.path.join(os.path.dirname(__file__), "authentication/keycloak.json")
+    FlaskKeycloak.from_kc_oidc_json(server, config_path=config_path)
 
 app = Dash(__name__, use_pages=True, server=server)
 
@@ -36,15 +37,6 @@ app.layout = html.Div(
         govuk_footer,
     ]
 )
-
-# Need this callback to access the session.
-# Probably can be done another way, but this is simple for now.
-@callback(Output("login-status-text", "children"), [Input("main", "children")])
-def login_status(value):
-    if "userinfo" in session:
-        return f"logged in as: {session['userinfo']['preferred_username']}"
-
-    return "Not logged in"
 
 
 if __name__ == "__main__":

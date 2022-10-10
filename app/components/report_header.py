@@ -1,7 +1,9 @@
 from dash import html
+from datetime import date
 
+today = date.today()
 
-def report_header(report_title: str, todays_date):
+def report_header(report_title: str, todays_date=today):
     return html.Div(
         className="govuk-grid-row",
         style={"marginTop": "20px"},

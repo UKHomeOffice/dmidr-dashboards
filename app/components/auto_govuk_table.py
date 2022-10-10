@@ -44,6 +44,7 @@ def auto_table_header(columns, hidden_lead_head):
 
     return html.Thead(
         className=f"govuk-table__head pad-head {is_hidden}",
+        style={"backgroundColor":"#e6e6e6"},
         children=[
             html.Tr(
                 className="govuk_table__row",
@@ -62,7 +63,7 @@ def auto_table_body(df, bold_lead=False):
         bold = "auto-table-cells"
 
     return html.Tbody(
-        className=f"govuk-table__body {bold}",
+        className=f"govuk-table__body first-cell-padding {bold}",
         children=[
             html.Tr(
                 className="govuk-table__row",

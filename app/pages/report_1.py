@@ -32,7 +32,7 @@ layout = html.Div(
                             className="govuk-grid-column-three-quarters",
                             children=[
                                 html.Div(
-                                    className="information_box",
+                                    className="information-box",
                                     children=[
                                         html.Span(
                                             className="govuk-caption-m",
@@ -51,7 +51,7 @@ layout = html.Div(
                             className="govuk-grid-column-one-quarter",
                             children=[
                                 html.Div(
-                                    className="information_box",
+                                    className="information-box",
                                     children=[
                                         html.Span(
                                             className="govuk-caption-m",

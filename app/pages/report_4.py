@@ -1,8 +1,8 @@
 import dash 
 from dash import html, dcc
-from datetime import date
 
 from components import *
+from .operational_report import *
 
 dash.register_page(
     __name__, 
@@ -21,17 +21,57 @@ layout = html.Div(
                 dcc.Tab(
                     label="Cases due this week",
                     className="custom-tab",
-                    selected_className="custom-tab--selected"
+                    selected_className="custom-tab--selected",
+                    children=[
+                        html.Div(
+                            className="tab-controls",
+                            children=[
+                                html.P(
+                                    className="govuk-body-l",
+                                    style={"marginBottom": "0px"},
+                                    children="Controls",
+                                )
+                            ],
+                        ),
+                        report_header("Cases due this week"),
+                        operational_report_body
+                    ]
                 ),
                 dcc.Tab(
                     label="Cases due in next 4 weeks",
                     className="custom-tab",
-                    selected_className="custom-tab--selected"
+                    selected_className="custom-tab--selected",
+                    children=[
+                        html.Div(
+                            className="tab-controls",
+                            children=[
+                                html.P(
+                                    className="govuk-body-l",
+                                    style={"marginBottom": "0px"},
+                                    children="Controls",
+                                )
+                            ],
+                        ),
+                        report_header("Cases due in the next 4 weeks"),
+                    ]
                 ),
                 dcc.Tab(
                     label="Out of service standard cases",
                     className="custom-tab",
-                    selected_className="custom-tab--selected"
+                    selected_className="custom-tab--selected",
+                    children=[
+                        html.Div(
+                            className="tab-controls",
+                            children=[
+                                html.P(
+                                    className="govuk-body-l",
+                                    style={"marginBottom": "0px"},
+                                    children="Controls",
+                                )
+                            ],
+                        ),
+                        report_header("Out of service standard cases"),
+                    ]
                 )
             ]
         ), 

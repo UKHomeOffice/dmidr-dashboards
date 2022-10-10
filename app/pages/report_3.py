@@ -1,6 +1,5 @@
 import dash
 from dash import html, dcc
-from datetime import date
 
 from .report_1 import *
 from .report_2 import *
@@ -8,7 +7,6 @@ from components import report_header
 
 dash.register_page(__name__, path="/report-3")
 
-today = date.today()
 
 layout = html.Div(
     className="report-background-box govuk-body",
@@ -23,11 +21,7 @@ layout = html.Div(
                     selected_className="custom-tab--selected",
                     children=[
                         html.Div(
-                            style={
-                                "padding": "10px 5px",
-                                "borderBottom": "1px solid #000",
-                                "backgroundColor": "#fff",
-                            },
+                            className="tab-controls",
                             children=[
                                 html.P(
                                     className="govuk-body",
@@ -36,7 +30,7 @@ layout = html.Div(
                                 )
                             ],
                         ),
-                        report_header("The reports", today),
+                        report_header("The reports"),
                         html.Div(
                             className="govuk-grid-row",
                             children=[
@@ -57,7 +51,7 @@ layout = html.Div(
                                             className="govuk-grid-column-three-quarters",
                                             children=[
                                                 html.Div(
-                                                    className="information_box",
+                                                    className="information-box",
                                                     children=[
                                                         html.Span(
                                                             className="govuk-caption-m",
@@ -76,7 +70,7 @@ layout = html.Div(
                                             className="govuk-grid-column-one-quarter",
                                             children=[
                                                 html.Div(
-                                                    className="information_box",
+                                                    className="information-box",
                                                     children=[
                                                         html.Span(
                                                             className="govuk-caption-m",
@@ -110,11 +104,7 @@ layout = html.Div(
                     selected_className="custom-tab--selected",
                     children=[
                         html.Div(
-                            style={
-                                "padding": "10px 5px",
-                                "borderBottom": "1px solid #000",
-                                "backgroundColor": "#fff",
-                            },
+                            className="tab-controls",
                             children=[
                                 html.P(
                                     className="govuk-body",
@@ -123,7 +113,7 @@ layout = html.Div(
                                 )
                             ],
                         ),
-                        report_header("The reports", today),
+                        report_header("The reports"),
                         html.Div(
                             className="govuk-grid-row",
                             children=[

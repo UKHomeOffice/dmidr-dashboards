@@ -7,7 +7,7 @@ ticket_details_sec = html.Div(
     className="govuk-grid-column-two-thirds",
     children=[
         html.Div(
-            className="information_box",
+            className="information-box",
             children=[
                 html.Span(
                     className="govuk-caption-m",

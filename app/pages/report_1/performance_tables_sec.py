@@ -7,7 +7,7 @@ performance_table_sec = html.Div(
     className="govuk-grid-column-one-third",
     children=[
         html.Div(
-            className="information_box",
+            className="information-box",
             style={"marginBottom": "30px"},
             children=[
                 html.Span(
@@ -26,7 +26,7 @@ performance_table_sec = html.Div(
             ],
         ),
         html.Div(
-            className="information_box",
+            className="information-box",
             children=[
                 html.Span(
                     className="govuk-caption-m",

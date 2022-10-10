@@ -11,7 +11,7 @@ dash.register_page(__name__, path="/report-3")
 today = date.today()
 
 layout = html.Div(
-    className="report_background_box govuk-body",
+    className="report-background-box govuk-body",
     children=[
         dcc.Tabs(
             parent_className="custom-tabs",

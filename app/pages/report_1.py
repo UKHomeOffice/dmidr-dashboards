@@ -7,7 +7,7 @@ from .report_1 import *
 dash.register_page(__name__, path="/report-1")
 
 layout = html.Div(
-    className="report_background_box",
+    className="report-background-box",
     children=[
         html.Div(
             className="govuk-grid-row",
@@ -32,7 +32,7 @@ layout = html.Div(
                             className="govuk-grid-column-three-quarters",
                             children=[
                                 html.Div(
-                                    className="information_box",
+                                    className="information-box",
                                     children=[
                                         html.Span(
                                             className="govuk-caption-m",
@@ -51,7 +51,7 @@ layout = html.Div(
                             className="govuk-grid-column-one-quarter",
                             children=[
                                 html.Div(
-                                    className="information_box",
+                                    className="information-box",
                                     children=[
                                         html.Span(
                                             className="govuk-caption-m",

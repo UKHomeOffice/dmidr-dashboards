@@ -1,3 +1,7 @@
+:root {
+  --ho-purple:#8f23b3;
+}
+
 body {
     margin: 0;
 }
@@ -14,29 +18,44 @@ body {
   padding-left: 5px
 }
 
+.govuk-table__header {
+  padding: 10px 10px 10px 5px;
+  border: 1px solid #b1b4b6
+}
+
+.govuk-table__body {
+  border: 1px solid #b1b4b6;
+}
+
+.govuk-table__cell {
+  border: 1px solid #b1b4b6;
+  padding: 10px 10px 10px 5px;
+}
+
 tbody tr:nth-child(odd){
   background-color: #fff;
 }
 
-.auto-table-cells td:nth-child(1) {
-  font-weight: 700;
-  padding: 10px 10px 10px 5px;
+tbody tr:nth-child(even){
+  background-color: #f1f1f1;
 }
 
-.pad-head th:nth-child(1) {
-  padding: 10px 10px 10px 5px;
+.auto-table-cells td:nth-child(1) {
+  font-weight: 700;
+  background-color: #e6e6e6;
 }
 
 .hide-lead-column-head th:nth-child(1) {
-  visibility: hidden;
+  color:#e6e6e6;
+  background-color: #e6e6e6;
 }
 
-.report_background_box {
+.report-background-box {
   background-color: #f1f1f1;
   padding: 20px 0px;
 }
 
-.information_box {
+.information-box {
   padding: 10px;
   border: 2px solid #cbcbcb;
 }
@@ -69,9 +88,15 @@ tbody tr:nth-child(odd){
   font-weight: bold;
 }
 
+.tab-controls {
+  padding: 20px 15px;
+  border-bottom: 1px solid #000;
+  background-color: #fff;
+}
+
 .ho-logo-image {
   vertical-align: middle;
-  border-left: 3px solid #8f23b3;
+  border-left: 3px solid var(--ho-purple);
   padding-left: 10px;
   margin-right: 15px;  
   height: 45px;
@@ -85,4 +110,40 @@ tbody tr:nth-child(odd){
 .tab-date-caption {
   display: block;
   text-align: right;
+}
+
+.counter-number--l {
+  font-size: 54px;
+  font-weight: 500;
+  color: var(--ho-purple);
+  margin-bottom: 10px;
+}
+
+.day-selector {
+  display: inline-block;
+  padding: 15px;
+  margin-left: 15px;
+  margin-bottom: 0px;
+  border: 1px solid var(--ho-purple);
+  background-color: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+
+.day-selector--active {
+  display: inline-block;
+  padding: 15px;
+  margin-left: 15px;
+  margin-bottom: 0px;
+  border: 3px solid var(--ho-purple);
+  background-color: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+
+
+.clear-selection-position {
+  margin-left: 15px;
+  margin-bottom: 0px;
+  vertical-align: bottom !important;
 }

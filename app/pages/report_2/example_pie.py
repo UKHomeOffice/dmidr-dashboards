@@ -12,7 +12,7 @@ example_pie = html.Div(
     className="govuk-grid-row",
     children=[
         html.Div(
-            className="information_box",
+            className="information-box",
             children=[
                 html.Span(className="govuk-caption-m", children="The title caption"),
                 html.H3(className="govuk-heading-m", children="This title"),

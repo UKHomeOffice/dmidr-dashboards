@@ -40,7 +40,7 @@ unit_df = pd.DataFrame(
 )
 
 completion_time_table = html.Div(
-    className="information_box",
+    className="information-box",
     children=[
         html.Span(className="govuk-caption-m", children="Case response time details"),
         html.H3(className="govuk-heading-m", children="Time to completion details"),

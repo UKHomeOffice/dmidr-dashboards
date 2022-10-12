@@ -10,7 +10,7 @@ example_case_count = html.Div(
     style={"marginBottom": "30px"},
     children=[
         html.Div(
-            className="information_box",
+            className="information-box",
             children=[
                 html.Span(
                     className="govuk-caption-m",

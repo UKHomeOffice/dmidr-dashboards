@@ -19,5 +19,5 @@ $ pip install -r requirements.txt
 ## Run app
 
 ```
-$ python app/app.py
+$ python app/index.py
 ```

@@ -121,13 +121,29 @@ tbody tr:nth-child(even){
 
 .day-selector {
   display: inline-block;
-  padding: 20px;
+  padding: 15px;
   margin-left: 15px;
+  margin-bottom: 0px;
   border: 1px solid var(--ho-purple);
   background-color: #fff;
   text-align: center;
+  cursor: pointer;
 }
 
-.day-selector-text {
-  margin: 0px;
+.day-selector--active {
+  display: inline-block;
+  padding: 15px;
+  margin-left: 15px;
+  margin-bottom: 0px;
+  border: 3px solid var(--ho-purple);
+  background-color: #fff;
+  text-align: center;
+  cursor: pointer;
+}
+
+
+.clear-selection-position {
+  margin-left: 15px;
+  margin-bottom: 0px;
+  vertical-align: bottom !important;
 }

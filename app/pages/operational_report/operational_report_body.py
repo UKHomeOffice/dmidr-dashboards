@@ -1,4 +1,4 @@
-from dash import html
+from dash import html, callback, Input, Output
 import pandas as pd
 
 from components import auto_govuk_table
@@ -7,6 +7,7 @@ from .day_selector_row import day_selector_row
 from .counting_section import counting_section
 
 blanks = ["cell", "cell", "cell", "cell", "cell", "cell", "cell", "cell"]
+Days = ["Mon", "Mon", "Tues", "Wed", "Thurs", "Thurs", "Thurs", "Fri"]
 
 df = pd.DataFrame(
     data={
@@ -19,7 +20,7 @@ df = pd.DataFrame(
         "UKBA recieved date":blanks,
         "Status":blanks,
         "Current handler name":blanks,
-        "Case SLA Date":blanks,
+        "Day":Days,
     }
 )
 
@@ -43,6 +44,7 @@ operational_report_body = html.Div(
             },
             children=[
                 html.Div(
+                    id="table-section-test",
                     style={
                         "backgroundColor":"#fff",
                         "padding":"10px"
@@ -55,3 +57,15 @@ operational_report_body = html.Div(
         )
     ]
 )
+
+@callback(
+    Output(component_id="table-section-test", component_property="children"),
+    Input(component_id="week-day-store", component_property="data"),
+    prevent_initial_call=True
+)
+def filter_table_by_day(filter_day):
+    if filter_day == None:
+        return auto_govuk_table(df, title="Case details", title_size="m")
+    else:
+        df_filtered = df.loc[df["Day"] == filter_day]
+        return auto_govuk_table(df_filtered, title="Case details", title_size="m")

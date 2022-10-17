@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+  reporting-app:
+    container_name: reporting-app
+    build: .
+    ports:
+      - "8050:8050"

@@ -2,6 +2,13 @@ version: "3.9"
 services:
   reporting-app:
     container_name: reporting-app
-    build: .
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
     ports:
       - "8050:8050"
+  test:
+    container_name: test-reporting-app
+    build:
+      context: .
+      dockerfile: ./tests/Dockerfile

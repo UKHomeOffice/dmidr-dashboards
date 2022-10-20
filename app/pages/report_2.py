@@ -2,7 +2,7 @@ import dash
 
 from dash import html
 
-from .report_2 import *
+from app.pages.report_2 import *
 
 
 dash.register_page(__name__, path="/report-2")

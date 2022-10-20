@@ -1,9 +1,9 @@
 import dash
 from dash import html, dcc
 
-from .report_1 import *
-from .report_2 import *
-from components import report_header
+from app.pages.report_1 import *
+from app.pages.report_2 import *
+from app.components import report_header
 
 dash.register_page(__name__, path="/report-3")
 

@@ -1,6 +1,6 @@
 import pandas as pd
 
-from components import auto_govuk_table
+from app.components import auto_govuk_table
 
 blanks = [
     "blank",

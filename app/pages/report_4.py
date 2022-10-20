@@ -1,8 +1,8 @@
 import dash 
 from dash import html, dcc
 
-from components import *
-from .operational_report import *
+from app.components import *
+from app.pages.operational_report import *
 
 dash.register_page(
     __name__, 

@@ -3,7 +3,7 @@ from dash import Dash, html, callback, Output, Input
 from flask import Flask, session
 import os
 
-from components import *
+from app.components import *
 
 server = Flask(__name__)
 

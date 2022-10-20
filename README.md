@@ -27,7 +27,7 @@ $ pip install -r requirements.txt
 ### 4. Run app
 
 ```
-$ python app/index.py
+$ PYTHONPATH=./ python app/index.py
 ```
 # Running the tests
 ## Using Docker

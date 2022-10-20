@@ -3,7 +3,7 @@ FROM amd64/alpine:3
 RUN mkdir app
 COPY app app/
 COPY ./requirements.txt ./requirements.txt
-
+ENV PYTHONPATH ./
 RUN apk update && \
     apk upgrade && \
     apk add --no-cache python3 && \
@@ -15,7 +15,5 @@ RUN python -m venv .venv
 RUN /.venv/bin/python -m pip install --upgrade pip
 RUN /.venv/bin/pip install -r requirements.txt
 
-WORKDIR /app
-
 ENTRYPOINT [ "/.venv/bin/python" ]
-CMD [ "index.py"]
+CMD [ "app/index.py"]

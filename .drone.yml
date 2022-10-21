@@ -9,6 +9,7 @@ steps:
     registry: quay.io
     repo: quay.io/ukhomeofficedigital/hocs-mi-dashboards
     tags: ${DRONE_COMMIT_SHA}
+    dockerfile: app/Dockerfile
   environment:
     DOCKER_PASSWORD:
       from_secret: QUAY_PASSWORD

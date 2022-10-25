@@ -1,6 +1,10 @@
 kind: pipeline
 type: kubernetes
-name: default
+name: build_tag
+
+# platform:
+#   os: linux
+#   arch: amd64
 
 steps:
 - name: push_to_quay

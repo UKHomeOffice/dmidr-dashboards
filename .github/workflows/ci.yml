@@ -10,4 +10,3 @@ jobs:
     - name: Run the tests
       run: docker compose run test
 
-

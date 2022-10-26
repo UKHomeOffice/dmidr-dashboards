@@ -1,0 +1,12 @@
+name: 'Docker Build and push image'
+on:
+  push:
+    branches:
+      - push-plotly-image
+
+jobs:
+  build:
+    uses: UKHomeOffice/hocs-github-actions/.github/workflows/docker-build-tag.yml@v2
+    with:
+      images: 'quay.io/ukhomeofficedigital/hocs-mi-dashboards'
+    secrets: inherit

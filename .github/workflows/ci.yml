@@ -9,4 +9,3 @@ jobs:
       run: docker compose build test
     - name: Run the tests
       run: docker compose run test
-

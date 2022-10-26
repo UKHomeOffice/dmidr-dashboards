@@ -1,8 +1,7 @@
 name: 'Docker Build and push image'
 on:
-  push:
-    branches:
-      - push-plotly-image
+  pull_request:
+    types: [ closed ]
 
 jobs:
   build:

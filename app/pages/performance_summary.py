@@ -5,7 +5,10 @@ from dash import html
 from .report_2 import *
 
 
-dash.register_page(__name__, path="/report-2")
+dash.register_page(
+    __name__, 
+    name="Performance summary",
+    path="/performance-summary")
 
 layout = html.Div(
     style={"backgroundColor": "#f1f1f1", "padding": "20px 0px"},

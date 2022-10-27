@@ -15,7 +15,7 @@ body {
 }
 
 .decs-section-break {
-  margin: 15px 5px;
+  margin: 15px 10px;
   border:2px solid #8f23b3;
 }
 
@@ -25,7 +25,7 @@ body {
 
 .govuk-table__header {
   padding: 10px 10px 10px 5px;
-  border: 1px solid #b1b4b6
+  border: 1px solid #b1b4b6;
 }
 
 .govuk-table__body {

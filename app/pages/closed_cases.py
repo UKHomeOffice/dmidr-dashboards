@@ -1,11 +1,15 @@
 import dash
 from dash import html, dcc
 
-from .report_1 import *
+from .open_cases_components import *
 from .report_2 import *
 from components import report_header
 
-dash.register_page(__name__, path="/report-3")
+dash.register_page(
+    __name__,
+    name="Closed cases",
+    path="/closed-cases"
+)
 
 
 layout = html.Div(

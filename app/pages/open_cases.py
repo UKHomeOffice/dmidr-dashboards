@@ -2,14 +2,13 @@ import dash
 
 from dash import html
 
-from .report_1 import *
+from .open_cases_components import *
 from components import report_header
 
 dash.register_page(
     __name__, 
-    path="/live-cases",
-    title="Live Cases",
-    name="Live Cases"
+    path="/open-cases",
+    name="Open Cases"
 )
 
 layout = html.Div(

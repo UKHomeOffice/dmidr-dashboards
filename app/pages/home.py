@@ -1,6 +1,8 @@
 import dash
 
-from dash import html, dcc
+from dash import html
+from components import board_link_card
+
 
 dash.register_page(__name__, path="/")
 
@@ -39,8 +41,8 @@ layout = html.Div(
                     className="govuk-grid-column-one-third",
                     style={
                         "textAlign":"right"
-                    }
-,                    children=[
+                    },                    
+                    children=[
                         html.A(
                             className="govuk-link govuk-body-l",
                             href="/login",
@@ -52,6 +54,44 @@ layout = html.Div(
         ),
         html.Hr(
             className="decs-section-break"
-        ), 
+        ),
+        html.Div(
+            className="govuk-grid-row",
+            children=[
+                html.Div(
+                    style={
+                        "margin":"3% 15% 10% 15%"
+                    },
+                    children=[
+                        html.Div(
+                            className="govuk-grid-row",
+                            style={"padding":"0px 15px"},
+                            children=[
+                                html.H1(
+                                    className="govuk-heading-l",
+                                    children="DECS reporting home"
+                                )
+                            ]
+                        ),
+                        html.Div(
+                            className="govuk-grid-row",
+                            children=[
+                                board_link_card(dash_title="Open cases", dash_link="/open-cases"),
+                                board_link_card(dash_title="Due cases", dash_link="/due-cases"),
+                                board_link_card(dash_title="Closed cases", dash_link="/closed-cases"),
+                            ]
+                        ),
+                        html.Div(
+                            className="govuk-grid-row",
+                            style={"paddingTop":"15px"},
+                            children=[
+                                board_link_card(dash_title="Performance summary", dash_link="/performance-summary"),
+                                board_link_card(dash_title="Intake and output"),
+                            ]
+                        )
+                    ]
+                )
+            ]
+        )
     ],
 )

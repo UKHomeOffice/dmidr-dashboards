@@ -6,9 +6,8 @@ from .operational_report import *
 
 dash.register_page(
     __name__, 
-    path="/operational-report",
-    title="Operational Report",
-    name="Operational Report"
+    name="Due cases",
+    path="/due-cases"
 )
 
 layout = html.Div(

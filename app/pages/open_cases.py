@@ -15,6 +15,16 @@ layout = html.Div(
     className="report-background-box govuk-body",
     children=[
         html.Div(
+            style={"paddingLeft":"10px"},
+            children=[
+                html.A(
+                    className="govuk-back-link",
+                    children="Back",
+                    href="/"
+                ),
+            ]
+        ),
+        html.Div(
             className="tab-controls",
             style={
                 "borderTop":"1px solid #000"

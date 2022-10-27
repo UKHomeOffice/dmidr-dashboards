@@ -10,13 +10,17 @@ body {
     margin:1% 2%;
 }
 
+.govuk-back-link::before {
+  transform: none;
+}
+
 .govuk-grid-row{
   margin: 0px;
 }
 
 .decs-section-break {
-  margin: 15px 10px;
-  border:2px solid #8f23b3;
+  margin: 5px 10px;
+  border:1.75px solid #8f23b3;
 }
 
 .th_padd {
@@ -57,7 +61,7 @@ tbody tr:nth-child(even){
 
 .report-background-box {
   background-color: #f1f1f1;
-  padding: 20px 0px;
+  padding-bottom: 20px;
 }
 
 .information-box {

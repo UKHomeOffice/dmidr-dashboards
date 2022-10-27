@@ -7,10 +7,16 @@ from components import board_link_card
 dash.register_page(__name__, path="/")
 
 layout = html.Div(
-    style={"backgroundColor": "#f1f1f1", "padding": "20px 0px"},
+    style={
+        "backgroundColor": "#f1f1f1",
+        "paddingBottom":"20px"
+    },
     children=[
         html.Div(
             className="govuk-grid-row",
+            style={
+                "padding":"10px 5px"
+            },
             children=[
                 html.Div(
                     className="govuk-grid-column-one-third",
@@ -28,11 +34,12 @@ layout = html.Div(
                 html.Div(
                     className="govuk-grid-column-one-third",
                     style={
-                        "verticalAlign":"middle"
+                        "textAlign":"center"
                     },
                     children=[
-                        html.P(
-                            className="ho-logo-text govuk-body-l", 
+                        html.H1(
+                            className="govuk-heading-l", 
+                            style={"margin":"0px"},
                             children="DECS Reporting"
                         ),
                     ]

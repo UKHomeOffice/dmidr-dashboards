@@ -2,7 +2,7 @@ import dash
 from dash import html, dcc
 
 from .open_cases_components import *
-from .report_2 import *
+from .closed_cases_components import *
 from components import report_header
 
 dash.register_page(
@@ -15,6 +15,16 @@ dash.register_page(
 layout = html.Div(
     className="report-background-box govuk-body",
     children=[
+        html.Div(
+            style={"paddingLeft":"10px"},
+            children=[
+                html.A(
+                    className="govuk-back-link",
+                    children="Back",
+                    href="/"
+                ),
+            ]
+        ),
         dcc.Tabs(
             parent_className="custom-tabs",
             className="custom-tabs-container",

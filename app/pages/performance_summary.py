@@ -2,7 +2,7 @@ import dash
 
 from dash import html
 
-from .report_2 import *
+from .closed_cases_components import *
 
 
 dash.register_page(
@@ -13,6 +13,16 @@ dash.register_page(
 layout = html.Div(
     style={"backgroundColor": "#f1f1f1", "padding": "20px 0px"},
     children=[
+        html.Div(
+            style={"paddingLeft":"10px"},
+            children=[
+                html.A(
+                    className="govuk-back-link",
+                    children="Back",
+                    href="/"
+                ),
+            ]
+        ),
         html.Div(
             className="govuk-grid-row",
             children=[

@@ -23,7 +23,7 @@ app.layout = html.Div(
             style={"padding": "10px 2% 0% 2%"},
             children=[
                 html.A(
-                    className="govuk-link govuk-!-font-size-27",
+                    className="govuk-link govuk-!-font-size-24",
                     style={"float": "left", "marginRight": "30px",},
                     children=f"{page['name']}",
                     href=page["relative_path"],

@@ -12,7 +12,6 @@ govuk_header = html.Header(
             children=[
                 html.Div(
                     className="govuk-header__logo",
-                    style={"width": "66.6%"},
                     children=[
                         html.A(
                             className="govuk-header__link govuk-header__link--homepage",
@@ -20,10 +19,16 @@ govuk_header = html.Header(
                             children=[
                                 html.Span(
                                     className="govuk-header__logotype",
+                                    style={
+                                        "marginRight":"15px"
+                                    },
                                     children=[
                                         html.Img(
                                             className="govuk-header__logotype-crown",
-                                            style={"marginRight": "10px"},
+                                            style={
+                                                "marginRight": "10px",
+                                                "marginBottom":"3px"
+                                            },
                                             src="/assets/images/govuk-logotype-crown.png",
                                         ),
                                         html.Span(
@@ -31,15 +36,21 @@ govuk_header = html.Header(
                                             children="GOV.UK",
                                         ),
                                     ],
-                                ),
-                                html.Span(
-                                    className="govuk-header__product-name",
-                                    children="DECS Reporting",
-                                ),
+                                )
                             ],
                         ),
                     ],
                 ),
+                html.Div(
+                    className="govuk-header__content", 
+                    children=[
+                        html.A(
+                            className="govuk-header__link govuk-header__service-name",
+                            href="/",
+                            children="DECS - Operational Reporting"
+                        )
+                    ]
+                )
             ],
         ),
     ]

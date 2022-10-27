@@ -3,33 +3,42 @@ import dash
 from dash import html
 
 from .report_1 import *
+from components import report_header
 
-dash.register_page(__name__, path="/report-1")
+dash.register_page(
+    __name__, 
+    path="/live-cases",
+    title="Live Cases",
+    name="Live Cases"
+)
 
 layout = html.Div(
-    className="report-background-box",
+    className="report-background-box govuk-body",
     children=[
+        html.Div(
+            className="tab-controls",
+            style={
+                "borderTop":"1px solid #000"
+            },
+            children=[
+                html.P(
+                    className="govuk-body-l",
+                    style={"marginBottom": "0px"},
+                    children="Controls",
+                )
+            ],
+        ),
+        report_header(
+            report_title="Open Cases"
+        ),
         html.Div(
             className="govuk-grid-row",
             children=[
                 html.Div(
-                    style={"padding": "0px 15px"},
-                    children=[
-                        html.H2(
-                            className="govuk-heading-l", children="Title for the report"
-                        ),
-                        html.P(
-                            className="govuk-body",
-                            children="Suspendisse potenti. Proin aliquet mi vel viverra faucibus. Quisque a lacus ac diam bibendum placerat. Etiam placerat eros a urna dapibus accumsan. Duis eu ipsum dignissim, sagittis arcu sit amet, tincidunt orci. Donec pulvinar, nibh ac rutrum faucibus, mauris augue malesuada odio, eget luctus turpis justo a nulla. Ut sed ipsum libero. Morbi rutrum, nisi at hendrerit luctus, lacus neque ultrices sem, id pellentesque nibh nunc et turpis. Nam auctor nibh ut orci viverra, vel suscipit neque cursus. Sed cursus nibh eu porttitor interdum. Suspendisse potenti. Aenean eleifend, nisi eget aliquam consequat, odio mauris venenatis purus, id ornare justo tortor a nisl. Proin nec tincidunt nisl. Nullam nec posuere mi. Nulla et erat ultricies, condimentum sapien ut, posuere lacus. Vestibulum ante mauris, pellentesque ac tellus sit amet, fringilla imperdiet nibh.",
-                        ),
-                    ],
-                ),
-                html.Div(
-                    className="govuk-grid-row",
-                    style={"marginBottom": "30px"},
+                    className="govuk-grid-column-two-thirds",
                     children=[
                         html.Div(
-                            className="govuk-grid-column-three-quarters",
+                            className="govuk-grid-row",
                             children=[
                                 html.Div(
                                     className="information-box",
@@ -42,37 +51,40 @@ layout = html.Div(
                                             className="govuk-heading-m",
                                             children="Ticket completion",
                                         ),
-                                        example_bar,
+                                        example_bar
                                     ],
-                                )
-                            ],
+                                ),
+                            ]
                         ),
                         html.Div(
-                            className="govuk-grid-column-one-quarter",
+                            className="govuk-grid-row",
                             children=[
-                                html.Div(
-                                    className="information-box",
-                                    children=[
-                                        html.Span(
-                                            className="govuk-caption-m",
-                                            children="All business targets",
-                                        ),
-                                        html.H3(
-                                            className="govuk-heading-m",
-                                            children="Performance",
-                                        ),
-                                        example_gauge,
-                                    ],
-                                )
-                            ],
+                                ticket_details_sec
+                            ]
                         ),
                     ],
                 ),
                 html.Div(
-                    className="govuk-grid-row",
-                    children=[ticket_details_sec, performance_table_sec,],
+                    className="govuk-grid-column-one-third",
+                    children=[
+                        html.Div(
+                            className="information-box",
+                            children=[
+                                html.Span(
+                                    className="govuk-caption-m",
+                                    children="All business targets",
+                                ),
+                                html.H3(
+                                    className="govuk-heading-m",
+                                    children="Performance",
+                                ),
+                                example_gauge,
+                                performance_table_sec
+                            ],
+                        )
+                    ],
                 ),
             ],
-        )
+        ),
     ],
 )

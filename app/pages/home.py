@@ -39,7 +39,10 @@ layout = html.Div(
                     children=[
                         html.H1(
                             className="govuk-heading-l", 
-                            style={"margin":"0px"},
+                            style={
+                                "margin":"0px", 
+                                "textAlign":"center"
+                            },
                             children="DECS Reporting"
                         ),
                     ]

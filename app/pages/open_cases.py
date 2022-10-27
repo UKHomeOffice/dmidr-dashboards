@@ -44,13 +44,14 @@ layout = html.Div(
             className="govuk-grid-row",
             children=[
                 html.Div(
-                    className="govuk-grid-column-two-thirds",
+                    className="govuk-grid-column-two-thirds", 
                     children=[
                         html.Div(
                             className="govuk-grid-row",
                             children=[
                                 html.Div(
                                     className="information-box",
+                                    style={"marginBottom": "30px"},
                                     children=[
                                         html.Span(
                                             className="govuk-caption-m",
@@ -65,35 +66,36 @@ layout = html.Div(
                                 ),
                             ]
                         ),
-                        html.Div(
-                            className="govuk-grid-row",
-                            children=[
-                                ticket_details_sec
-                            ]
-                        ),
-                    ],
+                        ticket_details_sec
+                    ]
                 ),
                 html.Div(
                     className="govuk-grid-column-one-third",
                     children=[
                         html.Div(
-                            className="information-box",
+                            className="govuk-grid-row",
                             children=[
-                                html.Span(
-                                    className="govuk-caption-m",
-                                    children="All business targets",
+                                html.Div(
+                                    className="information-box",
+                                    style={"marginBottom": "30px"},
+                                    children=[
+                                        html.Span(
+                                            className="govuk-caption-m",
+                                            children="All business targets",
+                                        ),
+                                        html.H3(
+                                            className="govuk-heading-m",
+                                            children="Performance",
+                                        ),
+                                        example_gauge,
+                                    ]
                                 ),
-                                html.H3(
-                                    className="govuk-heading-m",
-                                    children="Performance",
-                                ),
-                                example_gauge,
-                                performance_table_sec
-                            ],
-                        )
-                    ],
-                ),
-            ],
-        ),
-    ],
+                            ]
+                        ),
+                        performance_table_sec
+                    ]
+                )
+            ]
+        )
+    ]
 )

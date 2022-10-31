@@ -1,7 +1,8 @@
 import dash
 
 from dash import html
-from components import board_link_card
+
+from app.components import board_link_card
 
 
 dash.register_page(__name__, path="/")

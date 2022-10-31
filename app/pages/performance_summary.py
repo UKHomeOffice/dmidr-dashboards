@@ -2,7 +2,7 @@ import dash
 
 from dash import html
 
-from .closed_cases_components import *
+from app.pages.closed_cases_components import *
 
 
 dash.register_page(

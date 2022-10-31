@@ -1,7 +1,7 @@
 # Third party imports
 from dash import html
 
-from .details_table import details_table
+from app.pages.open_cases_components import details_table
 
 ticket_details_sec = html.Div(
     className="govuk-grid-row",

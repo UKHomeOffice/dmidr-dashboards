@@ -1,4 +1,4 @@
-from dash import html, dcc
+from dash import dcc
 import plotly.graph_objects as go
 
 example_gauge = dcc.Graph(

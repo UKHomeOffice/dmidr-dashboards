@@ -1,4 +1,3 @@
-# Third party
 from dash import html
 
 govuk_footer = html.Footer(

@@ -1,7 +1,7 @@
 # Third party imports
 from dash import html
 
-from .leader_board import leader_board, personal_leaders
+from app.pages.open_cases_components.leader_board import leader_board, personal_leaders
 
 performance_table_sec = html.Div(
     className="govuk-grid-row",

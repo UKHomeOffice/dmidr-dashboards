@@ -1,4 +1,3 @@
-# Third party imports
 from dash import html
 
 govuk_header = html.Header(

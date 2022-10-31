@@ -1,10 +1,9 @@
 from dash import html, callback, Input, Output
 import pandas as pd
 
-from components import auto_govuk_table
-
-from .day_selector_row import day_selector_row
-from .counting_section import counting_section
+from app.components import auto_govuk_table
+from app.pages.operational_report.day_selector_row import day_selector_row
+from app.pages.operational_report.counting_section import counting_section
 
 blanks = ["cell", "cell", "cell", "cell", "cell", "cell", "cell", "cell"]
 Days = ["Mon", "Mon", "Tues", "Wed", "Thurs", "Thurs", "Thurs", "Fri"]

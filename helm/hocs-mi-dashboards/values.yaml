@@ -1,0 +1,67 @@
+---
+hocs-generic-service:
+  nameOverride: hocs-mi-dashboards
+
+  deployment:
+    selectorRole: hocs-mi-dashboards
+    annotations:
+      downscaler/downtime: 'Mon-Sun 00:00-05:00 Europe/London,Mon-Sun 23:00-24:00 Europe/London'
+  volumes:
+    - name: keystore
+      emptyDir:
+        medium: "Memory"
+    - name: certs
+      emptyDir:
+        medium: 'Memory'
+    - name: secrets
+      emptyDir:
+        medium: "Memory"
+    - name: bundle
+      configMap:
+        name: bundle
+    # - name: auth-secrets
+    #   secret:
+    #     secretName: ui-casework-creds
+    # - name: frontend-keycloak-secret
+    #   secret:
+    #     secretName: frontend-keycloak-secret
+
+  app:
+    image:
+      # repository: quay.io/elcorbs/hocs-mi-dashboards
+      repository: quay.io/ukhomeofficedigital/alpine
+    env:
+      clientside: 1
+      isNotProd: 0
+      # a11yUrl: https://lssiprod.service-now.com/ess?id=kb_article&sys_id=98678fd71b9f901845e741d7bd4bcba1
+      # maxFilesize: '52428800'
+      # supportedTypes: doc,docx,txt,rtf,html,pdf,jpg,jpeg,tif,tiff,png,bmp,gif,xls,xlsx,msg
+
+  keycloak:
+    enabled: false
+    realm: https://sso.digital.homeoffice.gov.uk/auth/realms/hocs-prod
+    timeout: 60
+    domain: cs.homeoffice.gov.uk
+
+  keycloakApi:
+    enabled: false
+
+  proxy:
+    enabled: false
+
+  truststore:
+    enabled: false
+
+  ingress:
+    external:
+      enabled: false
+      host: www.{{ .Values.clusterPrefix }}.homeoffice.gov.uk
+    paths:
+      - backend:
+          serviceName: hocs-mi-dashboards
+          servicePort: 443
+        path: /
+      # - backend:
+      #     serviceName: hocs-audit
+      #     servicePort: 443
+      #   path: /export

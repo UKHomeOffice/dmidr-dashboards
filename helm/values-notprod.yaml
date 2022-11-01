@@ -11,13 +11,9 @@ hocs-generic-service:
     annotations:
       downscaler/downtime: "Mon-Sun 00:00-08:00 Europe/London,Mon-Sun 18:00-24:00 Europe/London"
 
-  # keycloak:
-  #   realm: https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
-  #   domain: cs-notprod.homeoffice.gov.uk
-
-  ingress:
-    internal:
-      enabled: true
+  keycloak:
+    realm: https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
+    domain: sso-dev.notprod.homeoffice.gov.uk/
 
   app:
     resources:
@@ -27,3 +23,10 @@ hocs-generic-service:
         memory: 512Mi
     env:
       isNotProd: 1
+
+  ingress:
+    external:
+      host: dev.{{ .Values.clusterPrefix }}-notprod.homeoffice.gov.uk
+    internal:
+      enabled: true
+      host: dev.internal.{{ .Values.clusterPrefix }}-notprod.homeoffice.gov.uk

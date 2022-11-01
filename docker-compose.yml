@@ -4,7 +4,7 @@ services:
     container_name: reporting-app
     build:
       context: .
-      dockerfile: ./app/Dockerfile
+      dockerfile: ./Dockerfile
     ports:
       - "8050:8050"
   test:

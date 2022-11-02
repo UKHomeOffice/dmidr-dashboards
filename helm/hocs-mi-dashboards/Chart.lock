@@ -1,6 +1,0 @@
-dependencies:
-- name: hocs-generic-service
-  repository: https://ukhomeoffice.github.io/hocs-helm-charts
-  version: 1.1.2
-digest: sha256:36eaeafc81f1e991c1d1c35f2b65a854ca8ff2411e6c3bb4d3f8cea2470d41e0
-generated: "2022-10-26T16:27:03.553539+01:00"

@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: hocs-mi-dashboards-service-tls
+spec:
+  secretName: hocs-mi-dashboards-service-tls-cmio
+  issuerRef:
+    name: platform-ca
+    kind: ClusterIssuer
+  commonName: app.cs-mi-dev.svc.cluster.local
+  dnsNames:
+  - app
+  - app.cs-mi-dev.svc

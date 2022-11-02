@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: hocs-mi-dashboards
+spec:
+  podSelector:
+    matchLabels:
+      name: hocs-mi-dashboards
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: ingress-internal
+    - namespaceSelector:
+        matchLabels:
+          name: ingress-external
+    ports:
+    - protocol: TCP
+      {{- if .Values.keycloak.enabled }}
+      port: 10443
+      {{- else }}
+      port: 10444
+      {{- end }}

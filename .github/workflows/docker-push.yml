@@ -6,7 +6,8 @@ on:
 jobs:
   tests:
     uses: ./.github/workflows/test.yml
-  build:
+  build-and-push:
+    needs: [tests]
     uses: UKHomeOffice/hocs-github-actions/.github/workflows/docker-build-tag.yml@v2
     with:
       images: 'quay.io/ukhomeofficedigital/hocs-mi-dashboards'

@@ -1,9 +1,5 @@
 name: Test
-on:
-  - push:
-    branches-ignore:
-      - main
-  - workflow_call
+on: [push, workflow_call]
 jobs:
   test:
     runs-on: ubuntu-latest

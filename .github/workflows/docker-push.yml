@@ -4,6 +4,8 @@ on:
     types: [ closed ]
 
 jobs:
+  tests:
+    uses: ./.github/workflows/test.yml
   build:
     uses: UKHomeOffice/hocs-github-actions/.github/workflows/docker-build-tag.yml@v2
     with:

@@ -25,7 +25,8 @@ app:
 
 ingress:
   external:
-    host: www.hocs-mi-dashboards.dev.cs-mi-dev.homeoffice.gov.uk
+
+    host: hocs-mi-dashboards.mi-dev.cs-notprod.homeoffice.gov.uk
   internal:
     enabled: true
-    host: plotly.hocs-mi-dashboards-internal.cs-mi-dev.homeoffice.gov.uk
+    host: hocs-mi-dashboards.mi-dev.internal.cs-notprod.homeoffice.gov.uk

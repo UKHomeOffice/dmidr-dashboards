@@ -161,8 +161,6 @@ truststore:
       readOnly: true
 
 ingress:
-  internal:
-    host: 0.0.0.0
   external:
     enabled: false
   paths:

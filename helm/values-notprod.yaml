@@ -25,7 +25,6 @@ app:
 
 ingress:
   external:
-
     host: hocs-mi-dashboards.mi-dev.cs-notprod.homeoffice.gov.uk
   internal:
     enabled: true

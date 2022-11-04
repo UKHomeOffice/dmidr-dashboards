@@ -25,6 +25,6 @@ steps:
       from_secret: CS_NOTPROD_KUBE_TOKEN
     VERSION: ${DRONE_TAG}
   commands:
-    - ./ci/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --set version="$${VERSION}"
+    - ./hocs-ci-infrastructure/helm/helm-deploy.sh --values ./helm/values-notprod.yaml --set version="$${VERSION}"
   depends_on:
     - checkout

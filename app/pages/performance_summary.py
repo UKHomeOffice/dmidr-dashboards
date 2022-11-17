@@ -6,14 +6,23 @@ from app.pages.operational_report import *
 
 dash.register_page(
     __name__, 
-    path="/operational-report",
-    title="Operational Report",
-    name="Operational Report"
+    name="Performance summary",
+    path="/performance-summary"
 )
 
 layout = html.Div(
     className="report-background-box govuk-body", 
     children=[
+        html.Div(
+            style={"paddingLeft":"10px"},
+            children=[
+                html.A(
+                    className="govuk-back-link",
+                    children="Back",
+                    href="/"
+                ),
+            ]
+        ),
         dcc.Tabs(
             parent_className="custom-tabs",
             className="custom-tabs-container",

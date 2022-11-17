@@ -1,16 +1,29 @@
 import dash
 from dash import html, dcc
 
-from app.pages.report_1 import *
-from app.pages.report_2 import *
+from app.pages.closed_cases_comp import *
+from app.pages.open_cases_comp import *
 from app.components import report_header
 
-dash.register_page(__name__, path="/report-3")
-
+dash.register_page(
+    __name__, 
+    name="Due cases",
+    path="/due-cases"
+)
 
 layout = html.Div(
     className="report-background-box govuk-body",
     children=[
+        html.Div(
+            style={"paddingLeft":"10px"},
+            children=[
+                html.A(
+                    className="govuk-back-link",
+                    children="Back",
+                    href="/"
+                ),
+            ]
+        ),
         dcc.Tabs(
             parent_className="custom-tabs",
             className="custom-tabs-container",

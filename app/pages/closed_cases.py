@@ -2,13 +2,27 @@ import dash
 
 from dash import html
 
-from app.pages.report_1 import *
+from app.pages.closed_cases_comp import *
 
-dash.register_page(__name__, path="/report-1")
+dash.register_page(
+     __name__,
+     name="Closed cases",
+     path="/closed-cases"
+ )
 
 layout = html.Div(
     className="report-background-box",
     children=[
+        html.Div(
+            style={"paddingLeft":"10px"},
+            children=[
+                html.A(
+                    className="govuk-back-link",
+                    children="Back",
+                    href="/"
+                ),
+            ]
+        ),
         html.Div(
             className="govuk-grid-row",
             children=[

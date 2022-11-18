@@ -14,13 +14,22 @@ body {
   margin: 0px;
 }
 
+.govuk-back-link::before {
+  transform: none;
+}
+
+.decs-section-break {
+  margin: 5px 10px;
+  border:1.75px solid #8f23b3;
+}
+
 .th_padd {
   padding-left: 5px
 }
 
 .govuk-table__header {
   padding: 10px 10px 10px 5px;
-  border: 1px solid #b1b4b6
+  border: 1px solid #b1b4b6;
 }
 
 .govuk-table__body {
@@ -52,12 +61,12 @@ tbody tr:nth-child(even){
 
 .report-background-box {
   background-color: #f1f1f1;
-  padding: 20px 0px;
+  padding-bottom: 20px;
 }
 
 .information-box {
   padding: 10px;
-  border: 2px solid #cbcbcb;
+  background-color: #fff;
 }
 
 .custom-tabs-container {

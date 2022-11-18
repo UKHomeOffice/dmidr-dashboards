@@ -7,6 +7,7 @@ serve: serve-transformation build
 	${DOCKER_COMPOSE} up -d reporting-app
 
 stop:
+	cd hocs-mi-transformation && make stop
 	rm -fr ./hocs-mi-transformation
 	${DOCKER_COMPOSE} down
 

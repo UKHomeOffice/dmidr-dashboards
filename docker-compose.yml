@@ -15,8 +15,14 @@ services:
       - transformation_db_username=postgres
       - transformation_db_port=5432
       - transformation_db_resource=postgres
+    networks:
+      - hocsnet
   test:
     container_name: test-reporting-app
     build:
       context: .
       dockerfile: ./tests/Dockerfile
+
+networks:
+  hocsnet:
+    name: hocsnet

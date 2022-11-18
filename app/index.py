@@ -1,4 +1,5 @@
 import dash
+import psycopg2
 from dash import Dash, html, callback, Output, Input
 from flask import Flask, session
 import os
@@ -24,10 +25,11 @@ app.layout = html.Div(
     ]
 )
 
+
 # Need this callback to access the session.
 # Probably can be done another way, but this is simple for now.
 @callback(
-    Output(component_id="login-status-text", component_property="children"), 
+    Output(component_id="login-status-text", component_property="children"),
     Input(component_id="main", component_property="children")
 )
 def login_status(value):
@@ -39,3 +41,29 @@ def login_status(value):
 
 if __name__ == "__main__":
     app.run_server(host='0.0.0.0', debug=True, port=8050)
+
+
+def create_db_connection():
+    return psycopg2.connect(
+        host=os.environ.get(f"transformation_db_host"),
+        user=os.environ.get(f"transformation_db_username"),
+        password=os.environ.get(f"transformation_db_password"),
+        database=os.environ.get(f"transformation_db_name"),
+        port=int(os.environ.get(f"transformation_db_port"))
+    )
+
+
+@retry(wait=wait_exponential(multiplier=2, min=1, max=10), stop=stop_after_attempt(5))
+def try_connection():
+    try:
+        with create_db_connection() as transform_connection:
+            stmt = text("SELECT 1")
+            connection.execute(stmt)
+        print("Connection to database successful.")
+
+    except Exception as e:
+        print("Connection to database failed, retrying.")
+        raise Exception
+
+
+try_connection()

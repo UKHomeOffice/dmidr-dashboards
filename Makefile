@@ -16,3 +16,9 @@ serve-transformation:
 
 clean:
 	rm -fr ./hocs-mi-transformation
+
+logs:
+	docker-compose logs -f reporting-app
+
+shell:
+	docker exec -it reporting-app bash

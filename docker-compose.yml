@@ -7,8 +7,22 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "8050:8050"
+    environment:
+      - transformation_db_host=transform-db
+      - transformation_db_name=transformation
+      - transformation_db_endpoint=transform-db
+      - transformation_db_password=postgres
+      - transformation_db_username=postgres
+      - transformation_db_port=5432
+      - transformation_db_resource=postgres
+    networks:
+      - hocsnet
   test:
     container_name: test-reporting-app
     build:
       context: .
       dockerfile: ./tests/Dockerfile
+
+networks:
+  hocsnet:
+    name: hocsnet

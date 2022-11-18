@@ -39,10 +39,6 @@ def login_status(value):
     return "Not logged in"
 
 
-if __name__ == "__main__":
-    app.run_server(host='0.0.0.0', debug=True, port=8050)
-
-
 def create_db_connection():
     return psycopg2.connect(
         host=os.environ.get(f"transformation_db_host"),
@@ -53,17 +49,22 @@ def create_db_connection():
     )
 
 
-@retry(wait=wait_exponential(multiplier=2, min=1, max=10), stop=stop_after_attempt(5))
 def try_connection():
+    print("Starting to connect to database.")
     try:
         with create_db_connection() as transform_connection:
-            stmt = text("SELECT 1")
-            connection.execute(stmt)
-        print("Connection to database successful.")
-
+            with transform_connection.cursor() as transform_cursor:
+                transform_cursor.execute(
+                    "SELECT * FROM information_schema.tables")
+                row = transform_cursor.fetchone()
+                if not row == None:
+                    print("Connection to database successful.")
     except Exception as e:
         print("Connection to database failed, retrying.")
         raise Exception
 
 
 try_connection()
+
+if __name__ == "__main__":
+    app.run_server(host='0.0.0.0', debug=True, port=8050)

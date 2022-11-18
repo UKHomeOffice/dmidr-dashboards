@@ -22,6 +22,42 @@ app:
   env:
   - name: isNotProd
     value: "1"
+  - name: transformation_db_name
+    valueFrom:
+      secretKeyRef:
+        name: cs-mi-dev-transformation-rds
+        key: db_name
+        optional: false
+  - name: transformation_db_host
+    valueFrom:
+      secretKeyRef:
+        name: cs-mi-dev-transformation-rds
+        key: endpoint
+        optional: false
+  - name: transformation_db_password
+    valueFrom:
+      secretKeyRef:
+        name: cs-mi-dev-transformation-rds
+        key: password
+        optional: false
+  - name: transformation_db_username
+    valueFrom:
+      secretKeyRef:
+        name: cs-mi-dev-transformation-rds
+        key: username
+        optional: false
+  - name: transformation_db_port
+    valueFrom:
+      secretKeyRef:
+        name: cs-mi-dev-transformation-rds
+        key: port
+        optional: false
+  - name: transformation_db_resource
+    valueFrom:
+      secretKeyRef:
+        name: cs-mi-dev-transformation-rds
+        key: resource_id
+        optional: false
 
 ingress:
   external:

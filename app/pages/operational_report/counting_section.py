@@ -2,7 +2,7 @@ from dash import html
 
 def counting_section(box_text, bold_section:str="", count=None):
     return html.Div(
-        className="govuk-grid-column-one-quarter", 
+        className="decs-grid-column-one-quarter", 
         children=[
             html.Div(
                 style={

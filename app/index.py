@@ -18,10 +18,10 @@ app = Dash(__name__, use_pages=True, server=server)
 app.layout = html.Div(
     id="main",
     children=[
-        html.Span(id="login-status-text", children=[]),
-        govuk_header,
+        decs_header,
         dash.page_container,
-        govuk_footer,
+        html.Span(id="login-status-text", children=[]),
+        decs_footer
     ]
 )
 

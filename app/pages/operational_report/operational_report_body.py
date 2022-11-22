@@ -28,7 +28,7 @@ operational_report_body = html.Div(
     children=[
         day_selector_row, 
         html.Div(
-            className="govuk-grid-row",
+            className="decs-grid-row",
             style={"marginBottom":"30px"},
             children=[
                 counting_section("Total due cases", bold_section="this week", count=34),
@@ -38,7 +38,7 @@ operational_report_body = html.Div(
             ]
         ),
         html.Div(
-            className="govuk-grid-row",
+            className="decs-grid-row",
             style={
                 "padding":"0px 15px"
             },

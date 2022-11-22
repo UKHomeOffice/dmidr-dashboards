@@ -25,7 +25,7 @@ layout = html.Div(
             ]
         ),
         html.Div(
-            className="govuk-grid-row",
+            className="decs-grid-row",
             children=[
                 html.Div(
                     style={"padding": "0px 15px"},
@@ -42,14 +42,14 @@ layout = html.Div(
             ],
         ),
         html.Div(
-            className="govuk-grid-row",
+            className="decs-grid-row",
             children=[
                 html.Div(
-                    className="govuk-grid-column-two-thirds",
+                    className="decs-grid-column-two-thirds",
                     children=[example_case_count, completion_time_table],
                 ),
                 html.Div(
-                    className="govuk-grid-column-one-third", children=[example_pie]
+                    className="decs-grid-column-one-third", children=[example_pie]
                 ),
             ],
         ),

@@ -9,7 +9,7 @@ the_pie_chart.update_layout(
 
 
 example_pie = html.Div(
-    className="govuk-grid-row",
+    className="decs-grid-row",
     children=[
         html.Div(
             className="information-box",

@@ -5,11 +5,11 @@ today = date.today()
 
 def report_header(report_title: str, todays_date=today):
     return html.Div(
-        className="govuk-grid-row",
+        className="decs-grid-row",
         style={"marginTop": "20px"},
         children=[
             html.Div(
-                className="govuk-grid-column-one-third",
+                className="decs-grid-column-one-third",
                 children=[
                     html.Img(
                         className="ho-logo-image",
@@ -21,7 +21,7 @@ def report_header(report_title: str, todays_date=today):
                 ],
             ),
             html.Div(
-                className="govuk-grid-column-one-third",
+                className="decs-grid-column-one-third",
                 children=[
                     html.H3(
                         className="govuk-heading-l",
@@ -31,7 +31,7 @@ def report_header(report_title: str, todays_date=today):
                 ],
             ),
             html.Div(
-                className="govuk-grid-column-one-third",
+                className="decs-grid-column-one-third",
                 children=[
                     html.Span(
                         className="govuk-caption-s tab-date-caption",

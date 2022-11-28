@@ -37,8 +37,8 @@ def try_connection():
         with create_db_connection() as transform_connection:
             with transform_connection.cursor() as transform_cursor:
                 transform_cursor.execute(
-                    "SELECT * FROM public.mpam_due_cases_aggregate_data")
-                rows = transform_cursor.fetchall(10)
+                    "SELECT * FROM public.mpam_due_cases_aggregate")
+                rows = transform_cursor.fetchall()
                 if not rows == None:
                     print("Connection to database successful.")
 

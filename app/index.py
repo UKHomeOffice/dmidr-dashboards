@@ -2,6 +2,7 @@ import dash
 import psycopg2
 from dash import Dash, html, callback, Output, Input
 import os
+from flask import Flask
 
 from app.components import *
 

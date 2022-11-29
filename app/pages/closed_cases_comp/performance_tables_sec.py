@@ -4,7 +4,7 @@ from dash import html
 from app.pages.closed_cases_comp.leader_board import leader_board, personal_leaders
 
 performance_table_sec = html.Div(
-    className="govuk-grid-column-one-third",
+    className="decs-grid-column-one-third",
     children=[
         html.Div(
             className="information-box",

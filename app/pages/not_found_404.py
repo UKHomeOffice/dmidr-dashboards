@@ -4,13 +4,13 @@ import dash
 dash.register_page(__name__)
 
 layout = html.Div(
-    className="govuk-grid-row",
+    className="decs-grid-row",
     style={
         "marginTop":"50px"
     },
     children=[
         html.Div(
-            className="govuk-grid-column-two-thirds",
+            className="decs-grid-column-two-thirds",
             style={
                 "padding":"0px"
             },

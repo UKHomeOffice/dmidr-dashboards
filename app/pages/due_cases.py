@@ -45,7 +45,7 @@ layout = html.Div(
                         ),
                         report_header("The reports"),
                         html.Div(
-                            className="govuk-grid-row",
+                            className="decs-grid-row",
                             children=[
                                 html.Div(
                                     style={"padding": "0px 15px"},
@@ -57,11 +57,11 @@ layout = html.Div(
                                     ],
                                 ),
                                 html.Div(
-                                    className="govuk-grid-row",
+                                    className="decs-grid-row",
                                     style={"marginBottom": "30px"},
                                     children=[
                                         html.Div(
-                                            className="govuk-grid-column-three-quarters",
+                                            className="decs-grid-column-three-quarters",
                                             children=[
                                                 html.Div(
                                                     className="information-box",
@@ -80,7 +80,7 @@ layout = html.Div(
                                             ],
                                         ),
                                         html.Div(
-                                            className="govuk-grid-column-one-quarter",
+                                            className="decs-grid-column-one-quarter",
                                             children=[
                                                 html.Div(
                                                     className="information-box",
@@ -101,7 +101,7 @@ layout = html.Div(
                                     ],
                                 ),
                                 html.Div(
-                                    className="govuk-grid-row",
+                                    className="decs-grid-row",
                                     children=[
                                         ticket_details_sec,
                                         performance_table_sec,
@@ -128,7 +128,7 @@ layout = html.Div(
                         ),
                         report_header("The reports"),
                         html.Div(
-                            className="govuk-grid-row",
+                            className="decs-grid-row",
                             children=[
                                 html.Div(
                                     style={"padding": "0px 15px"},
@@ -142,17 +142,17 @@ layout = html.Div(
                             ],
                         ),
                         html.Div(
-                            className="govuk-grid-row",
+                            className="decs-grid-row",
                             children=[
                                 html.Div(
-                                    className="govuk-grid-column-two-thirds",
+                                    className="decs-grid-column-two-thirds",
                                     children=[
                                         example_case_count,
                                         completion_time_table,
                                     ],
                                 ),
                                 html.Div(
-                                    className="govuk-grid-column-one-third",
+                                    className="decs-grid-column-one-third",
                                     children=[example_pie],
                                 ),
                             ],

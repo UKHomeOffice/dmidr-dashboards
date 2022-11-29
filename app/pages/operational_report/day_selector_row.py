@@ -1,7 +1,7 @@
 from dash import html, dcc, callback, Input, Output, ctx
 
 day_selector_row = html.Div(
-    className="govuk-grid-row govuk-body",
+    className="decs-grid-row govuk-body",
     style={"marginBottom":"50px"},
     children=[
         dcc.Store(

@@ -6,7 +6,7 @@ df = pd.DataFrame(
 )
 
 example_case_count = html.Div(
-    className="govuk-grid-row",
+    className="decs-grid-row",
     style={"marginBottom": "30px"},
     children=[
         html.Div(

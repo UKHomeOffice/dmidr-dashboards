@@ -19,14 +19,14 @@ users_df = pd.DataFrame(
 
 
 leader_board = html.Div(
-    className="govuk-grid-row",
+    className="decs-grid-row",
     children=[
         html.Div(
-            className="govuk-grid-column-one-half",
+            className="decs-grid-column-one-half",
             children=[auto_govuk_table(teams_df[0:3], title="Top 3", bold_lead=True)],
         ),
         html.Div(
-            className="govuk-grid-column-one-half",
+            className="decs-grid-column-one-half",
             children=[
                 auto_govuk_table(teams_df[3:6], title="Bottom 3", bold_lead=True)
             ],
@@ -35,14 +35,14 @@ leader_board = html.Div(
 )
 
 personal_leaders = html.Div(
-    className="govuk-grid-row",
+    className="decs-grid-row",
     children=[
         html.Div(
-            className="govuk-grid-column-one-half",
+            className="decs-grid-column-one-half",
             children=[auto_govuk_table(users_df[0:3], title="Top 3", bold_lead=True)],
         ),
         html.Div(
-            className="govuk-grid-column-one-half",
+            className="decs-grid-column-one-half",
             children=[
                 auto_govuk_table(users_df[3:6], title="Bottom 3", bold_lead=True)
             ],

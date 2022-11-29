@@ -2,7 +2,7 @@ from dash import html
 
 def board_link_card(dash_title:str, dash_link:str="/"):
     return html.Div(
-        className="govuk-grid-column-one-third",
+        className="decs-grid-column-one-third",
         style={"padding":"0px 0px 0px 15px"},
         children=[
             html.Div(

@@ -4,7 +4,7 @@ from dash import html
 from app.pages.closed_cases_comp.details_table import details_table
 
 ticket_details_sec = html.Div(
-    className="govuk-grid-column-two-thirds",
+    className="decs-grid-column-two-thirds",
     children=[
         html.Div(
             className="information-box",

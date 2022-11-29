@@ -12,62 +12,11 @@ layout = html.Div(
         "paddingBottom":"20px"
     },
     children=[
-        html.Div(
-            className="govuk-grid-row",
-            style={
-                "padding":"10px 5px"
-            },
-            children=[
-                html.Div(
-                    className="govuk-grid-column-one-third",
-                    children=[
-                        html.Img(
-                            className="ho-logo-image",
-                            src="/assets/images/uk-home-office-logo.png",
-                        ),
-                        html.P(
-                            className="ho-logo-text govuk-body-l", 
-                            children="Home Office"
-                        ),
-                    ]
-                ),
-                html.Div(
-                    className="govuk-grid-column-one-third",
-                    style={
-                        "textAlign":"center"
-                    },
-                    children=[
-                        html.P(
-                            className="govuk-body-l", 
-                            style={
-                                "margin":"0px", 
-                                "height":"100%",
-                                "textAlign":"center"
-                            },
-                            children="DECS Reporting"
-                        ),
-                    ]
-                ), 
-                html.Div(
-                    className="govuk-grid-column-one-third",
-                    style={
-                        "textAlign":"right"
-                    },                    
-                    children=[
-                        html.A(
-                            className="govuk-link govuk-body",
-                            href="/login",
-                            children="Sign out"
-                        )
-                    ]
-                )
-            ],
-        ),
         html.Hr(
             className="decs-section-break"
         ),
         html.Div(
-            className="govuk-grid-row",
+            className="decs-grid-row",
             children=[
                 html.Div(
                     style={
@@ -75,7 +24,7 @@ layout = html.Div(
                     },
                     children=[
                         html.Div(
-                            className="govuk-grid-row",
+                            className="decs-grid-row",
                             style={"padding":"0px 15px"},
                             children=[
                                 html.Span(
@@ -89,7 +38,7 @@ layout = html.Div(
                             ]
                         ),
                         html.Div(
-                            className="govuk-grid-row",
+                            className="decs-grid-row",
                             children=[
                                 board_link_card(dash_title="Open cases", dash_link="/open-cases"),
                                 board_link_card(dash_title="Due cases", dash_link="/due-cases"),
@@ -97,7 +46,7 @@ layout = html.Div(
                             ]
                         ),
                         html.Div(
-                            className="govuk-grid-row",
+                            className="decs-grid-row",
                             style={"paddingTop":"15px"},
                             children=[
                                 board_link_card(dash_title="Performance summary", dash_link="/performance-summary"),

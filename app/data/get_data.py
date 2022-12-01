@@ -9,12 +9,3 @@ def create_db_connection():
         database=os.environ.get(f"transformation_db_name"),
         port=int(os.environ.get(f"transformation_db_port"))
     )
-
-
-def get_mpam_due_cases():
-    query = "SELECT * FROM public.mpam_due_cases_aggregate"
-
-    with create_db_connection as connection:
-        data = pd.read_sql_query(query, connection)
-
-        return data

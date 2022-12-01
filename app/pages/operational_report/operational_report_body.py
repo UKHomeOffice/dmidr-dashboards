@@ -5,24 +5,13 @@ from app.components import auto_govuk_table
 
 from app.pages.operational_report.day_selector_row import day_selector_row
 from app.pages.operational_report.counting_section import counting_section
+from app.data.MPAM.mpam_due_cases import get_mpam_due_cases, get_mpam_due_cases_aggregate
 
 blanks = ["cell", "cell", "cell", "cell", "cell", "cell", "cell", "cell"]
 Days = ["Mon", "Mon", "Tues", "Wed", "Thurs", "Thurs", "Thurs", "Fri"]
 
-df = pd.DataFrame(
-    data={
-        "Case reference":blanks,
-        "Owning CSU":blanks,
-        "Business Area":blanks,
-        "Location":blanks,
-        "NRO":blanks,
-        "Case queue name":blanks,
-        "UKBA recieved date":blanks,
-        "Status":blanks,
-        "Current handler name":blanks,
-        "Day":Days,
-    }
-)
+cases_df = get_mpam_due_cases()
+case_counts = get_mpam_due_cases_aggregate()
 
 operational_report_body = html.Div(
     children=[
@@ -31,10 +20,10 @@ operational_report_body = html.Div(
             className="decs-grid-row",
             style={"marginBottom":"30px"},
             children=[
-                counting_section("Total due cases", bold_section="this week", count=34),
-                counting_section("Total due cases", bold_section="next 4 weeks", count=186),
-                counting_section("Total due cases", bold_section="out of service standard", count=114),
-                counting_section("Total due cases", bold_section="all time", count=300),           
+                counting_section("Total due cases", bold_section="this week", count=case_counts["Total due this week"]),
+                counting_section("Total due cases", bold_section="next 4 weeks", count=case_counts["Total due next 4 weeks"]),
+                counting_section("Total due cases", bold_section="out of service standard", count=case_counts["Total out of service standard"]),
+                counting_section("Total due cases", bold_section="all time", count=case_counts["Total cases"]),
             ]
         ),
         html.Div(
@@ -50,7 +39,7 @@ operational_report_body = html.Div(
                         "padding":"10px"
                     },
                     children=[
-                        auto_govuk_table(df, title="Case details", title_size="m")
+                        auto_govuk_table(cases_df, title="Case details", title_size="m")
                     ]
                 )
             ]
@@ -65,7 +54,7 @@ operational_report_body = html.Div(
 )
 def filter_table_by_day(filter_day):
     if filter_day == None:
-        return auto_govuk_table(df, title="Case details", title_size="m")
+        return auto_govuk_table(cases_df, title="Case details", title_size="m")
     else:
-        df_filtered = df.loc[df["Day"] == filter_day]
+        df_filtered = cases_df.loc[cases_df["Day"] == filter_day]
         return auto_govuk_table(df_filtered, title="Case details", title_size="m")

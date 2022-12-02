@@ -32,7 +32,7 @@ def create_db_connection():
 
 
 def try_connection():
-    print("Starting to connect to database.")
+    print("Attempting to connect to database.")
     try:
         with create_db_connection() as transform_connection:
             with transform_connection.cursor() as transform_cursor:
@@ -41,9 +41,10 @@ def try_connection():
                 rows = transform_cursor.fetchall()
                 if not rows == None:
                     print("Connection to database successful.")
-
                     for row in rows:
                         print(row)
+    except TypeError as e:
+        print("No credentials provided")
     except Exception as e:
         print("Connection to database failed, retrying.")
         raise Exception

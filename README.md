@@ -15,70 +15,24 @@ It will then push the image to the [quay repository][quay_repository], tagged wi
 
 # Local Develpoment
 ## Deploying the app
-### With Docker
+
+1. Local development with seed data requires the [Transformation][https://github.com/UKHomeOffice/hocs-mi-transformation] Database to be deployed.
+
+2. This also requires the [Transformation][https://github.com/UKHomeOffice/hocs-mi-transformation] process to be completed.
+
+3. Setup the virtual environment
 ```
-$ docker compose build reporting-app && docker compose up reporting-app
+$ make build
+$ make serve-transformation
+$ make serve
 ```
 
-### Without Docker
-
-1. Set up virtual env
-
+4. Clean down the [Transformation][https://github.com/UKHomeOffice/hocs-mi-transformation] repository
 ```
-$ python -m venv .venv
+$ make stop
+$ make clean
 ```
 
-2. Start env
-
-```
-$ source .venv/bin/activate
-```
-
-3. Install requirements
-
-```
-$ pip install -r requirements.txt
-```
-
-4. Run app
-
-```
-$ PYTHONPATH=./ python app/index.py
-```
-## Running the tests
-### Using Docker
-```
-$ docker compose build test && docker compose up test
-```
-
-### Without Docker
-1. Set up virtual env
-
-```
-$ python -m venv .venv
-```
-
-2. Start env
-
-```
-$ source .venv/bin/activate
-```
-
-3. Install requirements
-
-```
-$ pip install -r requirements.txt
-```
-
-4. Install dash testing
-```
-$ pip install dash\[testing] pytest
-```
-
-5. Run tests
-```
-$ python -m pytest tests
-```
 
 [quay_repository]: https://quay.io/repository/ukhomeofficedigital/hocs-mi-dashboards?tab=tags&tag=latest
 [push_image_workflow]: https://github.com/UKHomeOffice/hocs-mi-dashboards/actions/workflows/docker-push.yml

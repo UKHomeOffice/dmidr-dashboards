@@ -54,7 +54,7 @@ dummy_due_cases_aggregate = pd.Series(data={
 
 def get_mpam_due_cases():
 
-    if os.environ.get("STAGE") == "local":
+    if os.environ.get("STAGE") == "local" or os.environ.get("STAGE") is None:
         return dummy_due_cases
 
     with create_db_connection() as connection:
@@ -64,7 +64,7 @@ def get_mpam_due_cases():
 
 
 def get_mpam_due_cases_aggregate():
-    if os.environ.get("STAGE") == "local":
+    if os.environ.get("STAGE") == "local" or os.environ.get("STAGE") is None:
         return dummy_due_cases_aggregate
 
     with create_db_connection() as connection:

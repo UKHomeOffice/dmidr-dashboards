@@ -21,7 +21,7 @@ blanks = [
     "blank",
 ]
 
-dummy_data = pd.DataFrame(
+dummy_due_cases = pd.DataFrame(
     data={
         "Unit": [
             "Unit 1",
@@ -44,11 +44,18 @@ dummy_data = pd.DataFrame(
     }
 )
 
+dummy_due_cases_aggregate = pd.Series(data={
+        "Total due this week": 10,
+        "Total due next 4 weeks": 18,
+        "Total out of service standard": 3,
+        "Total cases": 18
+    })
+
 
 def get_mpam_due_cases():
 
     if os.environ.get("STAGE") == "local":
-        return dummy_data
+        return dummy_due_cases
 
     with create_db_connection() as connection:
         data = pd.read_sql_query(MPAM_DUE_CASES_QUERY, connection)
@@ -58,12 +65,7 @@ def get_mpam_due_cases():
 
 def get_mpam_due_cases_aggregate():
     if os.environ.get("STAGE") == "local":
-        return pd.Series(data={
-            "Total due this week": 10,
-            "Total due next 4 weeks": 18,
-            "Total out of service standard": 3,
-            "Total cases": 18
-        })
+        return dummy_due_cases_aggregate
 
     with create_db_connection() as connection:
             data = pd.read_sql_query(MPAM_DUE_CASES_AGGREGATE_QUERY, connection)

@@ -1,4 +1,4 @@
-import dash 
+import dash
 from dash import html, dcc
 
 from app.components import *
@@ -11,14 +11,17 @@ dash.register_page(
 )
 
 layout = html.Div(
-    className="report-background-box govuk-body", 
+    className="report-background-box govuk-body",
     children=[
+        html.Hr(
+            className="decs-section-break"
+        ),
         html.Div(
             style={"paddingLeft":"10px"},
             children=[
                 html.A(
                     className="govuk-back-link",
-                    children="Back",
+                    children="Back to home",
                     href="/"
                 ),
             ]
@@ -83,6 +86,6 @@ layout = html.Div(
                     ]
                 )
             ]
-        ), 
+        ),
     ]
 )

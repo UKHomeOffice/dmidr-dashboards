@@ -7,9 +7,6 @@ from app.pages.operational_report.day_selector_row import day_selector_row
 from app.pages.operational_report.counting_section import counting_section
 from app.data.MPAM.mpam_due_cases import get_mpam_due_cases, get_mpam_due_cases_aggregate
 
-blanks = ["cell", "cell", "cell", "cell", "cell", "cell", "cell", "cell"]
-Days = ["Mon", "Mon", "Tues", "Wed", "Thurs", "Thurs", "Thurs", "Fri"]
-
 cases_df = get_mpam_due_cases()
 case_counts = get_mpam_due_cases_aggregate()
 

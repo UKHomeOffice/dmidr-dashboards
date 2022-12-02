@@ -2,7 +2,7 @@ import os
 
 import pandas as pd
 
-from app.data.get_data import create_db_connection
+from app.data.create_db_connection import create_db_connection
 
 MPAM_DUE_CASES_QUERY = "SELECT * FROM public.mpam_due_cases"
 MPAM_DUE_CASES_AGGREGATE_QUERY = "SELECT * FROM public.mpam_due_cases_aggregate"
@@ -20,6 +20,7 @@ blanks = [
     "blank",
     "blank",
 ]
+days = ["Monday", "Monday", "Tuesday", "Wednesday", "Thursday", "Thursday", "Thursday", "Friday", "Monday", "Tuesday"]
 
 dummy_due_cases = pd.DataFrame(
     data={
@@ -41,6 +42,7 @@ dummy_due_cases = pd.DataFrame(
         "Answered on time": blanks,
         "Performance": blanks,
         "Unanswered": blanks,
+        "Day": days
     }
 )
 
@@ -53,7 +55,6 @@ dummy_due_cases_aggregate = pd.Series(data={
 
 
 def get_mpam_due_cases():
-
     if os.environ.get("STAGE") == "local" or os.environ.get("STAGE") is None:
         return dummy_due_cases
 
@@ -68,6 +69,5 @@ def get_mpam_due_cases_aggregate():
         return dummy_due_cases_aggregate
 
     with create_db_connection() as connection:
-            data = pd.read_sql_query(MPAM_DUE_CASES_AGGREGATE_QUERY, connection)
-
-            return data.squeeze()
+        data = pd.read_sql_query(MPAM_DUE_CASES_AGGREGATE_QUERY, connection)
+        return data.squeeze()

@@ -12,7 +12,7 @@ def test_day_selector_selects_tuesday():
 
         ctx = copy_context()
         output = ctx.run(run_callback)
-        assert output[0] == "Tues"
+        assert output[0] == "Tuesday"
         assert output[1:6] == [
                 "day-selector govuk-body",
                 "day-selector--active govuk-body govuk-!-font-weight-bold",
@@ -29,7 +29,7 @@ def test_day_selector_selects_friday():
 
     ctx = copy_context()
     output = ctx.run(run_callback)
-    assert output[0] == "Fri"
+    assert output[0] == "Friday"
     assert output[1:6] == [
             "day-selector govuk-body",
             "day-selector govuk-body",

@@ -1,5 +1,4 @@
 from dash import html, callback, Input, Output
-import pandas as pd
 
 from app.components import auto_govuk_table
 

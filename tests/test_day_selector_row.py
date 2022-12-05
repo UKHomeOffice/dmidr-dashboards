@@ -2,7 +2,7 @@ from contextvars import copy_context
 from dash._callback_context import context_value
 from dash._utils import AttributeDict
 
-from app.pages.operational_report.day_selector_row import day_clicks
+from app.pages.due_cases_comp.day_selector_row import day_clicks
 
 
 def test_day_selector_selects_tuesday():

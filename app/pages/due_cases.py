@@ -2,7 +2,7 @@ import dash
 from dash import html, dcc
 
 from app.components import *
-from app.pages.operational_report import *
+from app.pages.due_cases_comp import *
 
 dash.register_page(
     __name__, 
@@ -20,12 +20,16 @@ layout = html.Div(
             style={"paddingLeft":"10px"},
             children=[
                 html.A(
-                    className="govuk-back-link",
+                    className="govuk-back-link govuk-link--no-underline govuk-!-font-size-19",
+                    style={
+                        "paddingLeft":"20px"
+                    },
                     children="Back to home",
                     href="/"
                 ),
             ]
         ),
+        report_header("Due Cases"),
         dcc.Tabs(
             parent_className="custom-tabs",
             className="custom-tabs-container",
@@ -45,8 +49,7 @@ layout = html.Div(
                                 )
                             ],
                         ),
-                        report_header("Cases due this week"),
-                        operational_report_body
+                        due_case_body
                     ]
                 ),
                 dcc.Tab(
@@ -64,7 +67,6 @@ layout = html.Div(
                                 )
                             ],
                         ),
-                        report_header("Cases due in the next 4 weeks"),
                     ]
                 ),
                 dcc.Tab(
@@ -82,7 +84,6 @@ layout = html.Div(
                                 )
                             ],
                         ),
-                        report_header("Out of service standard cases"),
                     ]
                 )
             ]

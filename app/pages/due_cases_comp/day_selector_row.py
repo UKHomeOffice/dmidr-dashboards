@@ -1,8 +1,7 @@
 from dash import html, dcc, callback, Input, Output, ctx
 
 day_selector_row = html.Div(
-    className="decs-grid-row govuk-body",
-    style={"marginBottom":"50px"},
+    className="decs-grid-row day-selector-row govuk-body",
     children=[
         dcc.Store(
             id='week-day-store', 
@@ -36,6 +35,7 @@ day_selector_row = html.Div(
         html.Button(
             id="clear-day-selection",
             className="govuk-button clear-selection-position",
+            style={"margin":"auto 0px"},
             children="Clear selection"
         ),
     ]

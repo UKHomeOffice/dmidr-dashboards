@@ -2,19 +2,21 @@ from dash import html, callback, Input, Output
 
 from app.components import auto_govuk_table
 
-from app.pages.operational_report.day_selector_row import day_selector_row
-from app.pages.operational_report.counting_section import counting_section
+from app.pages.due_cases_comp.day_selector_row import day_selector_row
+from app.pages.due_cases_comp.counting_section import counting_section
 from app.data.MPAM.mpam_due_cases import get_mpam_due_cases, get_mpam_due_cases_aggregate
 
 cases_df = get_mpam_due_cases()
 case_counts = get_mpam_due_cases_aggregate()
 
-operational_report_body = html.Div(
+due_case_body = html.Div(
     children=[
         day_selector_row, 
         html.Div(
             className="decs-grid-row",
-            style={"marginBottom":"30px"},
+            style={
+                "marginBottom":"30px",
+            },
             children=[
                 counting_section("Total due cases", bold_section="this week", count=case_counts["Total due this week"]),
                 counting_section("Total due cases", bold_section="next 4 weeks", count=case_counts["Total due next 4 weeks"]),

@@ -67,6 +67,7 @@ layout = html.Div(
                                 )
                             ],
                         ),
+                    four_week_due_case_body
                     ]
                 ),
                 dcc.Tab(

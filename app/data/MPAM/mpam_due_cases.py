@@ -36,7 +36,7 @@ dummy_due_cases = pd.DataFrame(
             "Unit 9",
             "Unit 10",
         ],
-        "Due": blanks,
+        "Due Date": blanks,
         "Awaiting QA": blanks,
         "Answered": blanks,
         "Answered on time": blanks,

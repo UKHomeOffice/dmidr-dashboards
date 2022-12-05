@@ -1,8 +1,7 @@
 from dash import html, dcc, callback, Input, Output, ctx
 
 day_selector_row = html.Div(
-    className="decs-grid-row govuk-body",
-    style={"marginBottom":"50px"},
+    className="decs-grid-row day-selector-row govuk-body",
     children=[
         dcc.Store(
             id='week-day-store', 
@@ -36,6 +35,7 @@ day_selector_row = html.Div(
         html.Button(
             id="clear-day-selection",
             className="govuk-button clear-selection-position",
+            style={"margin":"auto 0px"},
             children="Clear selection"
         ),
     ]
@@ -65,7 +65,7 @@ def day_clicks(*args):
 
     if button_id == "mon-btn":
         return [
-            "Mon", 
+            "Monday",
             "day-selector--active govuk-body govuk-!-font-weight-bold",
             "day-selector govuk-body",
             "day-selector govuk-body",
@@ -75,7 +75,7 @@ def day_clicks(*args):
 
     if button_id == "tues-btn":
         return [
-            "Tues", 
+            "Tuesday",
             "day-selector govuk-body",
             "day-selector--active govuk-body govuk-!-font-weight-bold",
             "day-selector govuk-body",
@@ -84,7 +84,7 @@ def day_clicks(*args):
         ]
     if button_id == "wed-btn":
         return [
-            "Wed", 
+            "Wednesday",
             "day-selector govuk-body",
             "day-selector govuk-body",
             "day-selector--active govuk-body govuk-!-font-weight-bold",
@@ -93,7 +93,7 @@ def day_clicks(*args):
         ]
     if button_id == "thurs-btn":
         return [
-            "Thurs", 
+            "Thursday",
             "day-selector govuk-body",
             "day-selector govuk-body",
             "day-selector govuk-body",
@@ -102,7 +102,7 @@ def day_clicks(*args):
         ]
     if button_id == "fri-btn":
         return [
-            "Fri", 
+            "Friday",
             "day-selector govuk-body",
             "day-selector govuk-body",
             "day-selector govuk-body",

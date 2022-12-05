@@ -18,6 +18,9 @@ def report_header(report_title: str, todays_date=today):
             ),
             html.Div(
                 className="decs-grid-column-one-quarter",
+                style={
+                    "textAlign":"right"
+                },
                 children=[
                     html.Span(
                         className="govuk-caption-s tab-date-caption",

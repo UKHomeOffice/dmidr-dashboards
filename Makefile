@@ -22,3 +22,6 @@ logs:
 
 shell:
 	docker exec -it reporting-app bash
+
+test: build
+	${DOCKER_COMPOSE} up -d test

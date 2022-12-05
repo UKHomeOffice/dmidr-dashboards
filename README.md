@@ -37,3 +37,8 @@ $ make clean
 [quay_repository]: https://quay.io/repository/ukhomeofficedigital/hocs-mi-dashboards?tab=tags&tag=latest
 [push_image_workflow]: https://github.com/UKHomeOffice/hocs-mi-dashboards/actions/workflows/docker-push.yml
 [drone_pipeline]: https://drone-gh.acp.homeoffice.gov.uk/UKHomeOffice/hocs-mi-dashboards
+
+# Command to run locally
+```
+$ PYTHONPATH=./ python app/index.py
+```

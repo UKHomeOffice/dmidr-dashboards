@@ -3,7 +3,10 @@ FROM amd64/alpine:3
 RUN mkdir app
 COPY app app/
 COPY ./requirements.txt ./requirements.txt
+
 ENV PYTHONPATH ./
+ENV STAGE production
+
 RUN apk update && \
     apk upgrade && \
     apk add --no-cache python3 && \
@@ -20,4 +23,4 @@ RUN adduser -D -u 1001 plotly
 USER 1001
 
 ENTRYPOINT [ "/.venv/bin/python" ]
-CMD [ "app/index.py"]
+CMD ["app/index.py"]

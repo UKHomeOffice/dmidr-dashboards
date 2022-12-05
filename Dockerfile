@@ -23,4 +23,4 @@ RUN adduser -D -u 1001 plotly
 USER 1001
 
 ENTRYPOINT [ "/.venv/bin/python" ]
-CMD [ "app/index.py"]
+CMD ["app/index.py"]

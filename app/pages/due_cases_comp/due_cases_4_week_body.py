@@ -34,7 +34,7 @@ def mpam_due_cases(filter):
                 },
                 children=[
                     html.Div(
-                        id="table-section-test-four",
+                        id="table-section-test",
                         style={
                             "backgroundColor":"#fff",
                             "padding":"10px"
@@ -48,3 +48,15 @@ def mpam_due_cases(filter):
         ]
     ) 
     return mpam_due_cases_div
+
+@callback(
+    Output(component_id="table-section-test", component_property="children"),
+    Input(component_id="week-day-store", component_property="data"),
+    prevent_initial_call=True
+)
+def filter_table_by_day(filter_day):
+    if filter_day == None:
+        return auto_govuk_table(cases_df, title="Case details", title_size="m")
+    else:
+        df_filtered = cases_df.loc[cases_df["Day"] == filter_day]
+        return auto_govuk_table(df_filtered, title="Case details", title_size="m")    

@@ -1,6 +1,7 @@
 import os
 
 import pandas as pd
+import datetime
 
 from app.data.create_db_connection import create_db_connection
 
@@ -20,6 +21,14 @@ blanks = [
     "blank",
     "blank",
 ]
+
+due_data = []
+n_days = 10
+base = pd.Timestamp.today()
+timestamp_list = [base + datetime.timedelta(days=x) for x in range(n_days)]
+for x in timestamp_list:
+    due_data.append(x)
+
 days = ["Monday", "Monday", "Tuesday", "Wednesday", "Thursday", "Thursday", "Thursday", "Friday", "Monday", "Tuesday"]
 
 dummy_due_cases = pd.DataFrame(
@@ -36,7 +45,7 @@ dummy_due_cases = pd.DataFrame(
             "Unit 9",
             "Unit 10",
         ],
-        "Due Date": blanks,
+        "Due Date": due_data,
         "Awaiting QA": blanks,
         "Answered": blanks,
         "Answered on time": blanks,

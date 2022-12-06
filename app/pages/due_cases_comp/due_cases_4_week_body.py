@@ -33,13 +33,13 @@ four_week_due_case_body = html.Div(
             },
             children=[
                 html.Div(
-                    id="table-section-test",
+                    id="table-section-test-four",
                     style={
                         "backgroundColor":"#fff",
                         "padding":"10px"
                     },
                     children=[
-                        auto_govuk_table(cases_df.set_index("Due Date").loc[datetime.now():datetime.deltatime(weeks=4)], title="Case details", title_size="m")
+                        auto_govuk_table(cases_df.set_index("Due Date").loc[datetime.datetime.now().date():datetime.datetime.now().date() + datetime.timedelta(weeks=4)].reset_index(), title="Case details", title_size="m")
                     ]
                 )
             ]
@@ -48,7 +48,7 @@ four_week_due_case_body = html.Div(
 )
 
 @callback(
-    Output(component_id="table-section-test", component_property="children"),
+    Output(component_id="table-section-test-four", component_property="children"),
     Input(component_id="week-day-store", component_property="data"),
     prevent_initial_call=True
 )

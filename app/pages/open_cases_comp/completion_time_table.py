@@ -1,5 +1,4 @@
 from dash import html
-import pandas as pd
 
 from app.components import auto_govuk_table
 from app.data.MPAM.mpam_open_cases import get_mpam_open_cases

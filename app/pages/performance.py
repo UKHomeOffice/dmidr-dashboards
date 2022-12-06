@@ -153,7 +153,7 @@ layout = html.Div(
                                 ),
                                 html.Div(
                                     className="decs-grid-column-one-third",
-                                    children=[example_pie],
+                                    children=[decs_open_cases_pie],
                                 ),
                             ],
                         ),

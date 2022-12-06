@@ -1,0 +1,22 @@
+unit,open_date,team,stage
+UKVI,01/11/22,team a,Registration
+UKVI,01/11/22,team a,Draft
+UKVI,04/11/22,team b,Escalate
+LSE,05/11/22,team y,Minor Check
+LSE,01/11/22,team z,QA
+NE,23/11/22,team z,CCH Returns
+NE,16/11/22,team z,Triage
+NE,19/11/22,team c,Registration
+NE,20/11/22,team d,CCH Returns
+NW,11/11/22,team d,QA
+NW,9/11/22,team q,QA
+International,29/11/22,team k,Registration
+International,30/11/22,team k,Send
+Surge,21/11/22,team o,Send
+EUSS,18/11/22,team o,Triage
+BF,27/11/22,team o,CCH Returns
+BF,28/11/22,team o,Escalate
+BF,07/11/22,team r,CCH Returns
+BF,06/11/22,team r,Registration
+BF,15/11/22,team q,Triage
+BF,21/11/22,team b,Triage

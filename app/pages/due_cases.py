@@ -4,6 +4,15 @@ from dash import html, dcc
 from app.components import *
 from app.pages.due_cases_comp import *
 
+from app.data.MPAM.mpam_due_cases import get_mpam_due_cases, get_mpam_due_cases_aggregate
+
+import datetime
+
+def filter_due_cases_4_weeks():
+    cases_df = get_mpam_due_cases()
+    case_counts = get_mpam_due_cases_aggregate()
+    return auto_govuk_table(cases_df.set_index("Due Date").loc[datetime.datetime.now().date():datetime.datetime.now().date() + datetime.timedelta(weeks=4)].reset_index(), title="Case details", title_size="m")
+
 dash.register_page(
     __name__, 
     name="Due cases",
@@ -67,7 +76,7 @@ layout = html.Div(
                                 )
                             ],
                         ),
-                    mpam_due_cases()
+                    mpam_due_cases(filter_due_cases_4_weeks)
                     ]
                 ),
                 dcc.Tab(

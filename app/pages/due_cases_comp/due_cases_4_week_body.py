@@ -11,7 +11,7 @@ import datetime
 cases_df = get_mpam_due_cases()
 case_counts = get_mpam_due_cases_aggregate()
 
-def mpam_due_cases():
+def mpam_due_cases(filter):
     mpam_due_cases_div = html.Div(
         children=[
             day_selector_row, 
@@ -40,11 +40,11 @@ def mpam_due_cases():
                             "padding":"10px"
                         },
                         children=[
-                            auto_govuk_table(cases_df.set_index("Due Date").loc[datetime.datetime.now().date():datetime.datetime.now().date() + datetime.timedelta(weeks=4)].reset_index(), title="Case details", title_size="m")
+                            filter()
                         ]
                     )
                 ]
             )
         ]
     ) 
-    return mpam_due_cases_div    
+    return mpam_due_cases_div

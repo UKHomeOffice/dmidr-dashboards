@@ -20,7 +20,7 @@ def filter_none_due_cases():
 
 def filter_dates_out_of_service():
     cases_df = get_mpam_due_cases()
-    return auto_govuk_table(cases_df.set_index("Due Date").loc[datetime.datetime.now().date():datetime.datetime.now().date() - datetime.timedelta(years=1)].reset_index(), title="Case details", title_size="m")
+    return auto_govuk_table(cases_df.set_index("Due Date").loc[datetime.datetime.now().date():datetime.datetime.now().date() - datetime.timedelta(weeks=40)].reset_index(), title="Case details", title_size="m")
 
 
 dash.register_page(
@@ -104,7 +104,7 @@ layout = html.Div(
                                 )
                             ],
                         ),
-                        mpam_due_cases(filter_due_cases_4_weeks, False, "out-service-")
+                        mpam_due_cases(filter_dates_out_of_service, False, "out-service-")
                     ]
                 )
             ]

@@ -8,6 +8,10 @@ def decs_open_cases_pie(pie_data, values_col:str, pie_name:str="Placeholder", le
         values=pie_data[values_col].value_counts(), 
         names=pie_data[values_col].value_counts().index,
         hole=0.6,
+        color_discrete_sequence=[
+            "#832CAD","#E590C6","#5774F6",
+            "#D82EF6","#72BFF9"
+        ]
     )
 
     pie_chart.update_layout(

@@ -1,3 +1,4 @@
 from .example_case_count import example_case_count
 from .completion_time_table import completion_time_table
 from .decs_open_cases_pie import decs_open_cases_pie
+from .open_cases_age_bar import open_cases_age_bar

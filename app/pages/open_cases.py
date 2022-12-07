@@ -85,5 +85,21 @@ layout = html.Div(
                 ),
             ]
         ),
+        html.Div(
+            className="decs-grid-row", 
+            style={
+                "padding":"0px 15px", 
+                "margin":"15px 0px"
+            },
+            children=[
+                open_cases_age_bar(
+                    x_data=open_cases_df["case_age"].value_counts().index,
+                    y_data=open_cases_df["case_age"].value_counts(),
+                    plot_title="Cases with service standard by age",
+                    x_axis_title="Case age [Days]",
+                    y_axis_title="Open cases [count]"
+                )
+            ]
+        ),
     ],
 )

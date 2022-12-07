@@ -66,8 +66,9 @@ layout = html.Div(
                     children=[
                         decs_open_cases_pie(
                             open_cases_df, 
-                            values_col="case_age",
-                            pie_name="Cases within service standard by age range"
+                            values_col="unit",
+                            pie_name="Cases within service standard by business unit",
+                            legend_title="Business unit"
                         )
                     ]
                 ),
@@ -76,8 +77,9 @@ layout = html.Div(
                     children=[
                         decs_open_cases_pie(
                             open_cases_df, 
-                            values_col="case_age",
-                            pie_name="Cases within service standard by age range"
+                            values_col="stage",
+                            pie_name="Cases within service standard by stage",
+                            legend_title="Case stage"
                         )
                     ]
                 ),

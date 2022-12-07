@@ -2,7 +2,7 @@ from dash import html, callback, Input, Output
 
 from app.components import auto_govuk_table
 
-from app.pages.due_cases_comp.day_selector_row import day_selector_row
+from app.pages.due_cases_comp.day_selector_row import day_selector_row_func
 from app.pages.due_cases_comp.counting_section import counting_section
 from app.data.MPAM.mpam_due_cases import get_mpam_due_cases, get_mpam_due_cases_aggregate
 
@@ -11,10 +11,10 @@ import datetime
 cases_df = get_mpam_due_cases()
 case_counts = get_mpam_due_cases_aggregate()
 
-def mpam_due_cases(filter):
+def mpam_due_cases(filter, week_day_select, prefix):
     mpam_due_cases_div = html.Div(
         children=[
-            day_selector_row, 
+            day_selector_row_func(week_day_select), 
             html.Div(
                 className="decs-grid-row",
                 style={
@@ -34,7 +34,7 @@ def mpam_due_cases(filter):
                 },
                 children=[
                     html.Div(
-                        id="table-section-test",
+                        id=prefix+"table-section-test",
                         style={
                             "backgroundColor":"#fff",
                             "padding":"10px"

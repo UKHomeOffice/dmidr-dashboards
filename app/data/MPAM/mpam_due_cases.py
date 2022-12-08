@@ -50,14 +50,10 @@ dummy_due_cases = pd.DataFrame(
         "Signee": blanks,
         "Case Created Date": blanks,
         "Business Area": blanks,
-        "Date on CTS": due_data,
         "Stage": blanks,
-        "Answered": blanks,
-        "Answered on time": blanks,
-        "Performance": blanks,
         "Unanswered": blanks,
         "Day": days,
-        "Current Handler": blanks,
+        "Current Handler User Id": blanks,
         "Due Date": due_data
     }
 )

@@ -1,4 +1,5 @@
 import dash
+import pandas as pd
 from dash import html, dcc
 
 from app.components import *
@@ -12,7 +13,10 @@ import datetime
 
 def filter_due_cases_4_weeks():
     cases_df = get_mpam_due_cases()
-    return auto_govuk_table(cases_df.set_index("Due Date").loc[datetime.datetime.now().date():datetime.datetime.now().date() + datetime.timedelta(weeks=4)].reset_index(), title="Case details", title_size="m")
+    cases_df_4_week = cases_df.set_index("Due Date").loc[datetime.datetime.now().date():datetime.datetime.now().date() + datetime.timedelta(weeks=4)].reset_index()
+    column_to_move = cases_df_4_week.pop("Due Date")
+    cases_df_4_week.insert(1, "Due Date", column_to_move)
+    return auto_govuk_table(cases_df_4_week, title="Case details", title_size="m")
 
 def filter_none_due_cases():
     cases_df = get_mpam_due_cases()
@@ -20,7 +24,7 @@ def filter_none_due_cases():
 
 def filter_dates_out_of_service():
     cases_df = get_mpam_due_cases()
-    return auto_govuk_table(cases_df.set_index("Due Date").loc[datetime.datetime.now().date():datetime.datetime.now().date() - datetime.timedelta(weeks=40)].reset_index(), title="Case details", title_size="m")
+    return auto_govuk_table(cases_df[(cases_df["Due Date"] < pd.to_datetime(datetime.datetime.now().date()))], title="Case details", title_size="m")
 
 
 dash.register_page(

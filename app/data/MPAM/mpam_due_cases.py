@@ -51,11 +51,13 @@ dummy_due_cases = pd.DataFrame(
         "Case Created Date": blanks,
         "Business Area": blanks,
         "Date on CTS": due_data,
+        "Stage": blanks,
         "Answered": blanks,
         "Answered on time": blanks,
         "Performance": blanks,
         "Unanswered": blanks,
         "Day": days,
+        "Current Handler": blanks,
         "Due Date": due_data
     }
 )

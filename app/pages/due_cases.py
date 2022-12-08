@@ -13,7 +13,7 @@ def filter_due_cases_4_weeks():
     cases_df = get_mpam_due_cases()
     cases_df_4_week = cases_df.set_index("Due Date").loc[datetime.datetime.now().date():datetime.datetime.now().date() + datetime.timedelta(weeks=4)].reset_index()
     column_to_move = cases_df_4_week.pop("Due Date")
-    cases_df_4_week.insert(1, "Due Date", column_to_move)
+    cases_df_4_week.insert(8, "Due Date", column_to_move)
     return auto_govuk_table(cases_df_4_week, title="Case details", title_size="m")
 
 def filter_none_due_cases():

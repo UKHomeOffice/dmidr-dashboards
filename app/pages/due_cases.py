@@ -12,18 +12,18 @@ import datetime
 def filter_due_cases_4_weeks():
     cases_df = get_mpam_due_cases()
     cases_df_4_week = cases_df.set_index("Due Date").loc[datetime.datetime.now().date():datetime.datetime.now().date() + datetime.timedelta(weeks=4)].reset_index()
-    cases_df_4_week = cases_df_4_week[["CTSRef", "Workflow", "Directorate", "Signee", "Business Area", "Date on CTS", "Stage", "Current Handler", "Due Date"]]
+    cases_df_4_week = cases_df_4_week[["CTSRef", "Workflow", "Directorate", "Signee", "Business Area", "Stage", "Current Handler User Id", "Due Date"]]
     return auto_govuk_table(cases_df_4_week, title="Case details", title_size="m")
 
 def filter_none_due_cases():
     cases_df = get_mpam_due_cases()
-    cases_df = cases_df[["CTSRef", "Workflow", "Directorate", "Signee", "Business Area", "Date on CTS", "Stage", "Current Handler", "Due Date"]]
+    cases_df = cases_df[["CTSRef", "Workflow", "Directorate", "Signee", "Business Area", "Stage", "Current Handler User Id", "Due Date"]]
     return auto_govuk_table(cases_df, title="Case details", title_size="m")
 
 def filter_dates_out_of_service():
     cases_df = get_mpam_due_cases()
     cases_df_out_of_service = cases_df[(cases_df["Due Date"] < pd.to_datetime(datetime.datetime.now().date()))]
-    cases_df_out_of_service = cases_df_out_of_service[["CTSRef", "Workflow", "Directorate", "Signee", "Business Area", "Date on CTS", "Stage", "Current Handler", "Due Date"]]
+    cases_df_out_of_service = cases_df_out_of_service[["CTSRef", "Workflow", "Directorate", "Signee", "Business Area", "Stage", "Current Handler User Id", "Due Date"]]
     return auto_govuk_table(cases_df_out_of_service, title="Case details", title_size="m")
 
 

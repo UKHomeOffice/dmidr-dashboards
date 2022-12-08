@@ -33,7 +33,7 @@ days = ["Monday", "Monday", "Tuesday", "Wednesday", "Thursday", "Thursday", "Thu
 
 dummy_due_cases = pd.DataFrame(
     data={
-        "Unit": [
+        "CTSRef": [
             "Unit 1",
             "Unit 2",
             "Unit 3",
@@ -45,6 +45,13 @@ dummy_due_cases = pd.DataFrame(
             "Unit 9",
             "Unit 10",
         ],
+        "Workflow": blanks,
+        "Directorate": blanks,
+        "Signee": blanks,
+        "Case Created Date": blanks,
+        "Business Area": blanks,
+        "Stage": blanks,
+        "Current Handler User ID": blanks,
         "Due Date": due_data,
         "Awaiting QA": blanks,
         "Answered": blanks,
@@ -79,4 +86,5 @@ def get_mpam_due_cases_aggregate():
 
     with create_db_connection() as connection:
         data = pd.read_sql_query(MPAM_DUE_CASES_AGGREGATE_QUERY, connection)
+        # This data should only ever be a single row. Squeezing dataframe into a series.
         return data.squeeze()

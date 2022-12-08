@@ -6,8 +6,6 @@ from app.pages.due_cases_comp.day_selector_row import day_selector_row_func
 from app.pages.due_cases_comp.counting_section import counting_section
 from app.data.MPAM.mpam_due_cases import get_mpam_due_cases, get_mpam_due_cases_aggregate
 
-import datetime
-
 cases_df = get_mpam_due_cases()
 case_counts = get_mpam_due_cases_aggregate()
 

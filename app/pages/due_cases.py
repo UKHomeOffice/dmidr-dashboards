@@ -5,9 +5,7 @@ from dash import html, dcc
 from app.components import *
 from app.pages.due_cases_comp import *
 
-from dash import html, callback, Input, Output
-
-from app.data.MPAM.mpam_due_cases import get_mpam_due_cases, get_mpam_due_cases_aggregate
+from app.data.MPAM.mpam_due_cases import get_mpam_due_cases
 
 import datetime
 

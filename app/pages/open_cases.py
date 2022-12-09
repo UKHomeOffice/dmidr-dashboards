@@ -7,7 +7,7 @@ import datetime as dt
 # Project imports
 from app.components import *
 from app.pages.open_cases_comp import *
-from app.data.MPAM.mpam_open_cases import open_cases_df
+from app.data.MPAM.mpam_open_cases import get_mpam_open_cases
 
 dash.register_page(
     __name__, 
@@ -15,15 +15,13 @@ dash.register_page(
     name="Open Cases"
 )
 
-open_cases_df = open_cases_df
+open_cases_df = get_mpam_open_cases()
 
 ### Case age in days
-today = dt.datetime.now()
-open_cases_df["case_age"] = (today - open_cases_df["open_date"]).dt.days
 open_cases_df["binned_days"] = pd.cut(
-    open_cases_df["case_age"], 
-    bins=[5, 10, 15, 20, 25, 30, 35],
-    labels=["0 to 5", "6 to 10", "11 to 15", "16 to 20", "21 to 25", "26 to 30"]
+    open_cases_df["Age"], 
+    bins=[0, 5, 10, 15, 20],
+    labels=["0 to 5", "6 to 10", "11 to 15", "16 to 20"]
     )
 
 
@@ -66,7 +64,7 @@ layout = html.Div(
                     children=[
                         decs_open_cases_pie(
                             open_cases_df, 
-                            values_col="unit",
+                            values_col="Business Area",
                             pie_name="Cases within service standard by business unit",
                             legend_title="Business unit"
                         )
@@ -77,7 +75,7 @@ layout = html.Div(
                     children=[
                         decs_open_cases_pie(
                             open_cases_df, 
-                            values_col="stage",
+                            values_col="Stage",
                             pie_name="Cases within service standard by stage",
                             legend_title="Case stage"
                         )
@@ -93,8 +91,8 @@ layout = html.Div(
             },
             children=[
                 open_cases_age_bar(
-                    x_data=open_cases_df["case_age"].value_counts().index,
-                    y_data=open_cases_df["case_age"].value_counts(),
+                    x_data=open_cases_df["Age"].value_counts().index,
+                    y_data=open_cases_df["Age"].value_counts(),
                     plot_title="Cases with service standard by age",
                     x_axis_title="Case age [Days]",
                     y_axis_title="Open cases [count]"

@@ -14,5 +14,5 @@ spec:
   rules:
   - host: {{ .Values.ingress.internal.host }}
     http:
-      path: {{ .Values.ingress.internal.path }}
+      paths: {{ toYaml .Values.ingress.paths }}
 {{- end }}

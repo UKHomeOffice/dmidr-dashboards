@@ -161,8 +161,6 @@ truststore:
       readOnly: true
 
 ingress:
-  external:
-    enabled: false
   paths:
     - backend:
         serviceName: hocs-mi-dashboards

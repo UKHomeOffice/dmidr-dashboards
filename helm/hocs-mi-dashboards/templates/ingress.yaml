@@ -10,7 +10,7 @@ metadata:
     kubernetes.io/ingress.class: nginx-internal
 spec:
   rules:
-  - host: {{ .Values.ingress.internal.host }}
+  - host: cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
     http:
-      paths: {{ toYaml .Values.ingress.paths }}
+      paths: {{ - toYaml .Values.ingress.paths }}
 {{- end }}

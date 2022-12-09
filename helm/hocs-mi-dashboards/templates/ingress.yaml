@@ -7,8 +7,6 @@ metadata:
   labels:
     app: hocs-mi-dashboard
     cert-manager.io/solver: route53
-  annotations:
-    {{- toYaml .Values.ingress.annotations | nindent 4 }}
     kubernetes.io/ingress.class: nginx-internal
 spec:
   rules:

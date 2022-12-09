@@ -14,7 +14,8 @@ spec:
     http:
       paths:
         - backend:
-            name: hocs-mi-dashboards
-            port:
-              number: 8050
+            service:
+              name: hocs-mi-dashboards
+              port:
+                number: 8050
 {{- end }}

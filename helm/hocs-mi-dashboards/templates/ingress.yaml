@@ -12,5 +12,8 @@ spec:
   rules:
   - host: cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
     http:
-      paths: {{ toYaml .Values.ingress.paths }}
+      paths:
+        - backend:
+            serviceName: hocs-mi-dashboards
+            servicePort: 8050
 {{- end }}

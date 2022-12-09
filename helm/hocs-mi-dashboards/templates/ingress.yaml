@@ -13,7 +13,9 @@ spec:
   - host: cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
     http:
       paths:
-        - backend:
+        - path: /
+          pathType: Prefix
+          backend:
             service:
               name: hocs-mi-dashboards
               port:

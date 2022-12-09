@@ -8,6 +8,8 @@ metadata:
     app: hocs-mi-dashboard
     cert-manager.io/solver: route53
     kubernetes.io/ingress.class: nginx-internal
+  annotations:
+    cert-manager.io/enabled: "true"
 spec:
   rules:
   - host: cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk

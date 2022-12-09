@@ -12,5 +12,5 @@ spec:
   rules:
   - host: cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
     http:
-      paths: {{ - toYaml .Values.ingress.paths }}
+      paths: {{ toYaml .Values.ingress.paths }}
 {{- end }}

@@ -67,7 +67,7 @@ layout = html.Div(
                             children=[
                                 html.P(
                                     className="govuk-body-l",
-                                    style={"marginBottom": "0px"},
+                                    style={"marginBottom": "0px", "overflow": "scroll"},
                                     children="Controls",
                                 )
                             ],
@@ -85,7 +85,7 @@ layout = html.Div(
                             children=[
                                 html.P(
                                     className="govuk-body-l",
-                                    style={"marginBottom": "0px"},
+                                    style={"marginBottom": "0px", "overflow": "scroll"},
                                     children="Controls",
                                 )
                             ],
@@ -103,7 +103,7 @@ layout = html.Div(
                             children=[
                                 html.P(
                                     className="govuk-body-l",
-                                    style={"marginBottom": "0px"},
+                                    style={"marginBottom": "0px", "overflow": "scroll"},
                                     children="Controls",
                                 )
                             ],

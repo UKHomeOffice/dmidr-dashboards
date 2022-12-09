@@ -14,10 +14,10 @@ metadata:
 spec:
   rules:
   - host: cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
-           http:
-             paths:
-               - path: /
-                 backend:
-                   serviceName: hocs-mi-dashboards
-                   servicePort: 8050
+    http:
+      paths:
+        - backend:
+            serviceName: hocs-mi-dashboards
+            servicePort: 8050
+          path: /
 {{- end }}

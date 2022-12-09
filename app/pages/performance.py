@@ -151,10 +151,6 @@ layout = html.Div(
                                         completion_time_table,
                                     ],
                                 ),
-                                html.Div(
-                                    className="decs-grid-column-one-third",
-                                    children=[decs_open_cases_pie],
-                                ),
                             ],
                         ),
                     ],

@@ -30,7 +30,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        {{ - .Values.ingress.internal.host | nindent 8 }}
+        {{ - toYaml .Values.ingress.internal.host | nindent 8 }}
       secretName: {{ .Values.app.name }}-tls
   rules:
   - host: {{ .Values.ingress.internal.host }}

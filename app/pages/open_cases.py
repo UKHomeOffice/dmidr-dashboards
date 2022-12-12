@@ -101,5 +101,44 @@ layout = html.Div(
                 )
             ]
         ),
+        html.Div(
+            className="decs-grid-row",
+            children=[
+                html.Div(
+                    className="govuk-grid-column-one-third",
+                    children=[
+                        html.Div(children=["Place holder"]),
+                    ]
+                ),
+                html.Div(
+                    className="govuk-grid-column-one-third",
+                    children=[
+                        decs_open_cases_pie(
+                            open_cases_df, 
+                            values_col="stage",
+                            pie_name="Cases outside of service standard by business unit",
+                            legend_title="Business unit"
+                        )
+                    ]
+                ),
+                html.Div(
+                    className="govuk-grid-column-one-third",
+                    children=[
+                        decs_open_cases_pie(
+                            open_cases_df, 
+                            values_col="stage",
+                            pie_name="Cases outside of service standard by stage",
+                            legend_title="Case stage"
+                        )
+                    ]
+                ),
+            ]
+        ), 
+        html.Div(
+            className="decs-grid-row",
+            children=[
+
+            ]
+        )
     ],
 )

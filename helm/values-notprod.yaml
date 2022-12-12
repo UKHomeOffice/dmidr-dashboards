@@ -14,6 +14,7 @@ keycloak:
   domain: sso-dev.notprod.homeoffice.gov.uk/
 
 app:
+  name: hocs-mi-dashboard
   resources:
     limits:
       memory: 512Mi
@@ -63,3 +64,4 @@ ingress:
   internal:
     enabled: true
     host: cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
+    port: 8050

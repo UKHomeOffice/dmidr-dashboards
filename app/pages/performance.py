@@ -66,7 +66,7 @@ layout = html.Div(
                                                             className="govuk-heading-m",
                                                             children="Performance",
                                                         ),
-                                                        performance_bar
+                                                        performance_bar_func(get_mpam_performance_cases())
                                                     ],
                                                 )
                                             ],

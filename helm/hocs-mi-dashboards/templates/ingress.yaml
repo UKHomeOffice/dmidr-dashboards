@@ -2,11 +2,11 @@
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: {{ .Values.app.name }}
+  name: hocs-mi-dashboard
 spec:
   podSelector:
     matchLabels:
-      name: {{ .Values.app.name }}
+      name: hocs-mi-dashboard
   policyTypes:
     - Ingress
   ingress:
@@ -18,9 +18,9 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ .Values.app.name }}-internal
+  name: hocs-mi-dashboard-internal
   labels:
-    app: {{ .Values.app.name }}
+    app: hocs-mi-dashboard
     cert-manager.io/solver: route53
     kubernetes.io/ingress.class: nginx-internal
   annotations:
@@ -31,14 +31,14 @@ spec:
   tls:
     - hosts:
         - cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
-      secretName: {{ .Values.app.name }}-tls
+      secretName: hocs-mi-dashboards-tls
   rules:
   - host: cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
     http:
       paths:
         - backend:
             service:
-              name: hocs-mi-dashboard
+              name: hocs-mi-dashboards
               port:
                 number: 8050
           path: /

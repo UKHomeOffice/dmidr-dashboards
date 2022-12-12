@@ -2,7 +2,6 @@ import dash
 from dash import html, dcc
 
 from app.pages.closed_cases_comp import *
-from app.pages.open_cases_comp import *
 from app.components import report_header
 
 dash.register_page(
@@ -139,24 +138,6 @@ layout = html.Div(
                                         ),
                                     ],
                                 ),
-                            ],
-                        ),
-                        html.Div(
-                            className="decs-grid-row",
-                            children=[
-                                html.Div(
-                                    className="decs-grid-column-two-thirds",
-                                    children=[
-                                        example_case_count,
-                                        completion_time_table,
-                                    ],
-                                ),
-                                html.Div(
-                                    className="decs-grid-column-one-third",
-                                    children=[
-                                        # decs_open_cases_pie
-                                    ],
-                                )
                             ],
                         ),
                     ],

@@ -1,7 +1,17 @@
+import os
+
 import pandas as pd
 
+from app.data.create_db_connection import create_db_connection
 
-open_cases_df = pd.read_csv(
-    "app/data/MPAM/mpam_open_cases_mock.csv"
-)
-open_cases_df["open_date"] = pd.to_datetime(open_cases_df["open_date"], dayfirst=True)
+MPAM_OPEN_CASES_QUERY = "SELECT * FROM public.mpam_open_cases"
+
+
+def get_mpam_open_cases():
+    if os.environ.get("STAGE") == "local" or os.environ.get("STAGE") is None:
+        return pd.read_csv("app/data/MPAM/mpam_open_cases_mock.csv")
+
+    with create_db_connection() as connection:
+        data = pd.read_sql_query(MPAM_OPEN_CASES_QUERY, connection)
+
+        return data

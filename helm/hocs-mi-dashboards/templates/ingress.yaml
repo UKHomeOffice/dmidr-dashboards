@@ -33,7 +33,7 @@ spec:
         - cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
       secretName: {{ .Values.app.name }}-tls
   rules:
-  - host: {{ .Values.ingress.internal.host }}
+  - host: cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
     http:
       paths:
         - backend:

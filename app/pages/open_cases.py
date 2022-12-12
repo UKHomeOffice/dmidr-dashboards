@@ -52,7 +52,7 @@ layout = html.Div(
                     className="govuk-grid-column-one-third",
                     children=[
                         decs_open_cases_pie(
-                            open_cases_df, 
+                            open_cases_df.loc[open_cases_df["Outside Service Standard"] == 0], 
                             values_col="binned_days",
                             pie_name="Cases within service standard by age range",
                             legend_title="Case age"
@@ -63,7 +63,7 @@ layout = html.Div(
                     className="govuk-grid-column-one-third",
                     children=[
                         decs_open_cases_pie(
-                            open_cases_df, 
+                            open_cases_df.loc[open_cases_df["Outside Service Standard"] == 0], 
                             values_col="Business Area",
                             pie_name="Cases within service standard by business unit",
                             legend_title="Business unit"
@@ -74,7 +74,7 @@ layout = html.Div(
                     className="govuk-grid-column-one-third",
                     children=[
                         decs_open_cases_pie(
-                            open_cases_df, 
+                            open_cases_df.loc[open_cases_df["Outside Service Standard"] == 0], 
                             values_col="Stage",
                             pie_name="Cases within service standard by stage",
                             legend_title="Case stage"
@@ -87,12 +87,11 @@ layout = html.Div(
             className="decs-grid-row", 
             style={
                 "padding":"0px 15px", 
-                "margin":"15px 0px"
             },
             children=[
                 open_cases_age_bar(
-                    x_data=open_cases_df["Age"].value_counts().index,
-                    y_data=open_cases_df["Age"].value_counts(),
+                    x_data=open_cases_df["Age"].loc[open_cases_df["Outside Service Standard"] == 0].value_counts().index,
+                    y_data=open_cases_df["Age"].loc[open_cases_df["Outside Service Standard"] == 0].value_counts(),
                     plot_title="Cases with service standard by age",
                     x_axis_title="Case age [Days]",
                     y_axis_title="Open cases [count]"
@@ -105,15 +104,26 @@ layout = html.Div(
                 html.Div(
                     className="govuk-grid-column-one-third",
                     children=[
-                        html.Div(children=["Place holder"]),
+                        open_cases_counter(
+                            counter_text="Total open cases",
+                            count = open_cases_df.shape[0]
+                        ), 
+                        open_cases_counter(
+                            counter_text="Open cases inside of service",
+                            count=open_cases_df.loc[open_cases_df["Outside Service Standard"] == 0].shape[0]
+                        ), 
+                        open_cases_counter(
+                            counter_text="Open cases outside of service",
+                            count=open_cases_df.loc[open_cases_df["Outside Service Standard"] == 1].shape[0]
+                        ),
                     ]
                 ),
                 html.Div(
                     className="govuk-grid-column-one-third",
                     children=[
                         decs_open_cases_pie(
-                            open_cases_df, 
-                            values_col="stage",
+                            open_cases_df.loc[open_cases_df["Outside Service Standard"] == 1], 
+                            values_col="Stage",
                             pie_name="Cases outside of service standard by business unit",
                             legend_title="Business unit"
                         )
@@ -123,8 +133,8 @@ layout = html.Div(
                     className="govuk-grid-column-one-third",
                     children=[
                         decs_open_cases_pie(
-                            open_cases_df, 
-                            values_col="stage",
+                            open_cases_df.loc[open_cases_df["Outside Service Standard"] == 1], 
+                            values_col="Stage",
                             pie_name="Cases outside of service standard by stage",
                             legend_title="Case stage"
                         )
@@ -135,7 +145,7 @@ layout = html.Div(
         html.Div(
             className="decs-grid-row",
             children=[
-
+                "Place holder"
             ]
         )
     ],

@@ -1,8 +1,8 @@
 from dash import html
 
-def counting_section(box_text, bold_section:str="", count:int=None):
+def open_cases_counter(counter_text:str="place holder", count:int=000):
     return html.Div(
-        className="decs-grid-column-one-quarter", 
+        className="decs-grid-row",
         children=[
             html.Div(
                 style={
@@ -13,13 +13,10 @@ def counting_section(box_text, bold_section:str="", count:int=None):
                     html.P(
                         className="govuk-body-l",
                         style={"marginBottom":"10px"},
-                        children=[
-                            f"{box_text} ",
-                            html.B(f"{bold_section}")
-                        ]
+                        children=[f"{counter_text}"]
                     ),
                     html.H1(
-                        className="govuk-body counter-number--l ",
+                        className="govuk-body counter-number--l",
                         children=f"{count}"
                     )
                 ]

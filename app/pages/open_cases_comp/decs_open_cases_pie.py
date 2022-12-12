@@ -35,6 +35,7 @@ def decs_open_cases_pie(pie_data, values_col:str, pie_name:str="Placeholder", le
 
     return html.Div(
         className="decs-grid-row",
+        style={"margin":"0px"},
         children=[
             html.Div(
                 className="information-box",

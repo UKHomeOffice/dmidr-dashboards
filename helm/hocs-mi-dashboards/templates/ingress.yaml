@@ -18,8 +18,8 @@ spec:
         - cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
       secretName: hocs-mi-dashboards-tls
   rules:
-  - host: m.x.b
-    http:
+  - host:
+    http: cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
       paths:
         - backend:
             service:

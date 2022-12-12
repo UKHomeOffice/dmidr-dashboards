@@ -38,9 +38,9 @@ spec:
       paths:
         - backend:
             service:
-              name: {{ .Values.app.name }}
+              name: hocs-mi-dashboard
               port:
-                number: {{ .Values.ingress.internal.port }}
+                number: 8050
           path: /
           pathType: Prefix
 {{- end }}

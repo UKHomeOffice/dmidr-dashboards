@@ -30,7 +30,7 @@ metadata:
 spec:
   tls:
     - hosts:
-        {{- toYaml .Values.ingress.internal.host | nindent 8 }}
+        - cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
       secretName: {{ .Values.app.name }}-tls
   rules:
   - host: {{ .Values.ingress.internal.host }}

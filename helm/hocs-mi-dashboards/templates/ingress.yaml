@@ -6,9 +6,14 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      name: sysdigcloud
+      name: hocs-mi-dashboard
   policyTypes:
-  - ingress-interal
+    - Ingress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: ingress-interal
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

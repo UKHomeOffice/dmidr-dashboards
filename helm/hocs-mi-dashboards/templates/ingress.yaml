@@ -13,10 +13,6 @@ metadata:
     kubernetes.io/ingress.class: "nginx-internal"
     kubernetes.io/backend-protocol: "HTTPS"
 spec:
-  tls:
-    - hosts:
-        - cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
-      secretName: hocs-mi-dashboards-tls
   rules:
   - host: cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
     http:

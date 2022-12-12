@@ -1,8 +1,31 @@
 import dash
+import pandas as pd
 from dash import html, dcc
 
 from app.components import *
 from app.pages.due_cases_comp import *
+
+from app.data.MPAM.mpam_due_cases import get_mpam_due_cases
+
+import datetime
+
+def filter_due_cases_4_weeks():
+    cases_df = get_mpam_due_cases()
+    cases_df_4_week = cases_df.set_index("Due Date").loc[datetime.datetime.now().date():datetime.datetime.now().date() + datetime.timedelta(weeks=4)].reset_index()
+    cases_df_4_week = cases_df_4_week[["CTSRef", "Workflow", "Directorate", "Signee", "Business Area", "Stage", "Current Handler User Id", "Due Date"]]
+    return auto_govuk_table(cases_df_4_week, title="Case details", title_size="m")
+
+def filter_none_due_cases():
+    cases_df = get_mpam_due_cases()
+    cases_df = cases_df[["CTSRef", "Workflow", "Directorate", "Signee", "Business Area", "Stage", "Current Handler User Id", "Due Date"]]
+    return auto_govuk_table(cases_df, title="Case details", title_size="m")
+
+def filter_dates_out_of_service():
+    cases_df = get_mpam_due_cases()
+    cases_df_out_of_service = cases_df[(cases_df["Due Date"] < pd.to_datetime(datetime.datetime.now().date()))]
+    cases_df_out_of_service = cases_df_out_of_service[["CTSRef", "Workflow", "Directorate", "Signee", "Business Area", "Stage", "Current Handler User Id", "Due Date"]]
+    return auto_govuk_table(cases_df_out_of_service, title="Case details", title_size="m")
+
 
 dash.register_page(
     __name__, 
@@ -44,12 +67,12 @@ layout = html.Div(
                             children=[
                                 html.P(
                                     className="govuk-body-l",
-                                    style={"marginBottom": "0px"},
+                                    style={"marginBottom": "0px", "overflow": "scroll"},
                                     children="Controls",
                                 )
                             ],
                         ),
-                        due_case_body
+                        mpam_due_cases(filter_none_due_cases, True, "")
                     ]
                 ),
                 dcc.Tab(
@@ -62,11 +85,12 @@ layout = html.Div(
                             children=[
                                 html.P(
                                     className="govuk-body-l",
-                                    style={"marginBottom": "0px"},
+                                    style={"marginBottom": "0px", "overflow": "scroll"},
                                     children="Controls",
                                 )
                             ],
                         ),
+                    mpam_due_cases(filter_due_cases_4_weeks, False, "four-week-")
                     ]
                 ),
                 dcc.Tab(
@@ -79,11 +103,12 @@ layout = html.Div(
                             children=[
                                 html.P(
                                     className="govuk-body-l",
-                                    style={"marginBottom": "0px"},
+                                    style={"marginBottom": "0px", "overflow": "scroll"},
                                     children="Controls",
                                 )
                             ],
                         ),
+                        mpam_due_cases(filter_dates_out_of_service, False, "out-service-")
                     ]
                 )
             ]

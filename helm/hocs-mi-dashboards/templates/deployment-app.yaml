@@ -76,13 +76,16 @@ spec:
               drop:
                 - SETUID
                 - SETGID
+        {{- if .Values.proxy.enabled }}
         - name: auth-proxy
           image: quay.io/ukhomeofficedigital/acp-auth-proxy
           ports:
-            - containerPort: 8050
-              name: http
             - containerPort: 10443
               name: https
+              protocol: TCP
+            - containerPort: 8050
+              name: http
+              protocol: TCP
           env:
             - name: DISCOVERY_URL
               value: https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
@@ -97,26 +100,25 @@ spec:
                   name: keycloak
                   key: client-secret
             - name: SESSION_SECRET
-              value: d4ceec19c5d948539739dbac2efff26f
+              value: aa142e767af60fa71836152b35ae0192
             - name: UPSTREAM_URL
-              value: https://cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
-          securityContext:
-            runAsUser: 1000
-            runAsNonRoot: true
-          livenessProbe:
-            httpGet:
-              path: /oauth/health
-              port: 10443
-              scheme: HTTPS
-            initialDelaySeconds: 5
-            timeoutSeconds: 5
-          readinessProbe:
-            httpGet:
-              path: /oauth/health
-              port: 10443
-              scheme: HTTPS
-            initialDelaySeconds: 5
-            timeoutSeconds: 1
+              value: https://cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk/
+            - name: TLS_CERT
+              value: /certs/tls.crt
+            - name: TLS_PRIVATE_KEY
+              value: /certs/tls.key
+          resources:
+            limits:
+              memory: 100Mi
+            requests:
+              memory: 30Mi
+          volumeMounts:
+            - mountPath: /certs
+              name: certs
+            - mountPath: /etc/ssl/certs
+              name: bundle
+              readOnly: true
+        {{- end }}
       volumes:
         - name: certs
           secret:

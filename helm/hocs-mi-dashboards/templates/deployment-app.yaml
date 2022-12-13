@@ -107,8 +107,6 @@ spec:
               value: /certs/tls.crt
             - name: TLS_PRIVATE_KEY
               value: /certs/tls.key
-            - name: HTTP_LISTEN_PORT
-              value: 8050
           resources:
             limits:
               memory: 100Mi

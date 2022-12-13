@@ -45,9 +45,9 @@ Answered_on_time = [
 ]
 
 Performance = [
-    80,
-    74,
-    82,
+    float(80),
+    float(74),
+    float(82),
 ]
 
 Unanswered = [

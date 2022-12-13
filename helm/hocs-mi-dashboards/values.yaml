@@ -16,6 +16,12 @@ app:
       cpu: 200m
       memory: 768Mi
 
+service:
+  enabled: true
+  port: 443
+  portName: 'http'
+  targetPort: 8050
+
 keycloak:
   enabled: false
   realm: https://sso.digital.homeoffice.gov.uk/auth/realms/hocs-prod
@@ -93,7 +99,7 @@ keycloakApi:
     - --listen=127.0.0.1:{{ .Values.keycloakApi.targetPort }}
 
 proxy:
-  enabled: false
+  enabled: true
   image:
     repository: quay.io/ukhomeofficedigital/nginx-proxy
     version: v4.2.0

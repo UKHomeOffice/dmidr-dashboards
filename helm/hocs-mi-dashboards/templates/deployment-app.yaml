@@ -77,15 +77,48 @@ spec:
                 - SETUID
                 - SETGID
         {{- if .Values.proxy.enabled }}
-        - name: proxy
-          image: '{{ .Values.proxy.image.repository }}:{{ .Values.proxy.image.version }}'
-          securityContext: {{- toYaml .Values.deployment.securityContext | nindent 12 }}
-          env: {{- tpl (toYaml .Values.proxy.env) . | nindent 12 }}
-          volumeMounts: {{- toYaml .Values.proxy.volumeMounts | nindent 12 }}
+        - name: auth-proxy
+          image: quay.io/ukhomeofficedigital/acp-auth-proxy
           ports:
-            - name: {{ .Values.service.portName }}
-              containerPort: {{ .Values.service.targetPort }}
-          resources: {{- toYaml .Values.proxy.resources | nindent 12 }}
+            - containerPort: 8050
+              name: http
+            - containerPort: 10443
+              name: https
+          env:
+            - name: DISCOVERY_URL
+              value: https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
+            - name: CLIENT_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: keycloak
+                      key: client-id
+            - name: CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak
+                  key: client-secret
+            - name: SESSION_SECRET
+              value: d4ceec19c5d948539739dbac2efff26f
+            - name: UPSTREAM_URL
+              value: cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
+          securityContext:
+            runAsUser: 1000
+            runAsNonRoot: true
+          livenessProbe:
+            httpGet:
+              path: /oauth/health
+              port: 10443
+              scheme: HTTPS
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /oauth/health
+              port: 10443
+              scheme: HTTPS
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+          volumeMounts:
         {{- end }}
         {{- if .Values.keycloak.enabled }}
         - name: keycloak
@@ -115,7 +148,7 @@ spec:
           {{- end }}
           volumeMounts: {{- toYaml .Values.keycloak.volumeMounts | nindent 12 }}
           ports:
-            - name: {{ .Values.service.portName }}
+            - name: {{ .Values.Name }}
               containerPort: {{ .Values.keycloakApi.targetPort }}
           resources: {{- toYaml .Values.keycloak.resources | nindent 12 }}
         {{- end }}

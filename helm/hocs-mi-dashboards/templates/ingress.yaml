@@ -11,9 +11,9 @@ spec:
     - Ingress
   ingress:
     - from:
-        - namespaceSelector:
-            matchLabels:
-              name: hocs-mi-dashboards-internal
+      - podSelector:
+          matchLabels:
+            name: hocs-mi-dashboards
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

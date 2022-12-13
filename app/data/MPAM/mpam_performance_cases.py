@@ -1,4 +1,5 @@
 import os
+import datetime
 
 import pandas as pd
 
@@ -19,25 +20,58 @@ blanks = [
     "blank",
 ]
 
+business_areas = [
+    "PCT",
+    "BF",
+    "LSE",
+]
+
+Due = [
+    39, 
+    403,
+    49,
+]
+
+Answered = [
+    53, 
+    234,
+    59,
+]
+
+Answered_on_time = [
+    32,
+    212,
+    34,
+]
+
+Performance = [
+    80,
+    74,
+    82,
+]
+
+Unanswered = [
+    243,
+    431,
+    12,
+]
+
+due_data = []
+n_days = 3
+base = pd.Timestamp.today()
+timestamp_list = [base + datetime.timedelta(days=x) for x in range(n_days)]
+for x in timestamp_list:
+    due_data.append(x)
+
 dummy_performance_cases = pd.DataFrame(
     data={
-        "Unit": [
-            "Unit 1",
-            "Unit 2",
-            "Unit 3",
-            "Unit 4",
-            "Unit 5",
-            "Unit 6",
-            "Unit 7",
-            "Unit 8",
-            "Unit 9",
-            "Unit 10",
-        ],
-        "Due": blanks,
-        "Answered": blanks,
-        "Answered on time": blanks,
-        "Performance": blanks,
-        "Unanswered": blanks,
+        "business_area": business_areas,
+        "Due": Due,
+        "Answered": Answered,
+        "Answered on time": Answered_on_time,
+        "Performance": Performance,
+        "Unanswered": Unanswered,
+        "date": due_data,
     }
 )
 

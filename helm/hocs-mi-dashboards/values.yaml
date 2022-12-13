@@ -23,7 +23,7 @@ service:
   targetPort: 8050
 
 keycloak:
-  enabled: true
+  enabled: false
   realm: https://sso.digital.homeoffice.gov.uk/auth/realms/hocs-prod
   timeout: 60
   domain: cs.homeoffice.gov.uk
@@ -99,7 +99,7 @@ keycloakApi:
     - --listen=127.0.0.1:{{ .Values.keycloakApi.targetPort }}
 
 proxy:
-  enabled: false
+  enabled: true
   image:
     repository: quay.io/ukhomeofficedigital/nginx-proxy
     version: v4.2.0

@@ -7,6 +7,7 @@ data:
     location / {
       access_by_lua_block {
         -- load lua functions
+        print("Default lua")
         local lua_auth_module = require('authenticate')
         local response = lua_auth_module.authenticate_user()
 
@@ -23,6 +24,8 @@ data:
   admin.conf: |-
     location /admin/ {
       access_by_lua_block {
+        print("admin lua")
+    
         local lua_auth_module = require('authenticate')
         local response = lua_auth_module.authenticate_user()
 
@@ -38,6 +41,8 @@ data:
     # note: this location does not prompt for authentication and assumes that the "Authorization: Bearer" has already been set
     location /bearer {
       access_by_lua_block {
+        print("bearing lua")
+
         -- validate the user's access token
         require('authenticate').validate_token()
 

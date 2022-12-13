@@ -3,51 +3,93 @@ kind: ConfigMap
 metadata:
   name: auth-proxy-config
 data:
-  default.conf: |-
-    location / {
-      access_by_lua_block {
-        -- load lua functions
-        local lua_auth_module = require('authenticate')
-        local response = lua_auth_module.authenticate_user()
-
-        -- only allow access to users who have the 'users' role
-        -- a custom mapper has been created that adds the roles to userinfo (the information in response.user comes from the userinfo endpoint)
-        -- you can't get roles in userinfo when it has the default name (realm_access.roles) due to a bug that has been fixed in v12 (see https://issues.redhat.com/browse/KEYCLOAK-9874)
-        if lua_auth_module.contains(response.user.roles, "users") ~= true then
-          lua_auth_module.reject_as_forbidden()
-        end
+  authenticate.lua: |-
+    local auth_module = { }
+    function auth_module.authenticate_user()
+      local opts = {
+        discovery = os.getenv("DISCOVERY_URL") .. "/.well-known/openid-configuration",
+        client_id = os.getenv("CLIENT_ID"),
+        client_secret = os.getenv("CLIENT_SECRET"),
+        redirect_uri = os.getenv("REDIRECT_URL"),
+        token_endpoint_auth_method = os.getenv("CLIENT_AUTH_METHOD"),
+        logout_path = os.getenv("LOGOUT_PATH"),
+        revoke_tokens_on_logout = os.getenv("REVOKE_TOKENS_ON_LOGOUT"),
+        post_logout_redirect_uri = ngx.var.scheme .. "://" .. ngx.var.http_host,
+        renew_access_token_on_expiry = os.getenv("SILENT_TOKEN_RENEWAL"),
+        scope = os.getenv("SCOPES"):gsub(", ", " "):gsub(",", " "),
+        lifecycle = {
+          -- set cookie on login
+          on_authenticated = function (session)
+            ngx.header['Set-Cookie'] = "kc-access=" .. session.data.access_token .. "; Path=/; Secure=true;"
+          end,
+          -- remove cookie on logout
+          on_logout = function (session)
+            ngx.header['Set-Cookie'] = "kc-access=; Path=/; Secure=true; Expires=Thu, 01 Jan 1970 00:00:01 GMT;"
+          end
+        }
       }
 
-      proxy_pass $proxy_upstream;
-    }
-  admin.conf: |-
-    location /admin/ {
-      access_by_lua_block {
-        local lua_auth_module = require('authenticate')
-        local response = lua_auth_module.authenticate_user()
+      -- authenticate user using OIDC auth flow
+      local res, err = require("resty.openidc").authenticate(opts)
 
-        -- only allow admins
-        if lua_auth_module.contains(response.user.roles, "admin") ~= true then
-          lua_auth_module.reject_as_forbidden()
-        end
-      }
+      if err then
+        ngx.log(ngx.ERR, "There was an error while a user attempted to log in: " .. tostring(err))
 
-      proxy_pass $proxy_upstream;
-    }
-  bearer.conf: |-
-    # note: this location does not prompt for authentication and assumes that the "Authorization: Bearer" has already been set
-    location /bearer {
-      access_by_lua_block {
-        -- validate the user's access token
-        require('authenticate').validate_token()
+        ngx.header.content_type = 'text/html';
+        ngx.status = 500
+        ngx.exit(ngx.HTTP_INTERNAL_SERVER_ERROR)
+      end
 
-        -- this has to be inside this lua block as nginx will process returns before this lua block is executed
-        ngx.status = 200
-        ngx.header.content_type = 'application/json';
-        ngx.say('{"Status": "OK", "Message": "Bearer token is valid"}')
-        ngx.exit(ngx.HTTP_OK)
-      }
-    }
-  server-tokens.conf: |-
-    # do not show the openresty version
-    server_tokens off;
+      ngx.log(ngx.DEBUG, res.user.name .. " has successfully authenticated")
+      return res
+    end
+
+# Deployment
+- name: auth-proxy
+  image: quay.io/ukhomeofficedigital/acp-auth-proxy
+  ports:
+    - containerPort: 10443
+      name: https
+      protocol: TCP
+    - containerPort: 8050
+      name: http
+      protocol: TCP
+  env:
+    - name: DISCOVERY_URL
+      value: https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
+    - name: CLIENT_ID
+      valueFrom:
+        secretKeyRef:
+          name: keycloak
+          key: client-id
+    - name: CLIENT_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: keycloak
+          key: client-secret
+    - name: SESSION_SECRET
+      value: aa142e767af60fa71836152b35ae0192
+    - name: UPSTREAM_URL
+      value: https://cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk/
+    - name: TLS_CERT
+      value: /certs/tls.crt
+    - name: TLS_PRIVATE_KEY
+      value: /certs/tls.key
+  resources:
+    limits:
+      memory: 100Mi
+    requests:
+      memory: 30Mi
+  volumeMounts:
+    - mountPath: /certs
+      name: certs
+    - mountPath: /etc/ssl/certs
+      name: bundle
+      readOnly: true
+    - name: auth-proxy-config
+      mountPath: /usr/local/openresty/nginx/conf/lua/authenticate.lua
+      subPath: authenticate.lua
+volumes:
+  - name: config
+    configMap:
+      name: auth-proxy-config

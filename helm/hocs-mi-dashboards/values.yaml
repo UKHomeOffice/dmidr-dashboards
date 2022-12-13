@@ -99,7 +99,7 @@ keycloakApi:
     - --listen=127.0.0.1:{{ .Values.keycloakApi.targetPort }}
 
 proxy:
-  enabled: true
+  enabled: false
   image:
     repository: quay.io/ukhomeofficedigital/nginx-proxy
     version: v4.2.0

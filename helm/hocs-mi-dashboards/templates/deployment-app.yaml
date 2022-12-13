@@ -128,6 +128,9 @@ spec:
         - name: bundle
           configMap:
             name: bundle
+        - name: config
+          configMap:
+           name: auth-proxy-config
         - name: keystore
           emptyDir:
             medium: "Memory"

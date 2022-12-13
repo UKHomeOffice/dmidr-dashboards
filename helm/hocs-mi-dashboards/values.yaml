@@ -23,7 +23,7 @@ service:
   targetPort: 8050
 
 keycloak:
-  enabled: false
+  enabled: true
   realm: https://sso.digital.homeoffice.gov.uk/auth/realms/hocs-prod
   timeout: 60
   domain: cs.homeoffice.gov.uk

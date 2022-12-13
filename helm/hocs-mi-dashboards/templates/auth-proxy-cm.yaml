@@ -95,3 +95,10 @@ data:
     - mountPath: /etc/ssl/certs
       name: bundle
       readOnly: true
+volumes:
+  - name: certs
+    secret:
+      secretName: hocs-mi-dashboards-service-tls-cmio
+  - name: bundle
+    configMap:
+      name: bundle

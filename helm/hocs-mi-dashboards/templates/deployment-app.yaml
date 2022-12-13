@@ -76,7 +76,6 @@ spec:
               drop:
                 - SETUID
                 - SETGID
-        {{- if .Values.proxy.enabled }}
         - name: auth-proxy
           image: quay.io/ukhomeofficedigital/acp-auth-proxy
           ports:
@@ -88,10 +87,10 @@ spec:
             - name: DISCOVERY_URL
               value: https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
             - name: CLIENT_ID
-                  valueFrom:
-                    secretKeyRef:
-                      name: keycloak
-                      key: client-id
+              valueFrom:
+                secretKeyRef:
+                  name: keycloak
+                  key: client-id
             - name: CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
@@ -118,7 +117,6 @@ spec:
               scheme: HTTPS
             initialDelaySeconds: 5
             timeoutSeconds: 1
-        {{- end }}
       volumes:
         - name: certs
           secret:

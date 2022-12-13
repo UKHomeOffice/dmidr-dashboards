@@ -103,6 +103,8 @@ spec:
               value: aa142e767af60fa71836152b35ae0192
             - name: UPSTREAM_URL
               value: https://cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk/
+            - name: HTTP_LISTEN_PORT
+              value: 8050
             - name: TLS_CERT
               value: /certs/tls.crt
             - name: TLS_PRIVATE_KEY

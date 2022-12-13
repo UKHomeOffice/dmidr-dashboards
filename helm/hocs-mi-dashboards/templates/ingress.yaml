@@ -8,12 +8,12 @@ spec:
     matchLabels:
       name: hocs-mi-dashboards
   policyTypes:
-    - Ingress
+  - Ingress
   ingress:
-    - from:
-        - namespaceSelector:
-            matchLabels:
-              name: hocs-mi-dashboards-internal
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: ingress-internal
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

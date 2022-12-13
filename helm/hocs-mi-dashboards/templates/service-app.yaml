@@ -8,11 +8,7 @@ metadata:
 spec:
   ports:
     - name: https
-      {{- if .Values.keycloak.enabled }}
-      port: 10443
-      {{- else }}
       port: 8050
-      {{- end }}
       targetPort: 8050
   selector:
     name: hocs-mi-dashboards

@@ -6,53 +6,21 @@ data:
   default.conf: |-
     location / {
       access_by_lua_block {
-        -- load lua functions
-        print("Default lua")
+        -- load lua functions ("authenticate" is the name of the file containing the authentication function)
         local lua_auth_module = require('authenticate')
+        -- authenticate user ("authenticate_user" is the name of the function in the image that will authenticate the user)
         local response = lua_auth_module.authenticate_user()
-
-        -- only allow access to users who have the 'users' role
-        -- a custom mapper has been created that adds the roles to userinfo (the information in response.user comes from the userinfo endpoint)
-        -- you can't get roles in userinfo when it has the default name (realm_access.roles) due to a bug that has been fixed in v12 (see https://issues.redhat.com/browse/KEYCLOAK-9874)
-        if lua_auth_module.contains(response.user.roles, "users") ~= true then
-          lua_auth_module.reject_as_forbidden()
-        end
-      }
-
-      proxy_pass $proxy_upstream;
-    }
-  admin.conf: |-
-    location /admin/ {
-      access_by_lua_block {
-        print("admin lua")
     
-        local lua_auth_module = require('authenticate')
-        local response = lua_auth_module.authenticate_user()
-
-        -- only allow admins
-        if lua_auth_module.contains(response.user.roles, "admin") ~= true then
+        -- only allow users who have the "users" role access to this endpoint
+        -- the information from "response.user" comes from the userinfo endpoint, we're looking at the "roles" field from that endpoint
+        -- note: "contains" is a function built into the image that will check if a given Lua table (a list/array) contains a given value
+        if lua_auth_module.contains(response.user.roles, "users") ~= true then
+          -- if the user does not have the required role, show them a 403 with an access forbidden error message
+          -- note: "reject_as_forbidden" is another function that is built into the image
           lua_auth_module.reject_as_forbidden()
         end
       }
-
+    
+      # if the user has been authenticated and has the required role, send them to the upstream application
       proxy_pass $proxy_upstream;
     }
-  bearer.conf: |-
-    # note: this location does not prompt for authentication and assumes that the "Authorization: Bearer" has already been set
-    location /bearer {
-      access_by_lua_block {
-        print("bearing lua")
-
-        -- validate the user's access token
-        require('authenticate').validate_token()
-
-        -- this has to be inside this lua block as nginx will process returns before this lua block is executed
-        ngx.status = 200
-        ngx.header.content_type = 'application/json';
-        ngx.say('{"Status": "OK", "Message": "Bearer token is valid"}')
-        ngx.exit(ngx.HTTP_OK)
-      }
-    }
-  server-tokens.conf: |-
-    # do not show the openresty version
-    server_tokens off;

@@ -100,7 +100,7 @@ spec:
             - name: SESSION_SECRET
               value: d4ceec19c5d948539739dbac2efff26f
             - name: UPSTREAM_URL
-              value: cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
+              value: https://cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk
           securityContext:
             runAsUser: 1000
             runAsNonRoot: true
@@ -118,7 +118,6 @@ spec:
               scheme: HTTPS
             initialDelaySeconds: 5
             timeoutSeconds: 1
-          volumeMounts:
         {{- end }}
         {{- if .Values.keycloak.enabled }}
         - name: keycloak

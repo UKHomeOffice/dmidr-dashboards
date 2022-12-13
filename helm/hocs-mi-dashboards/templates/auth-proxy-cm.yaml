@@ -51,3 +51,47 @@ data:
   server-tokens.conf: |-
     # do not show the openresty version
     server_tokens off;
+
+- name: auth-proxy
+  image: quay.io/ukhomeofficedigital/acp-auth-proxy
+  ports:
+    - containerPort: 10443
+      name: https
+      protocol: TCP
+    - containerPort: 8050
+      name: http
+      protocol: TCP
+  env:
+    - name: DISCOVERY_URL
+      value: https://sso-dev.notprod.homeoffice.gov.uk/auth/realms/hocs-notprod
+    - name: CLIENT_ID
+      valueFrom:
+        secretKeyRef:
+          name: keycloak
+          key: client-id
+    - name: CLIENT_SECRET
+      valueFrom:
+        secretKeyRef:
+          name: keycloak
+          key: client-secret
+    - name: SESSION_SECRET
+      value: aa142e767af60fa71836152b35ae0192
+    - name: UPSTREAM_URL
+      value: https://cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk/
+    - name: HTTP_LISTEN_PORT
+      value: "8050"
+    - name: TLS_CERT
+      value: /certs/tls.crt
+    - name: TLS_PRIVATE_KEY
+      value: /certs/tls.key
+  resources:
+    limits:
+      memory: 100Mi
+    requests:
+      memory: 30Mi
+  volumeMounts:
+    - mountPath: /certs
+      name: certs
+    - mountPath: /etc/ssl/certs
+      name: bundle
+      readOnly: true

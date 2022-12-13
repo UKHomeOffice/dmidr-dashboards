@@ -107,8 +107,6 @@ spec:
               value: /certs/tls.crt
             - name: TLS_PRIVATE_KEY
               value: /certs/tls.key
-            - name: HTTP_LISTEN_PORT
-              value: 8050
           resources:
             limits:
               memory: 100Mi
@@ -120,6 +118,9 @@ spec:
             - mountPath: /etc/ssl/certs
               name: bundle
               readOnly: true
+            - name: auth-proxy-config
+              mountPath: /usr/local/openresty/nginx/conf/lua/authenticate.lua
+              subPath: authenticate.lua
         {{- end }}
       volumes:
         - name: certs
@@ -128,6 +129,9 @@ spec:
         - name: bundle
           configMap:
             name: bundle
+        - name: config
+          configMap:
+           name: auth-proxy-config
         - name: keystore
           emptyDir:
             medium: "Memory"

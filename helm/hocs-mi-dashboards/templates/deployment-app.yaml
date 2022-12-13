@@ -114,8 +114,8 @@ spec:
               memory: 30Mi
           volumeMounts:
             - name: auth-proxy-config
-                  mountPath: /usr/local/openresty/nginx/conf/locations/default.conf # this is where the default configuration is in the image, so we need to override it with our own config
-                  subPath: default.conf
+              mountPath: /usr/local/openresty/nginx/conf/locations/default.conf # this is where the default configuration is in the image, so we need to override it with our own config
+              subPath: default.conf
             - mountPath: /certs
               name: certs
             - mountPath: /etc/ssl/certs

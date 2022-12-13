@@ -118,9 +118,6 @@ spec:
             - mountPath: /etc/ssl/certs
               name: bundle
               readOnly: true
-            - name: auth-proxy-config
-              mountPath: /usr/local/openresty/nginx/conf/lua/authenticate.lua
-              subPath: authenticate.lua
         {{- end }}
       volumes:
         - name: certs

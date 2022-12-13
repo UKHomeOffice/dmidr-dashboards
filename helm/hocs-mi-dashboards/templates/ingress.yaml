@@ -13,7 +13,7 @@ spec:
     - from:
         - namespaceSelector:
             matchLabels:
-              name: ingress-interal
+              name: hocs-mi-dashboards-internal
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress

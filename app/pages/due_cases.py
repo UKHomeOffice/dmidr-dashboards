@@ -9,23 +9,26 @@ from app.data.MPAM.mpam_due_cases import get_mpam_due_cases
 
 import datetime
 
+COLUMN_ORDER = ["CTSRef", "Workflow", "Directorate", "Signee", "Business Area", "Stage", "Current Handler User Id", "Due Date"]
+
 def filter_due_cases_4_weeks():
     cases_df = get_mpam_due_cases()
-    cases_df_4_week = cases_df.set_index("Due Date").loc[datetime.datetime.now().date():datetime.datetime.now().date() + datetime.timedelta(weeks=4)].reset_index()
-    cases_df_4_week = cases_df_4_week[["CTSRef", "Workflow", "Directorate", "Signee", "Business Area", "Stage", "Current Handler User Id", "Due Date"]]
+    today = datetime.datetime.now().date()
+    cases_df_4_week_mask = (cases_df['Due Date'] > pd.to_datetime(today)) & (cases_df['Due Date'] < pd.to_datetime(today + datetime.timedelta(weeks=4)))
+    cases_df_4_week = cases_df.loc[cases_df_4_week_mask]
+    cases_df_4_week = cases_df_4_week[COLUMN_ORDER]
     return auto_govuk_table(cases_df_4_week, title="Case details", title_size="m")
 
 def filter_none_due_cases():
     cases_df = get_mpam_due_cases()
-    cases_df = cases_df[["CTSRef", "Workflow", "Directorate", "Signee", "Business Area", "Stage", "Current Handler User Id", "Due Date"]]
+    cases_df = cases_df[COLUMN_ORDER]
     return auto_govuk_table(cases_df, title="Case details", title_size="m")
 
 def filter_dates_out_of_service():
     cases_df = get_mpam_due_cases()
     cases_df_out_of_service = cases_df[(cases_df["Due Date"] < pd.to_datetime(datetime.datetime.now().date()))]
-    cases_df_out_of_service = cases_df_out_of_service[["CTSRef", "Workflow", "Directorate", "Signee", "Business Area", "Stage", "Current Handler User Id", "Due Date"]]
+    cases_df_out_of_service = cases_df_out_of_service[COLUMN_ORDER]
     return auto_govuk_table(cases_df_out_of_service, title="Case details", title_size="m")
-
 
 dash.register_page(
     __name__, 

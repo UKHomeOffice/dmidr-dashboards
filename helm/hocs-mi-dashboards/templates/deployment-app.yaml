@@ -102,7 +102,7 @@ spec:
             - name: SESSION_SECRET
               value: aa142e767af60fa71836152b35ae0192
             - name: UPSTREAM_URL
-              value: https://cs-mi-dev.internal.cs-notprod.homeoffice.gov.uk/
+              value: https://127.0.0.0:8050/
             - name: TLS_CERT
               value: /certs/tls.crt
             - name: TLS_PRIVATE_KEY

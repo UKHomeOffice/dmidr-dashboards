@@ -20,12 +20,6 @@ blanks = [
     "blank",
 ]
 
-business_areas = [
-    "PCT",
-    "BF",
-    "LSE",
-]
-
 Due = [
     39, 
     403,
@@ -45,9 +39,9 @@ Answered_on_time = [
 ]
 
 Performance = [
-    float(80),
-    float(74),
-    float(82),
+    "80%",
+    "74%",
+    "82",
 ]
 
 Unanswered = [
@@ -56,22 +50,17 @@ Unanswered = [
     12,
 ]
 
-due_data = []
-n_days = 3
-base = pd.Timestamp.today()
-timestamp_list = [base + datetime.timedelta(days=x) for x in range(n_days)]
-for x in timestamp_list:
-    due_data.append(x)
-
 dummy_performance_cases = pd.DataFrame(
     data={
-        "business_area": business_areas,
         "Due": Due,
+        "Awaiting QA": Unanswered,
         "Answered": Answered,
-        "Answered on time": Answered_on_time,
+        "Completed in time": Answered_on_time,
         "Performance": Performance,
         "Unanswered": Unanswered,
-        "date": due_data,
+        "Required to achieve 95% target": Due,
+        "Outstanding required to achieve 95% target": Due,
+
     }
 )
 

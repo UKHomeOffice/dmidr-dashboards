@@ -109,9 +109,9 @@ spec:
               value: /certs/tls.key
           resources:
             limits:
-              memory: 512Mi
+              memory: 1Gi
             requests:
-              memory: 30Mi
+              memory: 1Gi
           volumeMounts:
             - name: auth-proxy-config
               mountPath: /usr/local/openresty/nginx/conf/locations/default.conf # this is where the default configuration is in the image, so we need to override it with our own config

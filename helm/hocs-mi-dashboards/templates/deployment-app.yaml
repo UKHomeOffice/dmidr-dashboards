@@ -109,7 +109,7 @@ spec:
               value: /certs/tls.key
           resources:
             limits:
-              memory: 100Mi
+              memory: 512Mi
             requests:
               memory: 30Mi
           volumeMounts:

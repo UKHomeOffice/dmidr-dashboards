@@ -24,6 +24,10 @@ open_cases_df["binned_days"] = pd.cut(
     labels=["0 to 5", "6 to 10", "11 to 15", "16 to 20"]
     )
 
+age_counts_df = open_cases_df.groupby(by="Business Area")["Age"].value_counts().unstack(level=1).reset_index()
+for col in age_counts_df.columns:
+    age_counts_df = age_counts_df.rename(columns={col:f"{col} Days"})
+age_counts_df = age_counts_df.fillna(0)
 
 layout = html.Div(
     className="report-background-box govuk-body",
@@ -144,8 +148,14 @@ layout = html.Div(
         ), 
         html.Div(
             className="decs-grid-row",
+            style={
+                "padding":"0px 15px"
+            },
             children=[
-                "Place holder"
+                auto_govuk_table(
+                    age_counts_df, 
+                    bold_lead=True
+                )
             ]
         )
     ],

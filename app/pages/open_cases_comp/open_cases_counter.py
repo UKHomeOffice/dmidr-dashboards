@@ -5,10 +5,7 @@ def open_cases_counter(counter_text:str="place holder", count:int=000):
         className="decs-grid-row",
         children=[
             html.Div(
-                style={
-                    "backgroundColor":"#fff",
-                    "padding":"5px"
-                },
+                className="counter-tile",
                 children=[
                     html.P(
                         className="govuk-body-l",

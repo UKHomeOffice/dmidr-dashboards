@@ -130,6 +130,12 @@ tbody tr:nth-child(even){
   margin-bottom: 10px;
 }
 
+.counter-tile{
+  background-color: #fff;
+  padding: 5px;
+  height: min(155px);
+}
+
 .day-selector-row {
  margin-bottom: 50px;
  padding: 0px 15px;

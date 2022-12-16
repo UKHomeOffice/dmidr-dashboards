@@ -5,10 +5,7 @@ def counting_section(box_text, bold_section:str="", count:int=None):
         className="decs-grid-column-one-quarter", 
         children=[
             html.Div(
-                style={
-                    "backgroundColor":"#fff",
-                    "padding":"5px"
-                },
+                className="counter-tile",
                 children=[
                     html.P(
                         className="govuk-body-l",

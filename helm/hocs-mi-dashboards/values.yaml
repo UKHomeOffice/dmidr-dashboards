@@ -11,10 +11,16 @@ app:
   resources:
     limits:
       cpu: 1000m
-      memory: 768Mi
+      memory: 1Gi
     requests:
       cpu: 200m
-      memory: 768Mi
+      memory: 1Gi
+
+service:
+  enabled: true
+  port: 443
+  portName: 'http'
+  targetPort: 8050
 
 keycloak:
   enabled: false
@@ -93,7 +99,7 @@ keycloakApi:
     - --listen=127.0.0.1:{{ .Values.keycloakApi.targetPort }}
 
 proxy:
-  enabled: false
+  enabled: true
   image:
     repository: quay.io/ukhomeofficedigital/nginx-proxy
     version: v4.2.0
@@ -161,8 +167,6 @@ truststore:
       readOnly: true
 
 ingress:
-  external:
-    enabled: false
   paths:
     - backend:
         serviceName: hocs-mi-dashboards

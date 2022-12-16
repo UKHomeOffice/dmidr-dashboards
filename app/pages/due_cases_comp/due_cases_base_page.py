@@ -11,6 +11,9 @@ cases_df['Due Date'] = cases_df['Due Date'].dt.date
 case_counts = get_mpam_due_cases_aggregate()
 
 def mpam_due_cases(filter_func, week_day_select, prefix):
+    global cases_df
+    cases_df = filter_func()
+
     mpam_due_cases_div = html.Div(
         children=[
             html.Div(
@@ -52,7 +55,7 @@ def mpam_due_cases(filter_func, week_day_select, prefix):
                             "padding":"10px"
                         },
                         children=[
-                            auto_govuk_table(filter_func(cases_df), title="Case details", title_size="m")
+                            auto_govuk_table(filter_func(), title="Case details", title_size="m")
                         ]
                     )
                 ]

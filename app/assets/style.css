@@ -7,7 +7,7 @@ body {
 }
 
 .decs-grid-row{
-  margin: 0px;
+  margin: 0px 0px 20px 0px;
 }
 
 .govuk-back-link::before {
@@ -128,6 +128,12 @@ tbody tr:nth-child(even){
   font-weight: 500;
   color: var(--ho-purple);
   margin-bottom: 10px;
+}
+
+.counter-tile{
+  background-color: #fff;
+  padding: 5px;
+  height: min(155px);
 }
 
 .day-selector-row {

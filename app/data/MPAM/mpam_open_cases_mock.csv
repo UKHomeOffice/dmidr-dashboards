@@ -1,0 +1,22 @@
+Case ID,Business Area,Age,Deadline,team,Stage,Outside Service Standard
+Unit 1,UKVI,4,01/11/22,team a,Registration,1
+Unit 2,UKVI,15,01/11/22,team a,Draft,0
+Unit 3,UKVI,78,04/11/22,team b,Escalate,0
+Unit 4,LSE,4,05/11/22,team y,Minor Check,1
+Unit 5,LSE,17,01/11/22,team z,QA,1
+Unit 6,NE,2,23/11/22,team z,CCH Returns,1
+Unit 7,NE,7,16/11/22,team z,Triage,0
+Unit 8,NE,4,19/11/22,team c,Registration,1
+Unit 9,NE,12,20/11/22,team d,CCH Returns,0
+Unit 10,NW,31,11/11/22,team d,QA,0
+Unit 11,NW,7,9/11/22,team q,QA,1
+Unit 12,International,9,29/11/22,team k,Registration,1
+Unit 13,International,14,30/11/22,team k,Send,0
+Unit 14,Surge,34,21/11/22,team o,Send,0
+Unit 15,EUSS,98,18/11/22,team o,Triage,0
+Unit 16,BF,67,27/11/22,team o,CCH Returns,1
+Unit 17,BF,38,28/11/22,team o,Escalate,1
+Unit 18,BF,4,07/11/22,team r,CCH Returns,1
+Unit 19,BF,4,06/11/22,team r,Registration,0
+Unit 20,BF,8,15/11/22,team q,Triage,0
+Unit 21,BF,10,21/11/22,team b,Triage,1

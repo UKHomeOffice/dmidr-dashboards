@@ -1,4 +1,5 @@
 from dash import html, callback, Input, Output
+import pandas as pd
 
 from app.components import auto_govuk_table
 
@@ -9,7 +10,7 @@ from app.data.MPAM.mpam_due_cases import get_mpam_due_cases, get_mpam_due_cases_
 COLUMN_ORDER = ["CTSRef", "Workflow", "Directorate", "Signee", "Business Area", "Stage", "Current Handler User Id", "Due Date"]
 
 cases_df = get_mpam_due_cases()
-cases_df['Due Date'] = cases_df['Due Date'].dt.date
+cases_df['Due Date'] = pd.to_datetime(cases_df['Due Date']).dt.date
 case_counts = get_mpam_due_cases_aggregate()
 
 def mpam_due_cases(filter_func, week_day_select, prefix):

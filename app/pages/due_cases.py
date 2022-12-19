@@ -8,16 +8,15 @@ from app.data.MPAM.mpam_due_cases import get_mpam_due_cases
 
 import datetime
 
-COLUMN_ORDER = ["CTSRef", "Workflow", "Directorate", "Signee", "Business Area", "Stage", "Current Handler User Id", "Due Date", "Day"]
-
 
 def filter_due_cases_4_weeks():
     cases_df = get_mpam_due_cases()
     today = datetime.datetime.now().date()
-    # ToDo: James M. Feedback: Update to look at following 3 weeks, starting from the next monday
+    # ToDo: James M. Feedback: Update to look at following 3 weeks, starting from the next Monday. This would
+    # remove the need for a user to scroll past cases they can look at in this "Due this week" tab.
     cases_df_4_week_mask = (cases_df['Due Date'] > today) & (cases_df['Due Date'] < today + datetime.timedelta(weeks=4))
     cases_df_4_week = cases_df.loc[cases_df_4_week_mask]
-    return cases_df_4_week[COLUMN_ORDER]
+    return cases_df_4_week
 
 
 def filter_this_weeks_due_cases():
@@ -27,13 +26,13 @@ def filter_this_weeks_due_cases():
     end = start + datetime.timedelta(days=6)
     filter_mask = (cases_df['Due Date'] >= start) & (cases_df['Due Date'] <= end)
     cases_df = cases_df[filter_mask]
-    return cases_df[COLUMN_ORDER]
+    return cases_df
 
 
 def filter_dates_out_of_service():
     cases_df = get_mpam_due_cases()
     cases_df_out_of_service = cases_df[(cases_df["Due Date"] < datetime.datetime.now().date())]
-    return cases_df_out_of_service[COLUMN_ORDER]
+    return cases_df_out_of_service
 
 
 dash.register_page(

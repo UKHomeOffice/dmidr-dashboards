@@ -1,48 +1,45 @@
 from dash import html, dcc, callback, Input, Output, ctx
 
-def day_selector_row_func(week_day_select):
-    day_selector_row = html.Div(
-        className="decs-grid-row day-selector-row govuk-body",
-        children=[
-            dcc.Store(
-                id='week-day-store', 
-                data=None
-            ),
-            html.Button(
-                id="mon-btn",
-                className="day-selector govuk-body",
-                children="Monday"
-            ),
-            html.Button(
-                id="tues-btn",
-                className="day-selector govuk-body",
-                children="Tuesday"
-            ),
-            html.Button(
-                id="wed-btn",
-                className="day-selector govuk-body",
-                children="Wednesday"
-            ),
-            html.Button(
-                id="thurs-btn",
-                className="day-selector govuk-body",
-                children="Thursday"
-            ),
-            html.Button(
-                id="fri-btn",
-                className="day-selector govuk-body",
-                children="Friday"
-            ),
-            html.Button(
-                id="clear-day-selection",
-                className="govuk-button clear-selection-position",
-                style={"margin":"auto 0px"},
-                children="Clear selection"
-            ),
-        ]
-    )
-    if(week_day_select):
-        return day_selector_row
+day_selector_row_func = html.Div(
+    className="decs-grid-row day-selector-row govuk-body",
+    children=[
+        dcc.Store(
+            id='week-day-store',
+            data=None
+        ),
+        html.Button(
+            id="mon-btn",
+            className="day-selector govuk-body",
+            children="Monday"
+        ),
+        html.Button(
+            id="tues-btn",
+            className="day-selector govuk-body",
+            children="Tuesday"
+        ),
+        html.Button(
+            id="wed-btn",
+            className="day-selector govuk-body",
+            children="Wednesday"
+        ),
+        html.Button(
+            id="thurs-btn",
+            className="day-selector govuk-body",
+            children="Thursday"
+        ),
+        html.Button(
+            id="fri-btn",
+            className="day-selector govuk-body",
+            children="Friday"
+        ),
+        html.Button(
+            id="clear-day-selection",
+            className="govuk-button clear-selection-position",
+            style={"margin":"auto 0px"},
+            children="Clear selection"
+        ),
+    ]
+)
 
 @callback(
     [

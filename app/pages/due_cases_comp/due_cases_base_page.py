@@ -7,12 +7,29 @@ from app.pages.due_cases_comp.counting_section import counting_section
 from app.data.MPAM.mpam_due_cases import get_mpam_due_cases, get_mpam_due_cases_aggregate
 
 cases_df = get_mpam_due_cases()
+cases_df['Due Date'] = cases_df['Due Date'].dt.date
 case_counts = get_mpam_due_cases_aggregate()
 
-def mpam_due_cases(filter, week_day_select, prefix):
+def mpam_due_cases(filter_func, week_day_select, prefix):
+    global cases_df
+    cases_df = filter_func()
+
     mpam_due_cases_div = html.Div(
         children=[
-            day_selector_row_func(week_day_select), 
+            html.Div(
+                className="tab-controls",
+                children=[
+                    html.P(
+                        className="govuk-body-l",
+                        style={"marginBottom": "0px"},
+                        children=[
+                            "Controls",
+                            day_selector_row_func if week_day_select else None,
+                        ],
+                    )
+                ],
+            ),
+
             html.Div(
                 className="decs-grid-row",
                 style={
@@ -38,7 +55,7 @@ def mpam_due_cases(filter, week_day_select, prefix):
                             "padding":"10px"
                         },
                         children=[
-                            filter()
+                            auto_govuk_table(filter_func(), title="Case details", title_size="m")
                         ]
                     )
                 ]
@@ -57,4 +74,4 @@ def filter_table_by_day(filter_day):
         return auto_govuk_table(cases_df, title="Case details", title_size="m")
     else:
         df_filtered = cases_df.loc[cases_df["Day"] == filter_day]
-        return auto_govuk_table(df_filtered, title="Case details", title_size="m")    
+        return auto_govuk_table(df_filtered, title="Case details", title_size="m")

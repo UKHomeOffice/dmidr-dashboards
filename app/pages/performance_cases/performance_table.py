@@ -4,8 +4,8 @@ from app.components import auto_govuk_table
 
 
 
-def performance_table_func(unit_df):
-    performance_df = unit_df[["Due", "Answered", "Answered", "Completed in time", "Performance", "Unanswered"]].copy()
+def performance_table(unit_df):
+    performance_df = unit_df[["Business Area", "Due", "Answered", "Completed in time", "Performance", "Unanswered"]].copy()
     performance_table = auto_govuk_table(
         performance_df,
         title="Performance details",

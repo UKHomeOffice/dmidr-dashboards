@@ -1,7 +1,7 @@
 import dash
 from dash import html, dcc
 
-from data.MPAM.mpam_performance_cases import get_mpam_performance_cases
+from data.MPAM.mpam_performance_cases import get_mpam_performance_cases, get_mpam_performance_by_date
 from app.pages.performance_cases import *
 from app.components import report_header
 
@@ -15,50 +15,58 @@ dash.register_page(
 layout = html.Div(
     className="report-background-box govuk-body",
     children=[
+        html.Hr(
+            className="decs-section-break"
+        ),
         html.Div(
-            style={"paddingLeft":"10px"},
+            style={"paddingLeft": "10px"},
             children=[
                 html.A(
-                    className="govuk-back-link",
-                    children="Back",
+                    className="govuk-back-link govuk-link--no-underline govuk-!-font-size-19",
+                    style={
+                        "paddingLeft": "20px"
+                    },
+                    children="Back to home",
                     href="/"
                 ),
             ]
         ),
-        dcc.Tabs(
-            parent_className="custom-tabs",
-            className="custom-tabs-container",
+        html.Div(
+                className="tab-controls",
+                children=[
+                    html.P(
+                        className="govuk-body-l",
+                        style={"marginBottom": "0px"},
+                        children=[
+                            "Controls",
+                        ],
+                    )
+                ],
+            ),
+        report_header("Performance Summary"),
+        html.Div(
+            className="decs-grid-row",
             children=[
-                dcc.Tab(
-                    label="Report One",
-                    className="custom-tab",
-                    selected_className="custom-tab--selected",
-                    children=[
-                        html.Div(
-                            className="tab-controls",
-                            children=[
-                                html.P(
-                                    className="govuk-body",
-                                    style={"marginBottom": "0px"},
-                                    children="There is a date here: 10/02/2022",
-                                )
-                            ],
-                        ),
-                        report_header("Performance Summary"),
-                        html.Div(
-                            className="decs-grid-row",
-                            children=[
-                                html.Div(
-                                    className="decs-grid-row",
-                                    children=[
-                                       performance_table_func(get_mpam_performance_cases())
-                                    ],
-                                ),
-                            ],
-                        ),
-                    ],
+                html.Div(
+                    className="decs-grid-row",
+                    style={
+                        "padding": "0px 15px"
+                    },
+                    children=performance_bar(get_mpam_performance_by_date(), plot_title="Performance"),
                 ),
             ],
-        )
-    ],
-)
+        ),
+        html.Div(
+            className="decs-grid-row",
+            children=[
+                html.Div(
+                    className="decs-grid-row",
+                    style={
+                        "padding": "0px 15px"
+                    },
+                    children=performance_table(get_mpam_performance_cases()),
+                ),
+            ],
+        ),
+    ]
+),

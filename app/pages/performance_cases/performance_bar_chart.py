@@ -2,7 +2,7 @@ import plotly.express as px
 from dash import html, dcc
 
 def performance_bar(data, plot_title:str=None):
-    fig = px.histogram(data, x="Date", y=["Amount Answered On Time", "Amount Due"], barmode='group', height=400)
+    fig = px.histogram(data, x="date", y=["Amount Answered On Time", "Amount Due"], barmode='group', height=400)
 
     fig.update_layout(
         paper_bgcolor="#fff",

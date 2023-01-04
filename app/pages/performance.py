@@ -46,27 +46,17 @@ layout = html.Div(
         report_header("Performance Summary"),
         html.Div(
             className="decs-grid-row",
-            children=[
-                html.Div(
-                    className="decs-grid-row",
-                    style={
-                        "padding": "0px 15px"
-                    },
-                    children=performance_bar(get_mpam_performance_by_date(), plot_title="Performance"),
-                ),
-            ],
+            style={
+                "padding": "0px 15px"
+            },
+            children=performance_bar(get_mpam_performance_by_date(), plot_title="Performance")
         ),
         html.Div(
             className="decs-grid-row",
-            children=[
-                html.Div(
-                    className="decs-grid-row",
-                    style={
-                        "padding": "0px 15px"
-                    },
-                    children=performance_table(get_mpam_performance_cases()),
-                ),
-            ],
+            style={
+                "padding": "0px 15px"
+            },
+            children=performance_table(get_mpam_performance_cases()),
         ),
     ]
 ),

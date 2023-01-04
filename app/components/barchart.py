@@ -1,8 +1,7 @@
 import plotly.graph_objects as go
 from dash import html, dcc
 
-def open_cases_age_bar(x_data, y_data, plot_title:str=None, x_axis_title:str=None, y_axis_title:str=None):
-
+def barchart(x_data, y_data, plot_title:str=None, x_axis_title:str=None, y_axis_title:str=None):
     bar_chart = go.Figure()
     bar_chart.add_trace(
         go.Bar(
@@ -18,12 +17,12 @@ def open_cases_age_bar(x_data, y_data, plot_title:str=None, x_axis_title:str=Non
         paper_bgcolor="#fff",
         plot_bgcolor="#fff",
         yaxis=dict(
-            title=f"{y_axis_title}",
+            title=f"{y_axis_title if y_axis_title else y_data.name}",
             linecolor="#c1c1c1",
             gridcolor="#c1c1c1"
         ), 
         xaxis=dict(
-            title=f"{x_axis_title}",
+            title=f"{x_axis_title if x_axis_title else x_data.name}",
             linecolor="#c1c1c1",
         ),
         margin=dict(l=80, r=80, t=40, b=80)

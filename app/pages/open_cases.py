@@ -19,19 +19,19 @@ open_cases_df["binned_days"] = pd.cut(
     labels=["0 to 5", "6 to 10", "11 to 15", "16 to 20"],
 )
 
-
 def df_count_aggregation_by_column(column, outside_service_standard):
-    df = open_cases_df[open_cases_df["Outside Service Standard"] == int(outside_service_standard)]
+    df = open_cases_df[
+        open_cases_df["Outside Service Standard"] == outside_service_standard
+    ]
 
     return (
-        df
-        .groupby(column)
+        df.groupby(column)
         .agg(count=pd.NamedAgg(column=column, aggfunc="count"))
         .reset_index()
     )
 
 
-def df_by_age():
+def df_business_area_by_age():
     age_counts_df = (
         open_cases_df.groupby(by="Business Area")["Age"]
         .value_counts()
@@ -110,7 +110,7 @@ layout = html.Div(
             className="decs-grid-row",
             style={"padding": "0px 15px",},
             children=[
-                open_cases_age_bar(
+                barchart(
                     x_data=open_cases_df["Age"]
                     .loc[open_cases_df["Outside Service Standard"] == 0]
                     .value_counts()
@@ -178,7 +178,7 @@ layout = html.Div(
         html.Div(
             className="decs-grid-row",
             style={"padding": "0px 15px"},
-            children=[auto_govuk_table(df_by_age(), bold_lead=True)],
+            children=[auto_govuk_table(df_business_area_by_age(), bold_lead=True)],
         ),
     ],
 )

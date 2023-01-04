@@ -15,7 +15,12 @@ data["binned_days"] = pd.cut(
     labels=["0 to 5", "6 to 10", "11 to 15", "16 to 20"]
     )
 
-data = data.groupby("binned_days").agg({"Total cases closed": "sum"}).reset_index()
+def df_count_aggregation_by_column(column):
+    return (
+        data.groupby(column)
+        .agg("sum")
+        .reset_index()
+    )
 
 layout = report_base(
     title="Closed Cases",
@@ -24,8 +29,8 @@ layout = report_base(
             className="decs-grid-row",
             style={"padding": "0px 15px"},
             children=[
-                html.Div(className="govuk-grid-column-one-third", children=pie_chart(data, values_col="Total cases closed", names="binned_days")),
-                html.Div(className="govuk-grid-column-one-third", children=pie_chart(data, values_col="Total cases closed", names="binned_days")),
+                html.Div(className="govuk-grid-column-one-third", children=pie_chart(df_count_aggregation_by_column("binned_days"), values_col="Total cases closed", names="binned_days", legend_title="Case age", pie_name="Cases by age",)),
+                html.Div(className="govuk-grid-column-one-third", children=pie_chart(df_count_aggregation_by_column("binned_days"), values_col="Total cases closed", names="binned_days", legend_title="Case outcome", pie_name="Cases by outcome",)),
                 html.Div(
                     className="govuk-grid-column-one-third",
                     children=[
@@ -37,7 +42,12 @@ layout = report_base(
             ],
         ),
         html.Div(
-            className="decs-grid-row", style={"padding": "0px 15px"}, children="",
+            className="decs-grid-row",
+            style={"padding": "0px 15px"},
+            children=barchart(x_data=data["Age (days)"], y_data=data["Total cases closed"]),
+        ),
+        html.Div(
+            className="decs-grid-row", style={"padding": "0px 15px"}, children="table",
         ),
     ],
 )

@@ -50,7 +50,7 @@ layout = html.Div(
                             style={"paddingTop":"15px"},
                             children=[
                                 board_link_card(dash_title="Performance summary", dash_link="/performance-summary"),
-                                board_link_card(dash_title="Intake and output"),
+                                board_link_card(dash_title="Intake and output", dash_link="/intake-output"),
                             ]
                         )
                     ]

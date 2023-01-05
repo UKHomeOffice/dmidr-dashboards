@@ -4,8 +4,7 @@ from dash import html
 import pandas as pd
 
 # Project imports
-from app.components import *
-from app.pages.open_cases_comp import *
+from app.components import pie_chart, barchart, auto_govuk_table, counter
 from app.pages.report_base import report_base
 from app.data.MPAM.mpam_open_cases import get_mpam_open_cases
 

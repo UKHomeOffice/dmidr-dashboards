@@ -1,2 +1,0 @@
-from .performance_table import performance_table
-from .performance_bar_chart import performance_bar

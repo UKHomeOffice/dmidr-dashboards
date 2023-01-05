@@ -6,9 +6,14 @@ import pandas as pd
 # Project imports
 from app.components import *
 from app.pages.open_cases_comp import *
+from app.pages.report_base import report_base
 from app.data.MPAM.mpam_open_cases import get_mpam_open_cases
 
-dash.register_page(__name__, path="/open-cases", name="Open Cases")
+dash.register_page(
+    __name__, 
+    path="/open-cases",
+    name="Open Cases"
+)
 
 open_cases_df = get_mpam_open_cases()
 
@@ -42,23 +47,9 @@ def df_business_area_by_age():
         age_counts_df = age_counts_df.rename(columns={col: f"{col} Days"})
     return age_counts_df.fillna(0)
 
-
-layout = html.Div(
-    className="report-background-box govuk-body",
-    children=[
-        html.Hr(className="decs-section-break"),
-        html.Div(
-            style={"paddingLeft": "10px"},
-            children=[
-                html.A(
-                    className="govuk-back-link govuk-link--no-underline govuk-!-font-size-19",
-                    style={"paddingLeft": "20px"},
-                    children="Back to home",
-                    href="/",
-                ),
-            ],
-        ),
-        report_header("Open Cases"),
+layout = report_base(
+    title="Open Cases",
+    body=[
         html.Div(
             className="decs-grid-row",
             children=[
@@ -100,11 +91,11 @@ layout = html.Div(
                             values_col="count",
                             names="Stage",
                             pie_name="Cases within service standard by stage",
-                            legend_title="Case stage",
+                            legend_title="Case stage"
                         )
-                    ],
+                    ]
                 ),
-            ],
+            ]
         ),
         html.Div(
             className="decs-grid-row",
@@ -120,9 +111,9 @@ layout = html.Div(
                     .value_counts(),
                     plot_title="Cases with service standard by age",
                     x_axis_title="Case age [Days]",
-                    y_axis_title="Open cases [count]",
+                    y_axis_title="Open cases [count]"
                 )
-            ],
+            ]
         ),
         html.Div(
             className="decs-grid-row",
@@ -143,7 +134,7 @@ layout = html.Div(
                                 open_cases_df["Outside Service Standard"] == 1
                             ].shape[0],
                         ),
-                    ],
+                    ]
                 ),
                 html.Div(
                     className="govuk-grid-column-one-third",
@@ -155,9 +146,9 @@ layout = html.Div(
                             values_col="count",
                             names="Business Area",
                             pie_name="Cases outside of service standard by business unit",
-                            legend_title="Business unit",
+                            legend_title="Business unit"
                         )
-                    ],
+                    ]
                 ),
                 html.Div(
                     className="govuk-grid-column-one-third",
@@ -169,12 +160,12 @@ layout = html.Div(
                             values_col="count",
                             names="Stage",
                             pie_name="Cases outside of service standard by stage",
-                            legend_title="Case stage",
+                            legend_title="Case stage"
                         )
-                    ],
+                    ]
                 ),
-            ],
-        ),
+            ]
+        ), 
         html.Div(
             className="decs-grid-row",
             style={"padding": "0px 15px"},

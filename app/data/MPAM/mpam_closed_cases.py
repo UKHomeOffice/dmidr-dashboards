@@ -25,3 +25,11 @@ def get_mpam_closed_cases_by_age():
     with create_db_connection() as connection:
         data = pd.read_sql_query(MPAM_CLOSED_CASES_BY_AGE, connection)
         return data
+
+def get_mpam_closed_cases_by_outcome():
+    if os.environ.get("STAGE") == "local" or os.environ.get("STAGE") is None:
+        return pd.read_csv("data/MPAM/mocks/mpam_closed_cases_aggregate_by_outcome_mock.csv")
+
+    with create_db_connection() as connection:
+        data = pd.read_sql_query(MPAM_CLOSED_CASES_BY_OUTCOME, connection)
+        return data

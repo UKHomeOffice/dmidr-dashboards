@@ -7,6 +7,7 @@ from data.MPAM.mpam_performance_cases import (
 )
 from app.pages.performance_cases import *
 from app.pages.report_base import report_base
+from app.components import grouped_histogram
 
 
 dash.register_page(
@@ -23,7 +24,14 @@ layout = report_base(
             style={
                 "padding": "0px 15px"
             },
-            children=performance_bar(get_mpam_performance_by_date(), plot_title="Performance")
+            children=grouped_histogram(
+                get_mpam_performance_by_date(),
+                x_cols="date",
+                y_cols=["Amount Answered On Time", "Amount Due"],
+                plot_title="Performance",
+                y_axis_title="Due cases vs on time",
+                x_axis_title="Days"
+            )
         ),
         html.Div(
             className="decs-grid-row",

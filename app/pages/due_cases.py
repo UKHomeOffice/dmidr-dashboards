@@ -1,8 +1,7 @@
 import dash
 from dash import html, dcc, callback, Input, Output
 
-from app.components import *
-from app.pages.due_cases_comp import *
+from app.pages.due_cases_comp import due_cases_base_page
 from app.pages.report_base import report_base
 
 from app.data.MPAM.mpam_due_cases import get_mpam_due_cases
@@ -69,7 +68,7 @@ layout = report_base(
         ),
         html.Div(
             id="page-content",
-            children=mpam_due_cases(filter_this_weeks_due_cases, True, ""),
+            children=due_cases_base_page(filter_this_weeks_due_cases, True, ""),
         ),
     ],
 )
@@ -81,8 +80,8 @@ layout = report_base(
 )
 def tab_selected(selected_tab):
     if selected_tab == "tab-1":
-        return mpam_due_cases(filter_this_weeks_due_cases, True, "")
+        return due_cases_base_page(filter_this_weeks_due_cases, True, "")
     elif selected_tab == "tab-2":
-        return mpam_due_cases(filter_due_cases_4_weeks, False, "four-week-")
+        return due_cases_base_page(filter_due_cases_4_weeks, False, "four-week-")
     elif selected_tab == "tab-3":
-        return mpam_due_cases(filter_dates_out_of_service, False, "out-service-")
+        return due_cases_base_page(filter_dates_out_of_service, False, "out-service-")

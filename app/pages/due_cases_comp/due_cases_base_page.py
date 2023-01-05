@@ -13,7 +13,7 @@ cases_df = get_mpam_due_cases()
 cases_df['Due Date'] = pd.to_datetime(cases_df['Due Date']).dt.date
 case_counts = get_mpam_due_cases_aggregate()
 
-def mpam_due_cases(filter_func, week_day_select, prefix):
+def due_cases_base_page(filter_func, week_day_select, prefix):
     global cases_df
     cases_df = filter_func()
 

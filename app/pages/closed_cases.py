@@ -2,7 +2,7 @@ import dash
 import pandas as pd
 from dash import html, dcc
 
-from app.components import *
+from app.components import pie_chart, counter, barchart, auto_govuk_table
 from app.pages.report_base import report_base
 from app.data.MPAM.mpam_closed_cases import (
     get_mpam_closed_cases_aggregate,

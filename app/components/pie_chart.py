@@ -2,11 +2,11 @@ import plotly.express as px
 from dash import html, dcc
 
 
-def decs_open_cases_pie(pie_data, values_col:str, pie_name:str="Placeholder", legend_title:str="Legend"):
+def pie_chart(pie_data, values_col:str, names:str=None, pie_name:str="Placeholder", legend_title:str="Legend"):
 
     pie_chart = px.pie(
-        values=pie_data[values_col].value_counts(), 
-        names=pie_data[values_col].value_counts().index,
+        values=pie_data[values_col],
+        names=pie_data[names if names else values_col],
         hole=0.6,
         color_discrete_sequence=[
             "#832CAD","#E590C6","#5774F6",
@@ -17,7 +17,7 @@ def decs_open_cases_pie(pie_data, values_col:str, pie_name:str="Placeholder", le
     pie_chart.update_layout(
         annotations=[
             dict(
-                text=f"{pie_data.shape[0]}", 
+                text=f"{pie_data[values_col].sum()}",
                 x=0.5, 
                 y=0.5, 
                 font_size=30, 

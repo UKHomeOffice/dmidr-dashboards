@@ -52,7 +52,7 @@ def mpam_due_cases(filter_func, week_day_select, prefix):
                 },
                 children=[
                     html.Div(
-                        id=prefix+"table-section-test",
+                        id=prefix+"table-section",
                         style={
                             "backgroundColor":"#fff",
                             "padding":"10px"
@@ -68,7 +68,7 @@ def mpam_due_cases(filter_func, week_day_select, prefix):
     return mpam_due_cases_div
 
 @callback(
-    Output(component_id="table-section-test", component_property="children"),
+    Output(component_id="table-section", component_property="children"),
     Input(component_id="week-day-store", component_property="data"),
     prevent_initial_call=True
 )

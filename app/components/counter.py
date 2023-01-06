@@ -1,6 +1,6 @@
 from dash import html
 
-def open_cases_counter(counter_text:str="place holder", count:int=000):
+def counter(text:str= "place holder", count:int=000):
     return html.Div(
         className="decs-grid-row",
         children=[
@@ -10,7 +10,7 @@ def open_cases_counter(counter_text:str="place holder", count:int=000):
                     html.P(
                         className="govuk-body-l",
                         style={"marginBottom":"10px"},
-                        children=[f"{counter_text}"]
+                        children=[f"{text}"]
                     ),
                     html.H1(
                         className="govuk-body counter-number--l",

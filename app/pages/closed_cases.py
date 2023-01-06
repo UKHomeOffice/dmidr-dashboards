@@ -1,92 +1,93 @@
 import dash
+import pandas as pd
+from dash import html, dcc
 
-from dash import html
+from app.components import *
+from app.pages.report_base import report_base
+from app.data.MPAM.mpam_closed_cases import (
+    get_mpam_closed_cases_aggregate,
+    get_mpam_closed_cases_by_age,
+    get_mpam_closed_cases_by_outcome,
+)
 
-from app.pages.closed_cases_comp import *
+dash.register_page(__name__, name="Closed cases", path="/closed-cases")
 
-dash.register_page(
-     __name__,
-     name="Closed cases",
-     path="/closed-cases"
- )
+count_data = get_mpam_closed_cases_aggregate()
 
-layout = html.Div(
-    className="report-background-box",
-    children=[
-        html.Div(
-            style={"paddingLeft":"10px"},
-            children=[
-                html.A(
-                    className="govuk-back-link",
-                    children="Back",
-                    href="/"
-                ),
-            ]
-        ),
+data = get_mpam_closed_cases_by_age()
+data["binned_days"] = pd.cut(
+    data["Age (days)"],
+    bins=[0, 5, 10, 15, 20],
+    labels=["0 to 5", "6 to 10", "11 to 15", "16 to 20"],
+)
+
+
+def df_count_aggregation_by_column(column):
+    return data.groupby(column).agg("sum").reset_index()
+
+
+layout = report_base(
+    title="Closed Cases",
+    body=[
         html.Div(
             className="decs-grid-row",
             children=[
                 html.Div(
-                    style={"padding": "0px 15px"},
-                    children=[
-                        html.H2(
-                            className="govuk-heading-l", children="Title for the report"
-                        ),
-                        html.P(
-                            className="govuk-body",
-                            children="Suspendisse potenti. Proin aliquet mi vel viverra faucibus. Quisque a lacus ac diam bibendum placerat. Etiam placerat eros a urna dapibus accumsan. Duis eu ipsum dignissim, sagittis arcu sit amet, tincidunt orci. Donec pulvinar, nibh ac rutrum faucibus, mauris augue malesuada odio, eget luctus turpis justo a nulla. Ut sed ipsum libero. Morbi rutrum, nisi at hendrerit luctus, lacus neque ultrices sem, id pellentesque nibh nunc et turpis. Nam auctor nibh ut orci viverra, vel suscipit neque cursus. Sed cursus nibh eu porttitor interdum. Suspendisse potenti. Aenean eleifend, nisi eget aliquam consequat, odio mauris venenatis purus, id ornare justo tortor a nisl. Proin nec tincidunt nisl. Nullam nec posuere mi. Nulla et erat ultricies, condimentum sapien ut, posuere lacus. Vestibulum ante mauris, pellentesque ac tellus sit amet, fringilla imperdiet nibh.",
-                        ),
-                    ],
+                    className="govuk-grid-column-one-third",
+                    children=pie_chart(
+                        df_count_aggregation_by_column("binned_days"),
+                        values_col="Total cases closed",
+                        names="binned_days",
+                        legend_title="Case age",
+                        pie_name="Cases by age",
+                    ),
                 ),
                 html.Div(
-                    className="decs-grid-row",
-                    style={"marginBottom": "30px"},
-                    children=[
-                        html.Div(
-                            className="decs-grid-column-three-quarters",
-                            children=[
-                                html.Div(
-                                    className="information-box",
-                                    children=[
-                                        html.Span(
-                                            className="govuk-caption-m",
-                                            children="When are tickets completed through the week",
-                                        ),
-                                        html.H3(
-                                            className="govuk-heading-m",
-                                            children="Ticket completion",
-                                        ),
-                                        example_bar,
-                                    ],
-                                )
-                            ],
-                        ),
-                        html.Div(
-                            className="decs-grid-column-one-quarter",
-                            children=[
-                                html.Div(
-                                    className="information-box",
-                                    children=[
-                                        html.Span(
-                                            className="govuk-caption-m",
-                                            children="All business targets",
-                                        ),
-                                        html.H3(
-                                            className="govuk-heading-m",
-                                            children="Performance",
-                                        ),
-                                        example_gauge,
-                                    ],
-                                )
-                            ],
-                        ),
-                    ],
+                    className="govuk-grid-column-one-third",
+                    children=pie_chart(
+                        df_count_aggregation_by_column("binned_days"),
+                        values_col="Total cases closed",
+                        names="binned_days",
+                        legend_title="Case outcome",
+                        pie_name="Cases by outcome",
+                    ),
                 ),
                 html.Div(
-                    className="decs-grid-row",
-                    children=[ticket_details_sec, performance_table_sec,],
+                    className="govuk-grid-column-one-third",
+                    children=[
+                        counter(
+                            text="Total cases closed",
+                            count=count_data["Total cases closed"][0],
+                        ),
+                        counter(
+                            text="Cases closed inside of service standard",
+                            count=count_data["Cases closed inside of service standard"][0],
+                        ),
+                        counter(
+                            text="Cases closed outside of service standard",
+                            count=count_data["Cases closed outside of service standard"][0],
+                        ),
+                    ],
                 ),
             ],
-        )
+        ),
+        html.Div(
+            className="decs-grid-row",
+            style={"padding": "0px 15px"},
+            children=barchart(
+                x_data=data["Age (days)"], y_data=data["Total cases closed"]
+            ),
+        ),
+        html.Div(
+            className="decs-grid-row",
+            style={"padding": "0px 15px"},
+            children=auto_govuk_table(
+                get_mpam_closed_cases_by_outcome(),
+                title="Case outcomes by business unit",
+                title_size="m",
+                bold_lead=True,
+                hidden_lead_head=True,
+            ),
+        ),
     ],
 )

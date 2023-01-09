@@ -65,8 +65,8 @@ def grouped_histogram(data, x_cols, y_cols, plot_title:str=None, x_axis_title:st
             orientation="h",
             yanchor="bottom",
             y=1.02,
-            xanchor="right",
-            x=0.2
+            xanchor="left",
+            x=0
         )
     )
 

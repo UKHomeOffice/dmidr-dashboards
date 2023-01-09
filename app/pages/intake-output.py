@@ -57,15 +57,18 @@ fig = go.Figure(
     ],
     layout=go.Layout(
         yaxis_title="Intake and output",
+        margin=dict(t=0, b=40),
         legend=dict(
             orientation="h",
             yanchor="bottom",
             y=1.02,
-            xanchor="right",
-            x=0.4
+            xanchor="left",
+            x=0
         )
     )
 )
+
+fig.update_yaxes(rangemode="tozero")
 
 layout = report_base(
     "Intake and Output",

@@ -1,5 +1,6 @@
 import dash
 from dash import html, dcc
+import plotly.graph_objects as go
 
 from app.data.MPAM.mpam_intake_and_output import (
     get_mpam_intake_and_output,
@@ -17,10 +18,11 @@ dash.register_page(
 df = get_mpam_intake_and_output()
 
 table_df = df.groupby(by="Business Area").agg("sum").reset_index()
-
 histogram_df = df.groupby(by="Date").agg("sum").reset_index()
 
-import plotly.graph_objects as go
+def figure_hover_text(value_title:str):
+    return f"{value_title}:" + "%{y}<extra></extra>"
+
 
 fig = go.Figure(
     data=[
@@ -30,6 +32,7 @@ fig = go.Figure(
             y=histogram_df["Total Created"],
             offsetgroup=0,
             marker_color='#8F23B3',
+            hovertemplate=figure_hover_text('Total Created')
         ),
         go.Bar(
             name="Total Received",
@@ -38,6 +41,7 @@ fig = go.Figure(
             offsetgroup=0,
             base=histogram_df["Total Created"],
             marker_color='#A73379',
+            hovertemplate=figure_hover_text('Total Received')
         ),
         go.Bar(
             name="Total Completed",
@@ -45,6 +49,7 @@ fig = go.Figure(
             y=histogram_df["Total Completed"],
             offsetgroup=1,
             marker_color='#54C1FF',
+            hovertemplate=figure_hover_text('Total Completed')
         ),
         go.Bar(
             name="Total Responded",
@@ -53,6 +58,7 @@ fig = go.Figure(
             offsetgroup=1,
             base=histogram_df["Total Completed"],
             marker_color='#4E75FF',
+            hovertemplate=figure_hover_text('Total Responded')
         )
     ],
     layout=go.Layout(
@@ -64,6 +70,10 @@ fig = go.Figure(
             y=1.02,
             xanchor="left",
             x=0
+        ),
+        hoverlabel=dict(
+            bgcolor="white",
+            font_size=16,
         )
     )
 )

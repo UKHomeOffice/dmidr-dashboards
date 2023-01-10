@@ -2,7 +2,7 @@ import dash
 from dash import Dash, html, callback, Output, Input
 from flask import Flask
 
-from app.components import *
+from app.components import decs_header, decs_footer
 
 server = Flask(__name__)
 

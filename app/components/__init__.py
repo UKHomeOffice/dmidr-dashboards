@@ -6,3 +6,4 @@ from .board_link_card import board_link_card
 from .counter import counter
 from .pie_chart import pie_chart
 from .barchart import barchart
+from .barchart import grouped_histogram

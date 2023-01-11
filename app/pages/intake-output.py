@@ -16,47 +16,59 @@ dash.register_page(
 )
 
 df = get_mpam_intake_and_output()
+print(df.columns.values)
 
-table_df = df.groupby(by="Business Area").agg("sum").reset_index()
-histogram_df = df.groupby(by="Date").agg("sum").reset_index()
+table_df = df.groupby(by="Business Area").agg({
+    "Total created": "sum",
+    "Total received": "sum",
+    "Total responded": "sum",
+    "Total completed": "sum"
+}).reset_index()
+histogram_df = df.groupby(by="date").agg({
+    "Total created": "sum",
+    "Total received": "sum",
+    "Total responded": "sum",
+    "Total completed": "sum"
+}).reset_index()
 
 def figure_hover_text(value_title:str):
     return f"{value_title}:" + "%{y}<extra></extra>"
 
+print(histogram_df.columns.values)
 
 fig = go.Figure(
     data=[
         go.Bar(
             name="Total Created",
-            x=histogram_df["Date"],
-            y=histogram_df["Total Created"],
+            x=histogram_df["date"],
+            y=histogram_df["Total created"],
             offsetgroup=0,
             marker_color='#8F23B3',
             hovertemplate=figure_hover_text('Total Created')
         ),
         go.Bar(
             name="Total Received",
-            x=histogram_df["Date"],
-            y=histogram_df["Total Received"],
+            x=histogram_df["date"],
+            y=histogram_df["Total received"],
             offsetgroup=0,
-            base=histogram_df["Total Created"],
+            base=histogram_df["Total created"],
             marker_color='#A73379',
             hovertemplate=figure_hover_text('Total Received')
         ),
         go.Bar(
             name="Total Completed",
-            x=histogram_df["Date"],
-            y=histogram_df["Total Completed"],
+            x=histogram_df["date"],
+            y=histogram_df["Total completed"],
             offsetgroup=1,
             marker_color='#54C1FF',
             hovertemplate=figure_hover_text('Total Completed')
         ),
         go.Bar(
             name="Total Responded",
-            x=histogram_df["Date"],
-            y=histogram_df["Total Responded"],
+            x=histogram_df["date"],
+            y=histogram_df["Total responded"],
             offsetgroup=1,
-            base=histogram_df["Total Completed"],
+            base=histogram_df["Total completed"],
             marker_color='#4E75FF',
             hovertemplate=figure_hover_text('Total Responded')
         )

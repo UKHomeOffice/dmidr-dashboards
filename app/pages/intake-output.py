@@ -16,7 +16,6 @@ dash.register_page(
 )
 
 df = get_mpam_intake_and_output()
-print(df.columns.values)
 
 table_df = df.groupby(by="Business Area").agg({
     "Total created": "sum",
@@ -31,10 +30,9 @@ histogram_df = df.groupby(by="date").agg({
     "Total completed": "sum"
 }).reset_index()
 
+
 def figure_hover_text(value_title:str):
     return f"{value_title}:" + "%{y}<extra></extra>"
-
-print(histogram_df.columns.values)
 
 fig = go.Figure(
     data=[

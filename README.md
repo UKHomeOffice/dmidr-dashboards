@@ -44,7 +44,6 @@ $ PYTHONPATH=./ python app/index.py
 ```
 
 # Creating a new report.
-
 1. Create query within `app\data\{user group}\ `, with any mock data needed to enable local development.
 2. Create the report page within `app\pages\ `.
    1. Within the new page, register the report as a new page with dash.
@@ -57,13 +56,13 @@ $ PYTHONPATH=./ python app/index.py
         path="/example-report"
     )
     ```
-   2. A report base has been created which set out the general formatting of the page
+   2. A report base has been created which set out the general formatting of the page. Usage of this can be seen below. <br> Visualisations should be added as part of the body as an array of Dash [html](https://dash.plotly.com/dash-html-components) and [dcc](https://dash.plotly.com/dash-core-components) components. Some generic visualisations have been created and can be found within `app\components\ `
     ```python
     from app.pages.report_base import report_base
     
     layout = report_base(title="Example report", body=[...]
     ```
-   3. Add report to [home page](app/pages/home.py) to allow for easy navigation to report. Eg.
+   3. Add report navigation card to [home page](app/pages/home.py).
    ```python
    html.Div(
         className="decs-grid-row",
@@ -75,3 +74,4 @@ $ PYTHONPATH=./ python app/index.py
         ]
    )
    ```
+   4. Add interactivity such as filtering through the use of [callbacks](https://dash.plotly.com/basic-callbacks).

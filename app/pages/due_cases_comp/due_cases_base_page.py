@@ -22,21 +22,21 @@ def due_cases_base_page(filter_func, week_day_select, prefix):
             html.Div(
                 className="tab-controls",
                 children=[
-                    html.P(
+                    html.Span(
                         className="govuk-body-l",
                         style={"marginBottom": "0px"},
                         children=[
                             "Controls",
-                            day_selector_row_func if week_day_select else None,
+                            day_selector_row_func
                         ],
                     )
                 ],
-            ),
-
+            ) if week_day_select else None,
             html.Div(
                 className="decs-grid-row",
                 style={
-                    "marginBottom":"30px",
+                    "marginTop":"30px" if not week_day_select else None,
+                    "marginBottom": "30px",
                 },
                 children=[
                     counting_section("Total due cases", bold_section="this week", count=case_counts["Total due this week"]),

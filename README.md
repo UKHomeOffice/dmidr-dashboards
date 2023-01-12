@@ -16,9 +16,9 @@ It will then push the image to the [quay repository][quay_repository], tagged wi
 # Local Develpoment
 ## Deploying the app
 
-1. Local development with seed data requires the [Transformation][https://github.com/UKHomeOffice/hocs-mi-transformation] Database to be deployed.
+1. Local development with seed data requires the [Transformation](https://github.com/UKHomeOffice/hocs-mi-transformation) Database to be deployed.
 
-2. This also requires the [Transformation][https://github.com/UKHomeOffice/hocs-mi-transformation] process to be completed.
+2. This also requires the [Transformation](https://github.com/UKHomeOffice/hocs-mi-transformation) process to be completed.
 
 3. Setup the virtual environment
 ```
@@ -27,7 +27,7 @@ $ make serve-transformation
 $ make serve
 ```
 
-4. Clean down the [Transformation][https://github.com/UKHomeOffice/hocs-mi-transformation] repository
+4. Clean down the [Transformation](https://github.com/UKHomeOffice/hocs-mi-transformation) repository
 ```
 $ make stop
 $ make clean
@@ -42,3 +42,36 @@ $ make clean
 ```
 $ PYTHONPATH=./ python app/index.py
 ```
+
+# Creating a new report.
+1. Create query within `app\data\{user group}\ `, with any mock data needed to enable local development.
+2. Create the report page within `app\pages\ `.
+   1. Within the new page, register the report as a new page with dash.
+    ```python
+    import dash
+    
+    dash.register_page(
+        __name__, 
+        name="Example Report",
+        path="/example-report"
+    )
+    ```
+   2. A report base has been created which set out the general formatting of the page. Usage of this can be seen below. <br> Visualisations should be added as part of the body as an array of Dash [html](https://dash.plotly.com/dash-html-components) and [dcc](https://dash.plotly.com/dash-core-components) components. Some generic visualisations have been created and can be found within `app\components\ `
+    ```python
+    from app.pages.report_base import report_base
+    
+    layout = report_base(title="Example report", body=[...]
+    ```
+   3. Add report navigation card to [home page](app/pages/home.py).
+   ```python
+   html.Div(
+        className="decs-grid-row",
+        style={"paddingTop":"15px"},
+        children=[
+            board_link_card(dash_title="Performance summary", dash_link="/performance-summary"),
+            board_link_card(dash_title="Intake and output", dash_link="/intake-output"),
+            board_link_card(dash_title="Example report", dash_link="/example-report"),
+        ]
+   )
+   ```
+   4. Add interactivity such as filtering through the use of [callbacks](https://dash.plotly.com/basic-callbacks).

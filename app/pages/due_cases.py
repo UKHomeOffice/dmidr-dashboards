@@ -1,13 +1,10 @@
 import dash
 from dash import html, dcc, callback, Input, Output
-import pandas as pd
 
 from app.pages.report_base import report_base
-from app.components import auto_govuk_table
+from app.components import auto_govuk_table, counter
 
-
-from app.pages.due_cases_comp.day_selector_row import day_selector_row_func
-from app.pages.due_cases_comp.counting_section import counting_section
+from app.pages.due_cases_comp import *
 
 from app.data.MPAM.mpam_due_cases import (
     get_mpam_due_cases,
@@ -110,26 +107,38 @@ layout = report_base(
                             className="decs-grid-row",
                             style={"marginBottom": "30px",},
                             children=[
-                                counting_section(
-                                    "Total due cases",
-                                    bold_section="this week",
-                                    count=case_counts["Total due this week"],
+                                html.Div(
+                                    className="decs-grid-column-one-quarter",
+                                    children=counter(
+                                            "Total due cases",
+                                            bold_section="this week",
+                                            count=case_counts["Total due this week"],
+                                        )
                                 ),
-                                counting_section(
-                                    "Total due cases",
-                                    bold_section="next 4 weeks",
-                                    count=case_counts["Total due next 4 weeks"],
+                                html.Div(
+                                    className="decs-grid-column-one-quarter",
+                                    children=counter(
+                                        "Total due cases",
+                                        bold_section="next 4 weeks",
+                                        count=case_counts["Total due next 4 weeks"],
+                                    )
                                 ),
-                                counting_section(
-                                    "Total due cases",
-                                    bold_section="out of service standard",
-                                    count=case_counts["Total out of service standard"],
+                                html.Div(
+                                    className="decs-grid-column-one-quarter",
+                                    children=counter(
+                                        "Total due cases",
+                                        bold_section="out of service standard",
+                                        count=case_counts["Total out of service standard"],
+                                    )
                                 ),
-                                counting_section(
-                                    "Total due cases",
-                                    bold_section="all time",
-                                    count=case_counts["Total cases"],
-                                ),
+                                html.Div(
+                                    className="decs-grid-column-one-quarter",
+                                    children=counter(
+                                        "Total due cases",
+                                        bold_section="all time",
+                                        count=case_counts["Total cases"],
+                                    )
+                                )
                             ],
                         ),
                         html.Div(

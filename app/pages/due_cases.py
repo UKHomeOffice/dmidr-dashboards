@@ -16,8 +16,6 @@ from app.data.MPAM.mpam_due_cases import (
 
 import datetime
 
-cases_df = get_mpam_due_cases()
-cases_df["Due Date"] = pd.to_datetime(cases_df["Due Date"]).dt.date
 case_counts = get_mpam_due_cases_aggregate()
 
 COLUMN_ORDER = [
@@ -110,7 +108,7 @@ layout = report_base(
                     children=[
                         html.Div(
                             className="decs-grid-row",
-                            style={"marginTop": "30px", "marginBottom": "30px",},
+                            style={"marginBottom": "30px",},
                             children=[
                                 counting_section(
                                     "Total due cases",
@@ -144,13 +142,7 @@ layout = report_base(
                                         "backgroundColor": "#fff",
                                         "padding": "10px",
                                     },
-                                    children=[
-                                        auto_govuk_table(
-                                            cases_df[COLUMN_ORDER],
-                                            title="Case details",
-                                            title_size="m",
-                                        )
-                                    ],
+                                    children=[]
                                 )
                             ],
                         ),
@@ -164,19 +156,18 @@ layout = report_base(
 
 @callback(
     Output(component_id="control-items", component_property="style"),
-    [
-        Input(component_id="report-tabs", component_property="value"),
-    ],
+    Input(component_id="report-tabs", component_property="value"),
 )
 def update_controls(selected_tab):
     style = None
     if not selected_tab == "tab-1":
-        style = {"display":"none"}
+        style = {"display": "none"}
 
     return style
 
 
-@callback(Output(component_id="table-section", component_property="children"),
+@callback(
+    Output(component_id="table-section", component_property="children"),
     [
         Input(component_id="report-tabs", component_property="value"),
         Input(component_id="week-day-store", component_property="data"),
@@ -187,11 +178,10 @@ def tab_selected(selected_tab, day_filter):
     if selected_tab == "tab-1":
         df = filter_this_weeks_due_cases()
         if day_filter:
-            df = cases_df.loc[cases_df["Day"] == day_filter]
+            df = df.loc[df["Day"] == day_filter]
     elif selected_tab == "tab-2":
         df = filter_due_cases_4_weeks()
     elif selected_tab == "tab-3":
         df = filter_dates_out_of_service()
 
     return auto_govuk_table(df[COLUMN_ORDER], title="Case details", title_size="m",)
-

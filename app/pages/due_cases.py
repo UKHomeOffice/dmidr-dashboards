@@ -110,32 +110,28 @@ layout = report_base(
                                 html.Div(
                                     className="decs-grid-column-one-quarter",
                                     children=counter(
-                                            "Total due cases",
-                                            bold_section="this week",
+                                            text=["Total due cases ", html.B("this week")],
                                             count=case_counts["Total due this week"],
                                         )
                                 ),
                                 html.Div(
                                     className="decs-grid-column-one-quarter",
                                     children=counter(
-                                        "Total due cases",
-                                        bold_section="next 4 weeks",
+                                        text=["Total due cases ", html.B("next 4 weeks")],
                                         count=case_counts["Total due next 4 weeks"],
                                     )
                                 ),
                                 html.Div(
                                     className="decs-grid-column-one-quarter",
                                     children=counter(
-                                        "Total due cases",
-                                        bold_section="out of service standard",
+                                        text=["Total due cases ", html.B("out of service standard")],
                                         count=case_counts["Total out of service standard"],
                                     )
                                 ),
                                 html.Div(
                                     className="decs-grid-column-one-quarter",
                                     children=counter(
-                                        "Total due cases",
-                                        bold_section="all time",
+                                        text=["Total due cases ", html.B("all time")],
                                         count=case_counts["Total cases"],
                                     )
                                 )

@@ -6,6 +6,7 @@ today = date.today()
 def report_header(report_title: str, todays_date=today):
     return html.Div(
         className="decs-grid-row",
+        style={"marginBottom": "0px"},
         children=[
             html.Div(
                 className="decs-grid-column-three-quarters",

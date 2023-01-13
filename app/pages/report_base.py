@@ -2,7 +2,7 @@ from dash import html, dcc
 
 from app.components import report_header
 
-def report_base(title: str, body: list[object]):
+def report_base(title: str, body: list[object], controls: list[object] = None):
     return html.Div(
         className="report-background-box govuk-body",
         children=[
@@ -22,19 +22,20 @@ def report_base(title: str, body: list[object]):
                     ),
                 ]
             ),
+            report_header(title),
             html.Div(
-                className="tab-controls",
+                className="tab-controls govuk-body-l",
+                style={"paddingTop": "0px", "marginBottom": "0px"},
                 children=[
                     html.P(
-                        className="govuk-body-l",
-                        style={"marginBottom": "0px"},
+                        style={"marginBottom": "15px"},
                         children=[
-                            "Controls",
+                            "Controls"
                         ],
-                    )
+                    ),
+                    *controls
                 ],
-            ),
-            report_header(title),
+            ) if controls else None,
             *body
         ]
     )

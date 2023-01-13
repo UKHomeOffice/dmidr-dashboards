@@ -1,12 +1,30 @@
 import dash
 from dash import html, dcc, callback, Input, Output
 
-from app.pages.due_cases_comp import due_cases_base_page
 from app.pages.report_base import report_base
+from app.components import auto_govuk_table, counter
 
-from app.data.MPAM.mpam_due_cases import get_mpam_due_cases
+from app.pages.due_cases_comp import *
+
+from app.data.MPAM.mpam_due_cases import (
+    get_mpam_due_cases,
+    get_mpam_due_cases_aggregate,
+)
 
 import datetime
+
+case_counts = get_mpam_due_cases_aggregate()
+
+COLUMN_ORDER = [
+    "CTSRef",
+    "Workflow",
+    "Directorate",
+    "Signee",
+    "Business Area",
+    "Stage",
+    "Current Handler User Id",
+    "Due Date",
+]
 
 
 def filter_due_cases_4_weeks():
@@ -43,7 +61,7 @@ dash.register_page(__name__, name="Due cases", path="/due-cases")
 
 layout = report_base(
     title="Due Cases",
-    body=[
+    controls=[
         dcc.Tabs(
             id="report-tabs",
             parent_className="custom-tabs",
@@ -67,21 +85,108 @@ layout = report_base(
             ],
         ),
         html.Div(
+            className="tab-controls",
+            children=[
+                html.Span(
+                    className="govuk-body-l",
+                    style={"marginBottom": "0px"},
+                    children=[
+                        html.Span(id="control-items", children=day_selector_row_func),
+                    ],
+                )
+            ],
+        ),
+    ],
+    body=[
+        html.Div(
             id="page-content",
-            children=due_cases_base_page(filter_this_weeks_due_cases, True, ""),
+            children=[
+                html.Div(
+                    children=[
+                        html.Div(
+                            className="decs-grid-row",
+                            style={"marginBottom": "30px",},
+                            children=[
+                                html.Div(
+                                    className="decs-grid-column-one-quarter",
+                                    children=counter(
+                                            text=["Total due cases ", html.B("this week")],
+                                            count=case_counts["Total due this week"],
+                                        )
+                                ),
+                                html.Div(
+                                    className="decs-grid-column-one-quarter",
+                                    children=counter(
+                                        text=["Total due cases ", html.B("next 4 weeks")],
+                                        count=case_counts["Total due next 4 weeks"],
+                                    )
+                                ),
+                                html.Div(
+                                    className="decs-grid-column-one-quarter",
+                                    children=counter(
+                                        text=["Total due cases ", html.B("out of service standard")],
+                                        count=case_counts["Total out of service standard"],
+                                    )
+                                ),
+                                html.Div(
+                                    className="decs-grid-column-one-quarter",
+                                    children=counter(
+                                        text=["Total due cases ", html.B("all time")],
+                                        count=case_counts["Total cases"],
+                                    )
+                                )
+                            ],
+                        ),
+                        html.Div(
+                            className="decs-grid-row",
+                            style={"padding": "0px 15px"},
+                            children=[
+                                html.Div(
+                                    id="table-section",
+                                    style={
+                                        "backgroundColor": "#fff",
+                                        "padding": "10px",
+                                    },
+                                    children=[]
+                                )
+                            ],
+                        ),
+                    ]
+                ),
+            ],
         ),
     ],
 )
 
 
 @callback(
-    Output(component_id="page-content", component_property="children"),
+    Output(component_id="control-items", component_property="style"),
     Input(component_id="report-tabs", component_property="value"),
 )
-def tab_selected(selected_tab):
+def update_controls(selected_tab):
+    style = None
+    if not selected_tab == "tab-1":
+        style = {"display": "none"}
+
+    return style
+
+
+@callback(
+    Output(component_id="table-section", component_property="children"),
+    [
+        Input(component_id="report-tabs", component_property="value"),
+        Input(component_id="week-day-store", component_property="data"),
+    ],
+)
+def tab_selected(selected_tab, day_filter):
+
     if selected_tab == "tab-1":
-        return due_cases_base_page(filter_this_weeks_due_cases, True, "")
+        df = filter_this_weeks_due_cases()
+        if day_filter:
+            df = df.loc[df["Day"] == day_filter]
     elif selected_tab == "tab-2":
-        return due_cases_base_page(filter_due_cases_4_weeks, False, "four-week-")
+        df = filter_due_cases_4_weeks()
     elif selected_tab == "tab-3":
-        return due_cases_base_page(filter_dates_out_of_service, False, "out-service-")
+        df = filter_dates_out_of_service()
+
+    return auto_govuk_table(df[COLUMN_ORDER], title="Case details", title_size="m",)

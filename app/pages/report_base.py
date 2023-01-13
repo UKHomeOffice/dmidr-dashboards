@@ -24,17 +24,16 @@ def report_base(title: str, body: list[object], controls: list[object] = None):
             ),
             report_header(title),
             html.Div(
-                className="tab-controls",
-                style={"paddingTop": "0px"},
+                className="tab-controls govuk-body-l",
+                style={"paddingTop": "0px", "marginBottom": "0px"},
                 children=[
                     html.P(
-                        className="govuk-body-l",
-                        style={"marginBottom": "0px"},
+                        style={"marginBottom": "15px"},
                         children=[
-                            "Controls",
-                            *controls
+                            "Controls"
                         ],
-                    )
+                    ),
+                    *controls
                 ],
             ) if controls else None,
             *body

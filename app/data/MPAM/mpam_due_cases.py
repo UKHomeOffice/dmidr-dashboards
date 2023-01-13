@@ -68,12 +68,13 @@ dummy_due_cases_aggregate = pd.Series(data={
 
 def get_mpam_due_cases():
     if os.environ.get("STAGE") == "local" or os.environ.get("STAGE") is None:
-        return dummy_due_cases
+        data = dummy_due_cases
+    else:
+        with create_db_connection() as connection:
+            data = pd.read_sql_query(MPAM_DUE_CASES_QUERY, connection)
 
-    with create_db_connection() as connection:
-        data = pd.read_sql_query(MPAM_DUE_CASES_QUERY, connection)
-
-        return data
+    data["Due Date"] = pd.to_datetime(data["Due Date"]).dt.date
+    return data
 
 
 def get_mpam_due_cases_aggregate():

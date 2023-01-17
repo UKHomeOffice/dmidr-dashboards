@@ -79,6 +79,7 @@ fig = go.Figure(
 )
 
 fig.update_yaxes(rangemode="tozero")
+fig.update_layout(paper_bgcolor="#fff", plot_bgcolor="#fff")
 
 layout = report_base(
     "Intake and Output",
